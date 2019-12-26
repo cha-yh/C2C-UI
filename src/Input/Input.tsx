@@ -1,7 +1,6 @@
 import React, { useCallback, useState, forwardRef, useRef, useEffect } from 'react'
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
-import Label from '../Label/Label';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
 export type InputProps = {
@@ -81,6 +80,7 @@ const Input = forwardRef(
             required={require}
             error={error}
             messages={message}
+            showError={showError}
         >
             <Wrapper inputStatus={inputStatus(focus, disabled, error)}>
                 <input
@@ -115,7 +115,7 @@ const styles = {
     `
 }
 export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>`
-    box-sizing: border-box;
+    ${utils.initiateCss};
     width: 100%;
     height: ${rem(45)};
     margin: 0;
@@ -152,25 +152,5 @@ export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>
         font-size: ${rem(14)};
         ${flex.flex("0 0 auto")};
     }
-`;
-const InputBlock = styled.div<{ error: boolean, width: number | undefined, inputWidth: number }>`
-    width: 100%;
-    width: ${props => props.width && rem(props.width)};
-    padding-bottom: ${props => props.error && rem(21)};
-
-    
-
-    .msg-wrapper {
-        position: absolute;
-        ${props => props.inputWidth && utils.singleEllipsis(props.inputWidth)};
-        >span {
-            color: ${palette.grayLighten40};
-            color: ${props => props.error &&
-                palette.red
-            };
-            margin-right: ${rem(10)};
-        }
-    }
-
 `;
 export default Input;

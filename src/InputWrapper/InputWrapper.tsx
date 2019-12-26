@@ -8,6 +8,7 @@ type InputWrapperProps = {
     required?: boolean,
     error?: boolean,
     messages?: string[],
+    showError?: boolean
 }
 const InputWrapper = forwardRef(
     ({
@@ -15,7 +16,8 @@ const InputWrapper = forwardRef(
         label,
         required,
         error=false,
-        messages
+        messages,
+        showError
     }:InputWrapperProps,
     ref?: React.Ref<HTMLInputElement>) => {
         const [inputWidth, setInputWidth] = useState(0);
@@ -25,12 +27,12 @@ const InputWrapper = forwardRef(
                 setInputWidth(blockRef.current.clientWidth);
         }, [])
         return (
-            <div>
+            <InputWrapperBlock>
                 {label&&<Label text={label} require={required}/>}
                 <div ref={blockRef}>
                     {children}
                 </div>
-                {messages &&
+                {(messages && showError) &&
                 <MessagesWrapper error={error} inputWidth={inputWidth} title={String(messages)}>
                     {messages.map((item, index) => 
                         item && <span className="msg" key={index+item}>"{item}"</span>
@@ -38,10 +40,13 @@ const InputWrapper = forwardRef(
                 </MessagesWrapper>
             }
                 
-            </div>
+            </InputWrapperBlock>
         )
     }
 );
+const InputWrapperBlock = styled.div`
+    ${utils.initiateCss};
+`;
 const MessagesWrapper = styled.div<{error: boolean, inputWidth:number}>`
     position: absolute;
         ${props => props.inputWidth && utils.singleEllipsis(props.inputWidth)};

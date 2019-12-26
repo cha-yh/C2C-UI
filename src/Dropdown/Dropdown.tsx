@@ -8,7 +8,6 @@ import UnD from '../UnD/UnD';
 import { MdSearch } from 'react-icons/md';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { Scrollbars } from 'react-custom-scrollbars';
-import Label from '../Label/Label';
 import Input from '../Input/Input';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
@@ -28,13 +27,13 @@ interface OwnProps {
 }
 type Props = OwnProps;
 
-const Dropdown: React.SFC<Props> = ({
+const Dropdown = ({
     onChange, value, name, placeholder, options, checkError, message, error = false,
     label, require, search, disabled = false
-}) => {
-    const [showError, setShowError] = useState(false);
-
+}:Props) => {
+    const [ showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
+
     const clickListItem = (value: any) => {
         onChange && onChange(name, value);
         closeList(value, focus);
@@ -95,11 +94,11 @@ const Dropdown: React.SFC<Props> = ({
             label={label}
             required={require}
             messages={message}
+            showError={showError}
         >
             <Block inputStatus={inputStatus(focus, disabled, error)}>
                 <OutsideClickHandler
                     onOutsideClick={() => closeList(value, focus)}
-                    
                 >
                     <div className="box" onClick={handleDivClick}>
                         <p className={cx("placeholder", { 'selected': (valueText || value) })}>{valueText || value || placeholder || 'select item'}</p>
@@ -137,7 +136,7 @@ const Dropdown: React.SFC<Props> = ({
     );
 };
 
-const styles = {
+export const dropdownStyles = {
     focus: css`
         .box {
             border-color: ${palette.blue};
@@ -169,7 +168,7 @@ const styles = {
 }
 
 const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
-    *{box-sizing: border-box;}
+    ${utils.initiateCss};
     position: relative;
     width: 100%;    
     .box {
@@ -249,7 +248,7 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
             }
         }
     }
-    ${props => props.inputStatus && styles[props.inputStatus]};
+    ${props => props.inputStatus && dropdownStyles[props.inputStatus]};
 `;
 
 export default Dropdown;

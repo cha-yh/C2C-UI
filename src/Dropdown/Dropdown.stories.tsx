@@ -17,9 +17,9 @@ export default {
 export const dropdown = () => {
     const label = text('label', 'test-label');
     const search = boolean('search', true);
-    const error = boolean('error', true);
+    const error = boolean('error', false);
     const require = boolean('require', true);
-    const disabled = boolean('disabled', true);
+    const disabled = boolean('disabled', false);
     const placeholder = text('placeholder', "placeholder");
     const [testValue, setTestValue] = useState("");
     return (
