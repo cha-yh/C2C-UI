@@ -128,6 +128,25 @@ export const utils = {
         font-size: ${rem(32)};
         margin: ${rem(80)} 0;
     `,
+
+    initiateCss: css`
+        * { box-sizing: border-box; }
+        h1, h2, h3, h4, h5, p, a, li { margin: 0; }
+        
+        p, a {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        li { font-size: 0.875rem; }
+        
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.25rem; }
+        h4 { font-size: 1rem; }
+        h5 { font-size: 0.875rem; }
+        code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+    `
 }
 
 /**
@@ -222,4 +241,3 @@ export const flex = {
         `;
     }
 };
-
