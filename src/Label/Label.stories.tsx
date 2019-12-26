@@ -23,6 +23,6 @@ export const label = () => {
     );
 };
 
-Label.story = {
+label.story = {
     name: 'Default'
 };
