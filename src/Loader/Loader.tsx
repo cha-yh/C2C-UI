@@ -12,9 +12,28 @@ const LoaderBlock = styled.div<{ size: number, noMargin:boolean|undefined }>`
         width: fit-content;
     }
 `;
+type Types =
+    | 'Audio'
+    | 'BallTriangle'
+    | 'Bars'
+    | 'Circles'
+    | 'Grid'
+    | 'Hearts'
+    | 'Oval'
+    | 'Puff'
+    | 'Rings'
+    | 'TailSpin'
+    | 'ThreeDots'
+    | 'Watch'
+    | 'RevolvingDot'
+    | 'Triangle'
+    | 'Plane'
+    | 'MutatingDots'
+    | 'None'
+    | 'NotSpecified';
 
 interface OwnProps {
-    type?: string;
+    type?: Types;
     color?: string;
     size?: number;
     noMargin?: boolean;
