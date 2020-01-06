@@ -81,6 +81,7 @@ const Input = forwardRef(
             messages={message}
             showError={showError}
             errorMessages={errorMessages}
+            width={width}
         >
             <Wrapper inputStatus={inputStatus()}>
                 <input

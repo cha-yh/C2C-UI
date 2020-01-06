@@ -6,9 +6,7 @@ import Label from '../Label/Label';
 import {Wrapper} from '../Input/Input';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
-const InputRangeBlock = styled.div<{width: number | undefined, inputWidth: number }>`
-    width: 100%;
-    width: ${props => props.width && rem(props.width)};
+const InputRangeBlock = styled.div<{inputWidth: number }>`
     >.range {
         ${flex.row};
         ${flex.ai.center};
@@ -130,8 +128,9 @@ const InputRange = forwardRef(
             messages={message}
             showError={showError}
             errorMessages={errorMessages}
+            width={width}
         >
-            <InputRangeBlock width={width} inputWidth={inputWidth}>
+            <InputRangeBlock inputWidth={inputWidth}>
                 <div className="range">
                     <Wrapper inputStatus={inputStatus()} ref={blockRef}>
                         <input

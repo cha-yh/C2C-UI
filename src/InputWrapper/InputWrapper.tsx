@@ -41,17 +41,19 @@ const Popup = styled.div`
     padding: ${rem(10)};
     background: black;
     opacity: 0.9;
-    min-width: ${rem(190)};
+    min-width: ${rem(250)};
     right: 0;
     color: white;
     z-index: 2;
+    border-radius: ${rem(5)};
     >p {
 
     }
 
     >ul {
-        >li {
-
+        padding-left: ${rem(20)};
+        >li + li {
+            margin-top: ${rem(5)};
         }
     }
 `;
@@ -79,6 +81,7 @@ type InputWrapperProps = {
     messages?: string[],
     showError?: boolean,
     errorMessages?: string[]
+    width?: number;
 }
 const InputWrapper = forwardRef(
     ({
@@ -87,7 +90,8 @@ const InputWrapper = forwardRef(
         required,
         messages,
         showError,
-        errorMessages
+        errorMessages,
+        width
     }:InputWrapperProps,
     ref?: React.Ref<HTMLInputElement>) => {
         const [inputWidth, setInputWidth] = useState(0);
@@ -97,7 +101,7 @@ const InputWrapper = forwardRef(
                 setInputWidth(blockRef.current.clientWidth);
         }, [])
         return (
-            <InputWrapperBlock>
+            <InputWrapperBlock width={width}>
                 <div className="header">
                 {label?<Label text={label} require={required}/>:<p> </p>}
                 {(errorMessages&& showError)&&
@@ -129,9 +133,9 @@ const InputWrapper = forwardRef(
         )
     }
 );
-const InputWrapperBlock = styled.div`
+const InputWrapperBlock = styled.div<{width: number|undefined}>`
     ${utils.initiateCss};
-    width: 100%;
+    width: ${props => props.width ? rem(props.width) : '100%' };
 
     >:first-child {
         margin-bottom: ${rem(5)};

@@ -32,7 +32,7 @@ export const inputWrapper = () => {
                 label="label"
                 placeholder="placeholder"
                 require
-                width={500}
+                // width={500}
                 message={[
                     "1. Fatal Error",
                     "2. NOT_FOUND"

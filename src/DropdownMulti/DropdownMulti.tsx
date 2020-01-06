@@ -1,6 +1,6 @@
 import React, { useState, useCallback, SyntheticEvent, useRef } from 'react';
 import _ from 'lodash';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 
 import UnD from '../UnD/UnD';
@@ -13,7 +13,7 @@ import InputWrapper from '../InputWrapper/InputWrapper';
 import { dropdownStyles } from '../Dropdown/Dropdown';
 import { useOnClickOutside } from '../hooks';
 
-const SelectedItemBlock = styled.div`
+const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
     width: fit-content;
     height: ${rem(23)};
     margin: ${rem(2)};
@@ -35,6 +35,11 @@ const SelectedItemBlock = styled.div`
     >:first-child {
         margin-right: ${rem(5)};
     }
+
+    ${props => props.inputStatus === 'disabled' && css`
+        background: ${palette.grayLighten10};
+        color: ${palette.redLighten30};
+    `}
 `;
 const ListItemBlock = styled.div`
     ${flex.row};
@@ -143,6 +148,7 @@ interface OwnProps {
     search?: boolean;
     disabled?: boolean;
     errorMessages?: string[];
+    width?: number;
 }
 type Props = OwnProps;
 
@@ -150,7 +156,7 @@ const DropdownMulti = ({
     onChange, value, name,
     placeholder = "Select Values",
     options, checkError, message,
-    label, require, search, disabled = false, errorMessages
+    label, require, search, disabled = false, errorMessages, width
 }: Props) => {
     const [showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -175,6 +181,9 @@ const DropdownMulti = ({
     }
 
     const removeBlock = (e: SyntheticEvent, itemValue: any) => {
+        if(disabled) {
+            return;
+        }
         e.stopPropagation();
         const copy = [...value];
         _.remove(copy, (item: any) => {
@@ -232,6 +241,7 @@ const DropdownMulti = ({
             messages={message}
             showError={showError}
             errorMessages={errorMessages}
+            width={width}
         >
             <DropdownMultiBlock inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
@@ -249,6 +259,7 @@ const DropdownMulti = ({
                                     return (
                                         <SelectedItemBlock
                                             key={`${item}-${index}`}
+                                            inputStatus={inputStatus()}
                                         >
                                             <h5>{itemText}</h5>
                                             <MdClose onClick={(e) => removeBlock(e, item)} />

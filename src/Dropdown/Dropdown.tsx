@@ -26,12 +26,13 @@ interface OwnProps {
     search?: boolean;
     disabled?: boolean;
     errorMessages?: string[];
+    width?: number;
 }
 type Props = OwnProps;
 
 const Dropdown = ({
     onChange, value, name, placeholder, options, checkError, message,
-    label, require, search, disabled = false, errorMessages
+    label, require, search, disabled = false, errorMessages, width
 }:Props) => {
     const [ showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -102,6 +103,7 @@ const Dropdown = ({
             messages={message}  
             showError={showError}
             errorMessages={errorMessages}
+            width={width}
         >
             <Block inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
@@ -156,6 +158,10 @@ export const dropdownStyles = {
         .box {
             border-color: ${palette.gray};
             background: ${palette.grayLighten30};
+
+            .placeholder.selected {
+                color: ${palette.gray};
+            }
         }
         cursor: not-allowed;
     `,
