@@ -15,13 +15,13 @@ const InfoItem = ({
 }: Props) => {
     return (
         <InfoItemBlock row={row} labelWidth={labelWidth}>
-            <p className="label">{label}</p>
+            <h5 className="label">{label}</h5>
             {value
                 ?
                 <h5>{value}</h5>
 
                 :
-                <p className="no_data">NO DATA</p>
+                <h5 className="no_data">NO DATA</h5>
             }
         </InfoItemBlock>
     )
@@ -56,6 +56,10 @@ const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
     >h5 {
         white-space: initial;
         font-size: ${rem(16)};
+    }
+
+    >.label {
+        font-weight: 500;
     }
 
     >.no_data {
