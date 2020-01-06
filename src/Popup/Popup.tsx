@@ -1,7 +1,7 @@
-import React, { useState, SyntheticEvent, useEffect } from 'react'
+import React, { useState, SyntheticEvent, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
-import OutsideClickHandler from 'react-outside-click-handler';
+import { useOnClickOutside } from '../hooks';
 
 interface OwnProps {
     name: string;
@@ -34,11 +34,11 @@ const Popup = ({
             onClose(name)
         }
     }
+
+    const ref = useRef(null);
+    useOnClickOutside(ref, () => handleClickOutside());
     return (
-        <PopupBlock className={className}>
-            <OutsideClickHandler
-                onOutsideClick={handleClickOutside}
-            >
+        <PopupBlock className={className} ref={ref}>
                 <Trigger onClick={handleClickTrigger}>
                     {trigger}
                 </Trigger>
@@ -50,9 +50,6 @@ const Popup = ({
                         {contents}
                     </Contents>
                 }
-            </OutsideClickHandler>
-
-
         </PopupBlock>
     )
 }

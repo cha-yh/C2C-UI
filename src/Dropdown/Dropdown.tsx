@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import _ from 'lodash';
 import cx from 'classnames';
 import styled, { css } from 'styled-components';
@@ -6,10 +6,12 @@ import { rem, utils, flex, palette } from '../utils';
 
 import UnD from '../UnD/UnD';
 import { MdSearch } from 'react-icons/md';
-import OutsideClickHandler from 'react-outside-click-handler';
+
 import { Scrollbars } from 'react-custom-scrollbars';
 import Input from '../Input/Input';
 import InputWrapper from '../InputWrapper/InputWrapper';
+
+import {useOnClickOutside} from '../hooks';
 
 interface OwnProps {
     onChange: (name: string, value: string | number) => void;
@@ -19,17 +21,17 @@ interface OwnProps {
     options: Array<{ key: number, value: string | number, text: string }>;
     checkError?: (name: string, value: string | number) => void;
     message?: string[];
-    error?: boolean;
     label?: string;
     require?: boolean;
     search?: boolean;
     disabled?: boolean;
+    errorMessages?: string[];
 }
 type Props = OwnProps;
 
 const Dropdown = ({
-    onChange, value, name, placeholder, options, checkError, message, error = false,
-    label, require, search, disabled = false
+    onChange, value, name, placeholder, options, checkError, message,
+    label, require, search, disabled = false, errorMessages
 }:Props) => {
     const [ showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -56,11 +58,13 @@ const Dropdown = ({
         if (disabled) {
             return;
         }
-        setFocus(!focus);
+        
         if (focus) {
             setFocus(false);
             checkError && checkError(name, value);
             setShowError(true);
+        } else {
+            setFocus(true);
         }
     };
 
@@ -75,31 +79,31 @@ const Dropdown = ({
     if (index !== -1) {
         valueText = options[index].text;
     }
-    const inputStatus = (focus: boolean, disabled: boolean, error: boolean) => {
+    const inputStatus = () => {
         if (focus) {
             return 'focus';
         }
         if (disabled) {
             return 'disabled';
         }
-        if (error) {
+        if (errorMessages&&showError) {
             return 'error';
         } else {
             return null;
         }
     }
+
+    const ref = useRef(null);
+    useOnClickOutside(ref, () => closeList(value, focus));
     return (
         <InputWrapper
-            error={error}
             label={label}
             required={require}
-            messages={message}
+            messages={message}  
             showError={showError}
+            errorMessages={errorMessages}
         >
-            <Block inputStatus={inputStatus(focus, disabled, error)}>
-                <OutsideClickHandler
-                    onOutsideClick={() => closeList(value, focus)}
-                >
+            <Block inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
                         <p className={cx("placeholder", { 'selected': (valueText || value) })}>{valueText || value || placeholder || 'select item'}</p>
                         <UnD value={focus} />
@@ -130,7 +134,6 @@ const Dropdown = ({
                             </Scrollbars>
                         </div>
                     </div>
-                </OutsideClickHandler>
             </Block>
         </InputWrapper>
     );

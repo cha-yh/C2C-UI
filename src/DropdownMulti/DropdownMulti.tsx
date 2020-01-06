@@ -1,16 +1,17 @@
-import React, { useState, useCallback, SyntheticEvent } from 'react';
+import React, { useState, useCallback, SyntheticEvent, useRef } from 'react';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 
 import UnD from '../UnD/UnD';
 import { MdSearch, MdClose } from 'react-icons/md';
-import OutsideClickHandler from 'react-outside-click-handler';
+// import OutsideClickHandler from 'react-outside-click-handler';
 import { Scrollbars } from 'react-custom-scrollbars';
 import CheckBox from '../CheckBox/CheckBox';
 import Input from '../Input/Input';
 import InputWrapper from '../InputWrapper/InputWrapper';
 import { dropdownStyles } from '../Dropdown/Dropdown';
+import { useOnClickOutside } from '../hooks';
 
 const SelectedItemBlock = styled.div`
     width: fit-content;
@@ -45,8 +46,7 @@ const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
     ${utils.initiateCss};
     position: relative;
     width: 100%;
-    
-    padding-bottom: ${rem(21)};
+    min-width: ${rem(200)};
 
     .box {
         min-height: ${rem(45)};
@@ -138,11 +138,11 @@ interface OwnProps {
     options: Array<{ key: number, value: string | number, text: string }>;
     checkError?: (name: string, value: string[] | number[] | any) => void;
     message?: string[];
-    error?: boolean;
     label?: string;
     require?: boolean;
     search?: boolean;
     disabled?: boolean;
+    errorMessages?: string[];
 }
 type Props = OwnProps;
 
@@ -150,8 +150,7 @@ const DropdownMulti = ({
     onChange, value, name,
     placeholder = "Select Values",
     options, checkError, message,
-    error = false,
-    label, require, search, disabled = false
+    label, require, search, disabled = false, errorMessages
 }: Props) => {
     const [showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -203,33 +202,38 @@ const DropdownMulti = ({
         if (disabled) {
             return;
         }
-        setFocus(!focus);
+        if (focus) {
+            setFocus(false);
+            checkError && checkError(name, value);
+            setShowError(true);
+        } else {
+            setFocus(true);
+        }
     };
-    const inputStatus = (focus: boolean, disabled: boolean, error: boolean) => {
+    const inputStatus = () => {
         if (focus) {
             return 'focus';
         }
         if (disabled) {
             return 'disabled';
         }
-        if (error) {
+        if (errorMessages&&showError) {
             return 'error';
         } else {
             return null;
         }
     }
+    const ref = useRef(null);
+    useOnClickOutside(ref, ()=>closeList(value, focus));
     return (
         <InputWrapper
-            error={error}
             label={label}
             required={require}
             messages={message}
             showError={showError}
+            errorMessages={errorMessages}
         >
-            <DropdownMultiBlock inputStatus={inputStatus(focus, disabled, error)}>
-                <OutsideClickHandler
-                    onOutsideClick={() => closeList(value, focus)}
-                >
+            <DropdownMultiBlock inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
                         {value.length === 0
                             ?
@@ -284,7 +288,6 @@ const DropdownMulti = ({
                             </Scrollbars>
                         </div>
                     </div>}
-                </OutsideClickHandler>
                 {/* {(message && showError) && <span className="msg">{message}</span>} */}
             </DropdownMultiBlock>
         </InputWrapper>

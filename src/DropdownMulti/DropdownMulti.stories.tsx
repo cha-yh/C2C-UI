@@ -33,13 +33,12 @@ export const dropdownMulti = () => {
                 { key: 1, value: 'cd', text: 'cd cd' },
                 { key: 2, value: 'df', text: 'df text' }
             ]}
-            // checkError
-            // message={["error1", "errpr2"]}
-            error={error}
+            message={["error1", "errpr2"]}
             label={label}
             require={require}
             search={search}
             disabled={disabled}
+            errorMessages={['hello']}
         />
     );
 };

@@ -17,7 +17,6 @@ export default {
 export const dropdown = () => {
     const label = text('label', 'test-label');
     const search = boolean('search', true);
-    const error = boolean('error', false);
     const require = boolean('require', true);
     const disabled = boolean('disabled', false);
     const placeholder = text('placeholder', "placeholder");
@@ -35,11 +34,11 @@ export const dropdown = () => {
             ]}
             // checkError
             message={["error1", "errpr2"]}
-            error={error}
             label={label}
             require={require}
             search={search}
             disabled={disabled}
+            errorMessages={['hello']}
         />
     );
 };
