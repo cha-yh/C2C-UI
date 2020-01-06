@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from './Modal';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 
@@ -16,20 +16,28 @@ export default {
 export const modal = () => {
   const title = text('title', 'Title of Modal');
   const description = text('description', 'Description of Modal');
-  const visible = boolean('visible', true);
+  // const visible = boolean('visible', true);
   const confirmText = text('confirmText', 'ConfirmText');
   const cancelText = text('cancelText', 'CancelText');
-  const cancellable = boolean('cancellable', false);
+  const cancellable = boolean('cancellable', true);
 
+  const [visible, setVisible] = useState(false);
+  const handleCancel = () => {
+    setVisible(false);
+  }
   return (
-    <Modal
-      title={title}
-      description={description}
-      visible={visible}
-      confirmText={confirmText}
-      cancelText={cancelText}
-      cancellable={cancellable}
-    />
+    <div>
+      <button onClick={()=>{setVisible(true)}}>open modal</button>
+      <Modal
+        title={title}
+        description={description}
+        visible={visible}
+        confirmText={confirmText}
+        cancelText={cancelText}
+        cancellable={cancellable}
+        onCancel={handleCancel}
+      />
+    </div>
   );
 };
 

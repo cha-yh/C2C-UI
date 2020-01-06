@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { useRef, useEffect, SyntheticEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Button from '../Button/Button';
 import { animated, useTransition } from 'react-spring';
+import { flex } from '../utils';
+import { useOnClickOutside } from '../hooks';
 
 export type ModalProps = {
   visible: boolean;
@@ -25,17 +27,18 @@ const Modal = ({
   description,
   hideButtons,
   cancellable,
-  cancelText='Cancel',
-  confirmText='Confirm',
+  cancelText = 'Cancel',
+  confirmText = 'Confirm',
   children,
   onCancel,
   onConfirm
 }: ModalProps) => {
+
   const fadeTransition = useTransition(visible, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: {duration: 100}
+    config: { duration: 100 }
   });
 
   const slideUpTransition = useTransition(visible, null, {
@@ -57,8 +60,37 @@ const Modal = ({
       duration: 100
     }
   });
+  const onClickDimmer = () => {
+    console.log('onClickDimmer')
+    if (onCancel) {
+      onCancel();
+    }
+  }
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => onClickDimmer());
+  const closeModal= (e: SyntheticEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onCancel && onCancel();
+}
+
+  const escFunction = (event: any) => {
+    if(event.keyCode === 27) {
+        closeModal(event);
+    }
+  }
+
+  useEffect(() => {
+      document.addEventListener("keydown", escFunction, false);
+      document.body.style.overflow = 'hidden'
+      return () => {
+          document.removeEventListener("keydown", escFunction, false);
+          document.body.style.overflow = 'auto'
+      };
+  }, []);
+
   return (
-    <Fragment>
+    <React.Fragment>
       {fadeTransition.map(({ item, key, props }) =>
         item ? (
           <DimmerBlock
@@ -71,13 +103,13 @@ const Modal = ({
       {slideUpTransition.map(({ item, key, props }) =>
         item ? (
           <BoxWrapperBlock key={key} style={props}>
-            <WhiteBox>
+            <WhiteBox ref={ref}>
               {title && <h3>{title}</h3>}
               {description && <p>{description}</p>}
               {children}
               {!hideButtons && (
                 <ButtonGroup
-                  style={{ marginTop: '3rem' }} 
+                  style={{ marginTop: '3rem' }}
                   rightAlign>
                   {cancellable && (
                     <Button theme="tertiary" onClick={onCancel}>
@@ -91,7 +123,7 @@ const Modal = ({
           </BoxWrapperBlock>
         ) : null
       )}
-    </Fragment>
+    </React.Fragment>
   );
 };
 
@@ -102,27 +134,22 @@ const fullscreen = css`
   width: 100%;
   height: 100%;
 `;
-
 const darkLayer = css`
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.5);
-`;
-
-const whiteBoxWrapper = css`
-  z-index: 15;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  
 `;
 
 const DimmerBlock = styled(animated.div)`
   ${fullscreen};
-  ${darkLayer};
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
 `;
 
 const BoxWrapperBlock = styled(animated.div)`
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${fullscreen};
-  ${whiteBoxWrapper};
 `;
 
 const WhiteBox = styled.div`
