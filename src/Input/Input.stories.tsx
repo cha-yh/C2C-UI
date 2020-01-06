@@ -17,20 +17,39 @@ export default {
 export const input = () => {
   const label = text('label', 'test-label');
   const symbol = text('symbol', 'kg');
-  const error = boolean('error', true);
   const require = boolean('require', true);
   const disabled = boolean('disabled', false);
   const placeholder = text('placeholder', "placeholder");
 
   return (
-    <Input
-      error={error}
-      label={label}
-      require={require}
-      symbol={symbol}
-      placeholder={placeholder}
-      disabled={disabled}
-    />
+    <React.Fragment>
+      <Input
+        label={label}
+        require={require}
+        symbol={symbol}
+        placeholder={placeholder}
+        disabled={disabled}
+      />
+
+      <Input
+        label={label}
+        require={require}
+        symbol={symbol}
+        placeholder={placeholder}
+        disabled={disabled}
+        errorMessages={['first error', 'second error', 'third']}
+      />
+
+      <Input
+        message={["first messages. It's test dummy text.", 'second']}
+        label={label}
+        require={require}
+        symbol={symbol}
+        placeholder={placeholder}
+        disabled={disabled}
+        errorMessages={['first error', 'second error', 'third']}
+      />
+    </React.Fragment>
   );
 };
 
@@ -44,10 +63,9 @@ export const styles = () => {
     <React.Fragment>
       <h4>error</h4>
       <Input
-        error={true}
         label="label"
         require={true}
-        message={["error1", "error2", "error2", "error2", "error2", "error2", "error2", "error2", "error2"]}
+        errorMessages={["error1", "error2", "error2", "error2", "error2", "error2", "error2", "error2", "error2"]}
       />
 
       <h4>disabled</h4>

@@ -14,13 +14,13 @@ export type InputProps = {
     icon?: any;
     symbol?: string;
     message?: string[];
-    error?: boolean;
     width?: number;
     ref?: React.MutableRefObject<HTMLInputElement>;
 
     placeholder?: string;
     type?: string;
     disabled?: boolean;
+    errorMessages?: string[];
 }
 
 const Input = forwardRef(
@@ -28,8 +28,8 @@ const Input = forwardRef(
         {
             name, value, onChange,
             require, label, icon,
-            symbol, message, error = false,
-            checkError, width, placeholder, type, disabled=false
+            symbol, message,
+            checkError, width, placeholder, type, disabled=false, errorMessages
         }:InputProps,
         ref?: React.Ref<HTMLInputElement>
     ) => {
@@ -61,14 +61,14 @@ const Input = forwardRef(
     }, [])
 
     const blockRef = useRef<HTMLDivElement>(null);
-    const inputStatus = (focus:boolean, disabled:boolean, error:boolean) => {
+    const inputStatus = () => {
         if(focus) {
             return 'focus';
         }
         if(disabled) {
             return 'disabled';
         }
-        if(error) {
+        if(errorMessages&&showError) {
             return 'error';
         } else {
             return null;
@@ -78,11 +78,11 @@ const Input = forwardRef(
         <InputWrapper
             label={label}
             required={require}
-            error={error}
             messages={message}
             showError={showError}
+            errorMessages={errorMessages}
         >
-            <Wrapper inputStatus={inputStatus(focus, disabled, error)}>
+            <Wrapper inputStatus={inputStatus()}>
                 <input
                     ref={ref}
                     type={type||"text"}

@@ -18,8 +18,8 @@ export const textarea = () => {
         <Textarea
             label="label"
             require
-            message={['error1', 'error2', 'error3', 'error4']}
-            error
+            message={['error1', 'error2']}
+            errorMessages={['error3', 'error4']}
         />
     );
 };

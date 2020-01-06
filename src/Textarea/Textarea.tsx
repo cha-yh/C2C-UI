@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
-const TextareaBlock = styled.div<{error: boolean|undefined}>`
+const TextareaBlock = styled.div`
     width: 100%;
     >textarea {
         width: 100%;
@@ -24,12 +24,12 @@ interface OwnProps {
     onChange?: React.ChangeEventHandler;
     checkError?: React.ChangeEventHandler;
     require?: boolean;
-    error?: boolean;
     message?: string[];
+    errorMessages?: string[];
 }
 type Props = OwnProps;
 
-const Textarea: React.SFC<Props> = ({label, require, name, value, onChange, checkError, message, error}) => {
+const Textarea: React.SFC<Props> = ({label, require, name, value, onChange, checkError, message, errorMessages}) => {
     const [focus, setFocus] = useState(false);
     const [inputWidth, setInputWidth] = useState(0);
     const [showError, setShowError] = useState(false);
@@ -52,11 +52,11 @@ const Textarea: React.SFC<Props> = ({label, require, name, value, onChange, chec
         <InputWrapper
             label= {label}
             required= {require}
-            error= {error}
+            errorMessages= {errorMessages}
             messages= {message}
             showError= {showError}
         >
-            <TextareaBlock error={error}>
+            <TextareaBlock>
                 <textarea name={name} value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}
