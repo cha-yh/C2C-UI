@@ -35,12 +35,13 @@ const CheckBox = ({
 const disabled = css`
     pointer-events: none;
 
-    .label p {
+    .label h5 {
         color: ${palette.grayLighten10};
     }
 
     .check-box {
-        border: 1px solid ${palette.grayLighten10};    
+        border: 1px solid ${palette.grayLighten10};
+        background: ${palette.grayLighten20};
     }
 
     .check-box-checked {

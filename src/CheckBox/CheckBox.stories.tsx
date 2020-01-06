@@ -16,21 +16,31 @@ export default {
 
 export const checkbox = () => {
     const label = text('label', 'test-label');
-    const disabled = boolean('disabled', true);
-    const circle = boolean('circle', true);
+    const disabled = boolean('disabled', false);
+    const circle = boolean('circle', false);
 
     const [checked, setChecked] = useState(false);
     const onClick = () => {
         setChecked(!checked);
     }
     return (
-        <CheckBox
-            checked={checked}
-            onClick={onClick}
-            label={label}
-            disabled={disabled}
-            circle={circle}
-        />
+        <React.Fragment>
+            <CheckBox
+                checked={checked}
+                onClick={onClick}
+                label={"Check box"}
+            />
+
+            <CheckBox
+                checked={checked}
+                onClick={onClick}
+                label={label}
+                disabled={disabled}
+                circle={circle}
+            />
+        </React.Fragment>
+
+        
     );
 };
 
