@@ -3,7 +3,7 @@ import styled, { css, keyframes } from 'styled-components';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Button from '../Button/Button';
 import { animated, useTransition } from 'react-spring';
-import { flex } from '../utils';
+import { flex, rem } from '../utils';
 import { useOnClickOutside } from '../hooks';
 
 export type ModalProps = {
@@ -158,7 +158,7 @@ const WhiteBox = styled.div`
   width: 25rem;
   background: white;
   box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
+  padding: ${rem(20)};
 
   h3 {
     font-size: 1.5rem;

@@ -11,6 +11,9 @@ const LabelBlock = styled.h5`
     font-size: ${rem(14)};
     font-weight: 600;
     margin-bottom: ${rem(5)};
+
+    ${flex.row};
+    ${flex.ai.center};
 `;
 
 
