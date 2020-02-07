@@ -5,7 +5,7 @@ import InputWrapper from '../InputWrapper/InputWrapper';
 
 export type InputProps = {
     name?: string;
-    value?: string;
+    value?: string|number|string[];
     onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
     checkError?: (e:React.ChangeEvent<HTMLInputElement>) => void;
     require?: boolean;

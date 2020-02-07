@@ -20,6 +20,7 @@ export const input = () => {
   const require = boolean('require', true);
   const disabled = boolean('disabled', false);
   const placeholder = text('placeholder', "placeholder");
+  const type = text('type', 'text');
 
   return (
     <React.Fragment>
@@ -29,6 +30,7 @@ export const input = () => {
         symbol={symbol}
         placeholder={placeholder}
         disabled={disabled}
+        type={type}
       />
 
       <Input
