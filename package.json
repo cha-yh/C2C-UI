@@ -1,6 +1,6 @@
 {
   "name": "react-c2c-ui",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "module": "dist/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
