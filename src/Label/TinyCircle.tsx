@@ -5,7 +5,7 @@ import { rem, utils, flex, palette } from '../utils';
 const TinyCircleBlock = styled.div<{white:boolean|undefined, color:string|undefined}>`
     width: ${rem(6)};
     height: ${rem(6)};
-    background-color: ${palette.blue};
+    background-color: ${palette.blue500};
     background-color: ${props=>props.white && 'white'};
     background-color: ${props=>props.color && props.color};
     border-radius: ${rem(100)};

@@ -18,7 +18,7 @@ const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'erro
     height: ${rem(23)};
     margin: ${rem(2)};
     padding: ${rem(5)} ${rem(10)};
-    background: ${palette.blue};
+    background: ${palette.blue500};
     ${flex.row};
     ${flex.ai.center};
     border-radius: ${rem(100)};
@@ -37,8 +37,8 @@ const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'erro
     }
 
     ${props => props.inputStatus === 'disabled' && css`
-        background: ${palette.grayLighten10};
-        color: ${palette.redLighten30};
+        background: ${palette.gray400};
+        color: ${palette.red200};
     `}
 `;
 const ListItemBlock = styled.div`
@@ -55,7 +55,7 @@ const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
 
     .box {
         min-height: ${rem(45)};
-        border: 1px solid ${palette.grayLighten10};
+        border: 1px solid ${palette.gray400};
         padding: 0 ${rem(13)};
         ${flex.row};
         ${flex.jc.spaceB};
@@ -63,7 +63,7 @@ const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
         background: white;
 
         >.placeholder {
-            color: ${palette.gray};
+            color: ${palette.gray500};
             font-size: ${rem(12)};
             letter-spacing: -1px;
         }
@@ -79,7 +79,7 @@ const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
     .list {
         z-index: 1;
         width: 100%;
-        border: 1px solid ${palette.grayLighten10};
+        border: 1px solid ${palette.gray400};
         min-height: ${rem(200)};
         padding: ${rem(10)};
         padding-top: 0;
@@ -91,7 +91,7 @@ const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
             ${flex.row};
             ${flex.jc.spaceB};
             ${flex.ai.center};
-            border: 1px solid ${palette.grayLighten20};
+            border: 1px solid ${palette.gray300};
             padding-right: ${rem(10)};
             >input {
                 width: 100%;
@@ -126,7 +126,7 @@ const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
                 cursor: pointer;
                 margin-right: ${rem(10)};
                 &:hover {
-                    background: ${palette.grayLighten20};
+                    background: ${palette.gray300};
                 }
             }
         }

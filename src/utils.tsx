@@ -21,61 +21,61 @@ export const palette = {
     grayGreenDarken10:  '#6b826b' as const, //hover
 
     /** GRAY 100: lighten 40%, PRIMARY_WHITE */
-    grayLighten40:  '#FAFAFA' as const, 
+    gray100:  '#FAFAFA' as const, 
     /** GRAY 200: lignten 30% */
-    grayLighten30:  '#EEEEEE' as const,
+    gray200:  '#EEEEEE' as const,
     /** GRAY 300: lignten 20%, LIGHT, DIVIDER */
-    grayLighten20:  '#DDDDDD' as const,
+    gray300:  '#DDDDDD' as const,
     /** GRAY 400: lignten 10% PRIMARY, DISABLED */
-    grayLighten10:  '#BDBDBD' as const,
+    gray400:  '#BDBDBD' as const,
     /** GRAY 500: normal */
-    gray:           '#9E9E9E' as const,
+    gray500:  '#9E9E9E' as const,
     /** GRAY 600: darken 10% */
-    grayDarken10:   '#757575' as const,
+    gray600:   '#757575' as const,
     /** GRAY 700: darken 20% */
-    grayDarken20:   '#555555' as const,
+    gray700:   '#555555' as const,
     /** GRAY 800: darken 30%, PRIMARY_BLACK */
-    grayDarken30:   '#3D3D3D' as const, 
+    gray800:   '#3D3D3D' as const, 
     /** GRAY 900: darken 40% */
-    grayDarken40:   '#1F1F1F' as const,
+    gray900:   '#1F1F1F' as const,
 
     /** BLUE 100: lighten40 */
-    blueLighten40:  '#c8e7ff' as const,
+    blue100:  '#c8e7ff' as const,
     /** BLUE 200: lighten30 */
-    blueLighten30:  '#95d1ff' as const,
+    blue200:  '#95d1ff' as const,
     /** BLUE 300: lighten20 */
-    blueLighten20:  '#62bbff' as const,
+    blue300:  '#62bbff' as const,
     /** BLUE 400: lighten10 */
-    blueLighten10:  '#2fa5ff' as const,
+    blue400:  '#2fa5ff' as const,
     /** BLUE 500: normal, PRIMARY */
-    blue:           '#008EFB' as const,
+    blue500:  '#008EFB' as const,
     /** BLUE 600: darken10 */
-    blueDarken10:   '#0071c8' as const,
+    blue600:   '#0071c8' as const,
     /** BLUE 700: darken20 */
-    blueDarken20:   '#005495' as const,
+    blue700:   '#005495' as const,
     /** BLUE 800: darken30 */
-    blueDarken30:   '#003762' as const,
+    blue800:   '#003762' as const,
     /** BLUE 900: darken40 */
-    blueDarken40:   '#001b2f' as const,
+    blue900:   '#001b2f' as const,
 
     /** RED 100: lighten40 */
-    redLighten40:   '#fff1ee' as const,
+    red100:   '#fff1ee' as const,
     /** RED 200: lighten30 */
-    redLighten30:   '#ffc7bb' as const,
+    red200:   '#ffc7bb' as const,
     /** RED 300: lighten20 */
-    redLighten20:   '#ff9e88' as const,
+    red300:   '#ff9e88' as const,
     /** RED 400: lighten10 */
-    redLighten10:   '#ff7455' as const,
+    red400:   '#ff7455' as const,
     /** RED 500: normal, PRIMARY, ERROR */
-    red:            '#FF4A22' as const,
+    red500:   '#FF4A22' as const,
     /** RED 600: darken10 */
-    redDarken10:    '#ee2b00' as const,
+    red600:    '#ee2b00' as const,
     /** RED 700: darken20 */
-    redDarken20:    '#bb2200' as const,
+    red700:    '#bb2200' as const,
     /** RED 800: darken30 */
-    redDarken30:    '#881900' as const,
+    red800:    '#881900' as const,
     /** RED 900: darken40 */
-    redDarken40:    '#550f00' as const,
+    red900:    '#550f00' as const,
 }
 
 /**
@@ -101,7 +101,7 @@ export const utils = {
         margin: ${rem(20)} auto;
     `,
     disabled: css`
-        background: ${palette.grayLighten40};
+        background: ${palette.gray100};
         color: white;
         cursor: default;
     `,

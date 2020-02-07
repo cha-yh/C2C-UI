@@ -65,12 +65,12 @@ const Trigger = styled.div`
     >p {
         margin-right: ${rem(5)};
         font-size: ${rem(13)};
-        color: ${palette.red};
+        color: ${palette.red500};
     }
 
     >svg {
         font-size: ${rem(13)};
-        color: ${palette.red};
+        color: ${palette.red500};
     }
 `;
 
@@ -146,7 +146,7 @@ const InputWrapperBlock = styled.div<{width: number|undefined}>`
 const MessagesWrapper = styled.div<{inputWidth:number}>`
     ${props => props.inputWidth && utils.singleEllipsis(props.inputWidth)};
     >p {
-        color: ${palette.grayDarken30};
+        color: ${palette.gray800};
         margin-right: ${rem(10)};
     }
 `

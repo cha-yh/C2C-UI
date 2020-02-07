@@ -36,22 +36,22 @@ const disabled = css`
     pointer-events: none;
 
     .label h5 {
-        color: ${palette.grayLighten10};
+        color: ${palette.gray400};
     }
 
     .check-box {
-        border: 1px solid ${palette.grayLighten10};
-        background: ${palette.grayLighten20};
+        border: 1px solid ${palette.gray400};
+        background: ${palette.gray300};
     }
 
     .check-box-checked {
-        background-color: ${palette.gray};
-        border-color: ${palette.gray};
+        background-color: ${palette.gray500};
+        border-color: ${palette.gray500};
     }
 
     .label-checked {
         >h5 {
-            color: ${palette.gray};
+            color: ${palette.gray500};
         }
     }
 `;
@@ -63,28 +63,28 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
     width: fit-content;
     &:hover {
         .check-box {
-            background-color: ${palette.blue};
+            background-color: ${palette.blue500};
         }
 
         .label >h5 {
             font-size: 13px;
-            color: ${palette.blue};
+            color: ${palette.blue500};
         }
     }
     &:active {
         .check-box {
-            background-color: ${palette.blueDarken10};
+            background-color: ${palette.blue600};
         }
 
         .label >h5 {
             font-size: 13px;
-            color: ${palette.blueDarken10};
+            color: ${palette.blue600};
         }
     }
     .check-box {
         width: ${rem(17)};
         height: ${rem(17)};
-        border: 1px solid ${palette.grayLighten10};
+        border: 1px solid ${palette.gray400};
         border-radius: 2px;
         cursor: pointer;
         margin-right: ${rem(10)};
@@ -96,8 +96,8 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
     }
     
     .check-box-checked {
-        background-color: ${palette.blue};
-        border: 1px solid ${palette.blue};
+        background-color: ${palette.blue500};
+        border: 1px solid ${palette.blue500};
         ${flex.row};
         ${flex.ai.center};
         ${flex.jc.center};
@@ -114,7 +114,7 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
 
     .label-checked {
         p {
-            color: ${palette.blue};
+            color: ${palette.blue500};
         }
     }
 

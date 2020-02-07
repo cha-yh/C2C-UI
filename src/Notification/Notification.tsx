@@ -126,15 +126,15 @@ const Notification = ({
 const colorTheme = {
     normal: css`
         >.head {
-            background: ${palette.grayDarken30};
+            background: ${palette.gray800};
         }
         >.body {
-            background: ${palette.grayDarken40};
+            background: ${palette.gray900};
         }
 
         &:hover {
             >.head {
-            background: ${palette.grayDarken40};
+            background: ${palette.gray900};
             }
             >.body {
                 background: black;
@@ -144,36 +144,36 @@ const colorTheme = {
 
     success: css`
         >.head {
-            background: ${palette.blue};
+            background: ${palette.blue500};
         }
         >.body {
-            background: ${palette.blueDarken10};
+            background: ${palette.blue600};
         }
 
         &:hover {
             >.head {
-                background: ${palette.blueDarken10};
+                background: ${palette.blue600};
             }
             >.body {
-                background: ${palette.blueDarken20};;
+                background: ${palette.blue700};;
             }
         }
     `,
 
     failure: css`
         >.head {
-            background: ${palette.red};
+            background: ${palette.red500};
         }
         >.body {
-            background: ${palette.redDarken10};
+            background: ${palette.red600};
         }
 
         &:hover {
             >.head {
-                background: ${palette.redDarken10};
+                background: ${palette.red600};
             }
             >.body {
-                background: ${palette.redDarken20};
+                background: ${palette.red700};
             }
         }
     `
@@ -202,7 +202,7 @@ const NotificationBlock = styled(animated.div)<{theme: 'normal'|'success'|'failu
             color: white;
             cursor: pointer;
             &:hover {
-                color: ${palette.grayLighten20};
+                color: ${palette.gray300};
             }
         }
 

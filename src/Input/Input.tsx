@@ -104,15 +104,15 @@ const Input = forwardRef(
 
 const styles = {
     focus: css`
-        border-color: ${palette.blue};
+        border-color: ${palette.blue500};
     `,
     disabled: css`
-        border-color: ${palette.gray};
-        background: ${palette.grayLighten30};
+        border-color: ${palette.gray500};
+        background: ${palette.gray200};
         >input {cursor: not-allowed;}
     `,
     error: css`
-        border-color: ${palette.red};
+        border-color: ${palette.red500};
     `
 }
 export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>`
@@ -121,10 +121,10 @@ export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>
     height: ${rem(45)};
     margin: 0;
     padding-right: ${rem(13)};
-    border: 1px solid ${palette.grayLighten10};
+    border: 1px solid ${palette.gray400};
     border-radius: 2px;
-    background: ${palette.grayLighten40};
-    color: ${palette.grayDarken30};
+    background: ${palette.gray100};
+    color: ${palette.gray800};
     font-family: 'Montserrat';
     transition: all 0.125s ease-in;
     ${flex.row};
@@ -143,7 +143,7 @@ export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>
     }
 
     >input::placeholder {
-        color: ${palette.gray};
+        color: ${palette.gray500};
         font-size: ${rem(14)};
         letter-spacing: 0;
     }

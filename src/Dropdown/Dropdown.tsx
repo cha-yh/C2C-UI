@@ -144,11 +144,11 @@ const Dropdown = ({
 export const dropdownStyles = {
     focus: css`
         .box {
-            border-color: ${palette.blue};
+            border-color: ${palette.blue500};
             border-bottom: none;
         }
         .list {
-            border-color: ${palette.blue};
+            border-color: ${palette.blue500};
             border-top: none;
             display: block;
         }
@@ -156,22 +156,22 @@ export const dropdownStyles = {
     `,
     disabled: css`
         .box {
-            border-color: ${palette.gray};
-            background: ${palette.grayLighten30};
+            border-color: ${palette.gray500};
+            background: ${palette.gray200};
 
             .placeholder.selected {
-                color: ${palette.gray};
+                color: ${palette.gray500};
             }
         }
         cursor: not-allowed;
     `,
     error: css`
         .box {
-            border-color: ${palette.red};
+            border-color: ${palette.red500};
         }
 
         .error {
-            color: ${palette.red};
+            color: ${palette.red500};
         }
     `
 }
@@ -182,7 +182,7 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
     width: 100%;    
     .box {
         height: ${rem(45)};
-        border: 1px solid ${palette.grayLighten10};
+        border: 1px solid ${palette.gray400};
         padding: 0 ${rem(13)};
         ${flex.row};
         ${flex.jc.spaceB};
@@ -190,7 +190,7 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
         background: white;
         
         >.placeholder {
-            color: ${palette.gray};
+            color: ${palette.gray500};
             font-size: ${rem(14)};
             letter-spacing: -1px;
         }
@@ -203,7 +203,7 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
     .list {
         z-index: 1;
         width: 100%;
-        border: 1px solid ${palette.grayLighten10};
+        border: 1px solid ${palette.gray400};
         padding: ${rem(10)};
         padding-top: 0;
         background: white;
@@ -215,7 +215,7 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
             ${flex.row};
             ${flex.jc.spaceB};
             ${flex.ai.center};
-            border: 1px solid ${palette.grayLighten20};
+            border: 1px solid ${palette.gray300};
             padding-right: ${rem(10)};
             >input {
                 width: 100%;
@@ -252,7 +252,7 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
                 cursor: pointer;
                 margin-right: ${rem(10)};
                 &:hover {
-                    background: ${palette.grayLighten20};
+                    background: ${palette.gray300};
                 }
             }
         }

@@ -7,7 +7,7 @@ export type LabelProps = {
     require?: boolean;
 };
 const LabelBlock = styled.h5`
-    color: ${palette.grayDarken30};
+    color: ${palette.gray800};
     font-size: ${rem(14)};
     font-weight: 600;
     margin-bottom: ${rem(5)};

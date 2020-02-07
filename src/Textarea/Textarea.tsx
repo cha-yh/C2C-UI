@@ -10,10 +10,10 @@ const TextareaBlock = styled.div`
         height: ${rem(300)};
         margin: 0;
         padding-right: ${rem(13)};
-        border: 1px solid ${palette.grayLighten10};
+        border: 1px solid ${palette.gray400};
         border-radius: 2px;
-        background: ${palette.grayLighten40};
-        color: ${palette.grayDarken30};
+        background: ${palette.gray100};
+        color: ${palette.gray800};
     }
 `;
 

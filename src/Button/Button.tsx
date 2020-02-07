@@ -55,12 +55,12 @@ const Button = ({
       return 'white';
     }
     if(disabled) {
-      return palette.grayLighten10;
+      return palette.gray400;
     }
     if(theme === 'secondary') {
-      return palette.blue;
+      return palette.blue500;
     } else if(theme === 'tertiary') {
-      return palette.blue;
+      return palette.blue500;
     }
     return 'white';
   }
@@ -106,26 +106,26 @@ const Button = ({
 };
 const themes = {
   primary: css`
-    background: ${palette.blue};
+    background: ${palette.blue500};
     color: white;
     &:hover:enabled {
-      background: ${palette.blueDarken10};
+      background: ${palette.blue600};
     }
     &:active:enabled {
-      background: ${palette.blueDarken20};
+      background: ${palette.blue700};
     }
     &:disabled {
-      background: ${palette.grayLighten10};
+      background: ${palette.gray400};
     }
   `,
   secondary: css`
     background: #e9ecef;
-    color: ${palette.grayDarken30};
+    color: ${palette.gray800};
     &:hover:enabled {
-      background: ${palette.grayLighten20};
+      background: ${palette.gray300};
     }
     &:active:enabled {
-      background: ${palette.grayLighten10};
+      background: ${palette.gray400};
     }
     &:disabled {
       color: #c6d3e1;
@@ -133,15 +133,15 @@ const themes = {
   `,
   tertiary: css`
     background: none;
-    color: ${palette.blue};
+    color: ${palette.blue500};
     &:hover:enabled {
-      background: ${palette.grayLighten30};
+      background: ${palette.gray200};
     }
     &:active:enabled {
-      background: ${palette.grayLighten20};
+      background: ${palette.gray300};
     }
     &:disabled {
-      color: ${palette.grayLighten10};
+      color: ${palette.gray400};
     }
   `
 };
