@@ -35,7 +35,6 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-named-asset-import": "^0.3.5",
     "babel-preset-react-app": "^9.1.0",
-    "react-app-polyfill": "^1.0.6",
     "react-docgen-typescript-loader": "^3.6.0",
     "rollup": "^1.27.11",
     "rollup-plugin-babel": "^4.3.3",
