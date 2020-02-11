@@ -155,7 +155,6 @@ export const utils = {
 const dFlex = css`
     display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 `;
@@ -164,79 +163,62 @@ export const flex = {
     row: css`
         ${dFlex};
         flex-direction: row;
-        -ms-flex-direction: row;
     `,
     rowR: css`
         ${dFlex};
         flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
     `,
     col: css`
         ${dFlex};
         flex-direction: column;
-        -ms-flex-direction: column;
     `,
     colR: css`
         ${dFlex};
         flex-direction: column-reverse;
-        -ms-flex-direction: column-reverse;
     `,
     wrap: css`
-        -ms-flex-wrap : wrap;
         flex-wrap: wrap;
     `,
     nowrap: css`
-        -ms-flex-wrap : nowrap;
         flex-wrap: nowrap;
     `,
     jc: {
         center: css`
             justify-content: center;
-            -ms-flex-pack: center;
         `,
         start: css`
             justify-content: flex-start;
-            -ms-flex-pack: start;
         `,
         end: css`
             justify-content: flex-end;
-            -ms-flex-pack: end;
         `,
         spaceA: css`
             justify-content: space-around;
-            -ms-flex-pack: justify; //no space-around
         `,
         spaceB: css`
             justify-content: space-between;
-            -ms-flex-pack: justify;
         `,
         unset: css`
             justify-content: unset;
-            -ms-flex-pack: unset;
         `,
     },
     ai: {
         center: css`
             align-items: center;
-            -ms-flex-align: center;
         `,
         start: css`
             align-items: flex-start;
-            -ms-flex-align: start;
         `,
         end: css`
             align-items: flex-end;
-            -ms-flex-pack: end;
         `,
         unset: css`
             align-items: unset;
-            -ms-flex-pack: unset;
         `,
     },
     flex: (value: string) => {
         return css`
             -webkit-flex: ${value}; /* Safari 6.1+ */ 
-            -ms-flex: ${value}; /* IE 10 */ 
             flex: ${value};
         `;
     }
