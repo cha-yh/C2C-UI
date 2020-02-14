@@ -20,18 +20,60 @@ export const infoGroup = () => {
         <InfoGroupBlock>
             <InfoGroup
                 infos={[
-                    {value: 'lorem ipsum dolor sit amet', label: 'l'},
-                    {value: 't2', label: 'la'},
-                    {value: 'test1', label: 'label1123123'},
-                    {value: 'tes1', label: 'lab'}
+                    {
+                        label: "Origin",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Region",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Altitude",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Temperature",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Soil",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Annual rainfall",
+                        value: "lorem ipsum do"
+                    }
                 ]}
+            />
 
-                // infos2={[
-                //     {value: 'lorem ipsum dolor shit lorem', label: 'l123'},
-                //     {value: 't2', label: 'la123'},
-                //     {value: 'test1', label: 'label1123123123'},
-                //     {value: 'tes1', label: 'lab'}
-                // ]}
+<InfoGroup
+                infos={[
+                    {
+                        label: "Origin",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Region",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Altitude",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Temperature",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Soil",
+                        value: "lorem ipsum do"
+                    },
+                    {
+                        label: "Annual rainfall",
+                        value: "lorem ipsum do"
+                    }
+                ]}
             />
         </InfoGroupBlock>
     );
@@ -39,7 +81,11 @@ export const infoGroup = () => {
 
 const InfoGroupBlock = styled.div`
     ${flex.row};
-    ${flex.wrap};
+    width: 1080px;
+
+    >div {
+        flex: 1 0 auto;
+    }
 `;
 
 infoGroup.story = {

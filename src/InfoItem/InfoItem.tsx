@@ -15,10 +15,10 @@ const InfoItem = ({
 }: Props) => {
     return (
         <InfoItemBlock row={row} labelWidth={labelWidth}>
-            <h5 className="label">{label}</h5>
+            <InfoLabel>{label}</InfoLabel>
             {value
                 ?
-                <h5>{value}</h5>
+                <h5 className="value">{value}</h5>
 
                 :
                 <h5 className="no_data">NO DATA</h5>
@@ -27,18 +27,23 @@ const InfoItem = ({
     )
 }
 
+export const InfoLabel = styled.h5`
+    font-size: ${rem(12)} !important;
+    font-weight: 300;
+    white-space: nowrap;
+`;
+
 const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
     ${utils.initiateCss};
+    width: 100%;
     ${props =>
         props.row &&
         css`
             ${flex.row};
+            ${flex.ai.center};
             /* ${flex.wrap}; */
             >:first-child {
                 ${flex.flex('none')};
-            }
-
-            >.label {
                 margin-right:${rem(20)};
                 ${ props.labelWidth
                     ? css`
@@ -52,14 +57,9 @@ const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
             }
         `
     };
-
-    >h5 {
-        white-space: initial;
+    >.value {
         font-size: ${rem(16)};
-    }
-
-    >.label {
-        font-weight: 500;
+        font-weight: 700;
     }
 
     >.no_data {

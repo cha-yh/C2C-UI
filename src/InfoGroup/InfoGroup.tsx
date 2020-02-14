@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import InfoItem from '../InfoItem/InfoItem';
+import InfoItem, { InfoLabel } from '../InfoItem/InfoItem';
 import styled from 'styled-components';
 import {rem, flex, media} from '../utils';
 
@@ -20,6 +20,7 @@ const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
     const [labelWidth, setLabelWidth] = useState(0);
     const [label2Width, setLabel2Width] = useState(0);
     useEffect(() => {
+        label1Ref.current && console.log('label1Ref.current', label1Ref.current);
         label1Ref.current &&
             setLabelWidth(label1Ref.current.clientWidth);
 
@@ -30,12 +31,12 @@ const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
         <InfoGroupBlock>
             <WidthFixer ref={label1Ref}>
                 {infos.map(item => 
-                    <h5>{item.label}</h5>
+                    <InfoLabel>{item.label}</InfoLabel>
                 )}
             </WidthFixer>
             {infos2 && <WidthFixer ref={label2Ref}>
                 {infos2.map(item => 
-                    <h5>{item.label}</h5>
+                    <InfoLabel>{item.label}</InfoLabel>
                 )}
             </WidthFixer>}
             <InfoGroupBox >
