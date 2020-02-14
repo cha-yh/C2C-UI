@@ -81,13 +81,15 @@ const Modal = ({
   }
 
   useEffect(() => {
+    if(visible) {
       document.addEventListener("keydown", escFunction, false);
       document.body.style.overflow = 'hidden'
       return () => {
           document.removeEventListener("keydown", escFunction, false);
           document.body.style.overflow = 'auto'
       };
-  }, []);
+    }
+  }, [visible]);
 
   return (
     <React.Fragment>
