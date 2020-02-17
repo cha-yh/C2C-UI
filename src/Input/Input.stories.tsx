@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -21,37 +21,52 @@ export const input = () => {
   const disabled = boolean('disabled', false);
   const placeholder = text('placeholder', "placeholder");
   const type = text('type', 'text');
-
+  const [first, setFirst] = useState(null);
+  const onChangeFirst = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirst(Number(e.target.value))
+  }
   return (
-    <React.Fragment>
+      <form onSubmit={(e:React.FormEvent<HTMLFormElement>) => {
+        e.stopPropagation();
+        e.preventDefault();
+      }}>
       <Input
-        label={label}
-        require={require}
-        symbol={symbol}
-        placeholder={placeholder}
-        disabled={disabled}
-        type={type}
-      />
+          label={label}
+          symbol={symbol}
+          placeholder={placeholder}
+          disabled={disabled}
+          type={'number'}
+          step={0.001}
+          min={0}
+          max={1}
+          value={first}
+          name="first"
+          onChange={onChangeFirst}
+          required
+          size={10}
+        />
 
-      <Input
-        label={label}
-        require={require}
-        symbol={symbol}
-        placeholder={placeholder}
-        disabled={disabled}
-        errorMessages={['first error', 'second error', 'third']}
-      />
+        <Input
+          label={label}
+          required
+          symbol={symbol}
+          placeholder={placeholder}
+          disabled={disabled}
+          errorMessages={[]}
+        />
 
-      <Input
-        message={["first messages. It's test dummy text.", 'second']}
-        label={label}
-        require={require}
-        symbol={symbol}
-        placeholder={placeholder}
-        disabled={disabled}
-        errorMessages={['first error', 'second error', 'third']}
-      />
-    </React.Fragment>
+        <Input
+          message={["first messages. It's test dummy text.", 'second']}
+          label={label}
+          required
+          symbol={symbol}
+          placeholder={placeholder}
+          disabled={disabled}
+          errorMessages={['first error', 'second error', 'third']}
+        />
+
+        <input type="submit" value="Submit" />
+      </form>
   );
 };
 

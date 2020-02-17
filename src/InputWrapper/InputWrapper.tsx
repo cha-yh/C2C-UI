@@ -80,7 +80,7 @@ type InputWrapperProps = {
     required?: boolean,
     messages?: string[],
     showError?: boolean,
-    errorMessages?: string[]
+    errorMessages?: string[],
     width?: number;
 }
 const InputWrapper = forwardRef(
@@ -90,7 +90,7 @@ const InputWrapper = forwardRef(
         required,
         messages,
         showError,
-        errorMessages,
+        errorMessages=[],
         width
     }:InputWrapperProps,
     ref?: React.Ref<HTMLInputElement>) => {
@@ -104,7 +104,7 @@ const InputWrapper = forwardRef(
             <InputWrapperBlock width={width}>
                 <div className="header">
                 {label?<Label text={label} require={required}/>:<p> </p>}
-                {(errorMessages&& showError)&&
+                {(errorMessages.length&& showError)?
                     <Helper
                         trigger={
                             <Trigger>
@@ -113,7 +113,7 @@ const InputWrapper = forwardRef(
                             </Trigger>
                         }
                         messages={errorMessages}
-                    />
+                    />:null
                 }
                 </div>
 

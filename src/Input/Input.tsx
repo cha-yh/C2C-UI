@@ -1,35 +1,42 @@
-import React, { useCallback, useState, forwardRef, useRef, useEffect } from 'react'
+import React, { useCallback, useState, forwardRef, useRef, useEffect, InputHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
-export type InputProps = {
-    name?: string;
-    value?: string|number|string[];
-    onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
-    checkError?: (e:React.ChangeEvent<HTMLInputElement>) => void;
-    require?: boolean;
+export interface InputProps {
+    name?: string,
+    value?: string|number|string[],
+    onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void,
+    checkError?: (e:React.ChangeEvent<HTMLInputElement>) => void,
+    min?: string | number,
+    max?: string | number,
+    onKeyUp?: ((event: React.KeyboardEvent<HTMLInputElement>) => void),
+    step?: string | number,
+    required?: boolean,
+    pattern?: string,
+    size?: number,
 
-    label?: string;
-    icon?: any;
-    symbol?: string;
-    message?: string[];
-    width?: number;
-    ref?: React.MutableRefObject<HTMLInputElement>;
+    label?: string,
+    icon?: any,
+    symbol?: string,
+    message?: string[],
+    width?: number,
+    ref?: React.MutableRefObject<HTMLInputElement>,
 
-    placeholder?: string;
-    type?: string;
-    disabled?: boolean;
-    errorMessages?: string[];
+    placeholder?: string,
+    type?: string,
+    disabled?: boolean,
+    errorMessages?: string[]
 }
 
 const Input = forwardRef(
     (
         {
             name, value, onChange,
-            require, label, icon,
+            required, label, icon,
             symbol, message,
-            checkError, width, placeholder, type, disabled=false, errorMessages
+            checkError, width, placeholder, type, disabled=false, errorMessages=[],
+            min, max, onKeyUp, step, pattern, size
         }:InputProps,
         ref?: React.Ref<HTMLInputElement>
     ) => {
@@ -68,7 +75,7 @@ const Input = forwardRef(
         if(disabled) {
             return 'disabled';
         }
-        if(errorMessages&&showError) {
+        if(errorMessages.length&&showError) {
             return 'error';
         } else {
             return null;
@@ -77,7 +84,7 @@ const Input = forwardRef(
     return (
         <InputWrapper
             label={label}
-            required={require}
+            required={required}
             messages={message}
             showError={showError}
             errorMessages={errorMessages}
@@ -86,7 +93,7 @@ const Input = forwardRef(
             <Wrapper inputStatus={inputStatus()}>
                 <input
                     ref={ref}
-                    type={type||"text"}
+                    type={type}
                     name={name}
                     value={value}
                     onChange={handleChange}
@@ -94,6 +101,13 @@ const Input = forwardRef(
                     onFocus={onFocus}
                     placeholder={placeholder}
                     disabled={disabled}
+                    min={min}
+                    max={max}
+                    onKeyUp={onKeyUp}
+                    step={step}
+                    required={required}
+                    pattern={pattern}
+                    size={size}
                 />
                 {icon && icon}
                 {symbol && <span>{symbol}</span>}
