@@ -27,6 +27,9 @@ type ButtonProps = {
 
   /** Color of font */
   fontColor?: string;
+
+  /** Type of Button */
+  type?: "button" | "submit" | "reset";
 };
 
 /** Button */
@@ -40,7 +43,8 @@ const Button = ({
   style,
   className,
   loading,
-  fontColor
+  fontColor,
+  type
 }: ButtonProps) => {
   const loaderSize = (size:string) => {
     if(size === 'small') {
@@ -87,6 +91,7 @@ const Button = ({
       style={style}
       className={className}
       fontColor={buttonFontColor(disabled, fontColor)}
+      type={type}
     >
       {loading
         ? 

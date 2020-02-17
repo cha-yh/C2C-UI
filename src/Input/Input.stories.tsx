@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from './Input';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
-
+import Button from '../Button/Button';
 export default {
   title: 'components|Input',
   component: Input,
@@ -65,7 +65,7 @@ export const input = () => {
           errorMessages={['first error', 'second error', 'third']}
         />
 
-        <input type="submit" value="Submit" />
+        <Button type="submit" >btn</Button>
       </form>
   );
 };
@@ -81,7 +81,7 @@ export const styles = () => {
       <h4>error</h4>
       <Input
         label="label"
-        require={true}
+        required
         errorMessages={["error1", "error2", "error2", "error2", "error2", "error2", "error2", "error2", "error2"]}
       />
 
@@ -110,7 +110,7 @@ export const styles = () => {
       />
       <Input
         label="label2"
-        require
+        required
       />
 
       
