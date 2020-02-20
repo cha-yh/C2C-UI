@@ -61,7 +61,6 @@ const Modal = ({
     }
   });
   const onClickDimmer = () => {
-    console.log('onClickDimmer')
     if (onCancel) {
       onCancel();
     }

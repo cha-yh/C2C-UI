@@ -20,7 +20,6 @@ const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
     const [labelWidth, setLabelWidth] = useState(0);
     const [label2Width, setLabel2Width] = useState(0);
     useEffect(() => {
-        label1Ref.current && console.log('label1Ref.current', label1Ref.current);
         label1Ref.current &&
             setLabelWidth(label1Ref.current.clientWidth);
 
