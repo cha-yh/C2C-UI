@@ -7,7 +7,7 @@ const TextareaBlock = styled.div`
     width: 100%;
     >textarea {
         width: 100%;
-        height: ${rem(300)};
+        height: ${rem(100)};
         margin: 0;
         padding-right: ${rem(13)};
         border: 1px solid ${palette.gray400};
@@ -23,13 +23,13 @@ interface OwnProps {
     value?: string;
     onChange?: React.ChangeEventHandler;
     checkError?: React.ChangeEventHandler;
-    require?: boolean;
+    required?: boolean;
     message?: string[];
     errorMessages?: string[];
 }
 type Props = OwnProps;
 
-const Textarea: React.SFC<Props> = ({label, require, name, value, onChange, checkError, message, errorMessages}) => {
+const Textarea: React.SFC<Props> = ({label, required, name, value, onChange, checkError, message, errorMessages}) => {
     const [focus, setFocus] = useState(false);
     const [inputWidth, setInputWidth] = useState(0);
     const [showError, setShowError] = useState(false);
@@ -51,7 +51,7 @@ const Textarea: React.SFC<Props> = ({label, require, name, value, onChange, chec
     return (
         <InputWrapper
             label= {label}
-            required= {require}
+            required= {required}
             errorMessages= {errorMessages}
             messages= {message}
             showError= {showError}
@@ -61,6 +61,7 @@ const Textarea: React.SFC<Props> = ({label, require, name, value, onChange, chec
                     onChange={handleChange}
                     onBlur={handleBlur}
                     onFocus={onFocus}
+                    required={required}
                 />
             </TextareaBlock>
         </InputWrapper>

@@ -132,7 +132,7 @@ const styles = {
 export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>`
     ${utils.initiateCss};
     width: 100%;
-    height: ${rem(45)};
+    height: ${rem(35)};
     margin: 0;
     padding-right: ${rem(13)};
     border: 1px solid ${palette.gray400};
