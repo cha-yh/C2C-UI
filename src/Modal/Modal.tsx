@@ -83,10 +83,12 @@ const Modal = ({
   useEffect(() => {
     if(visible) {
       document.addEventListener("keydown", escFunction, false);
-      document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '1.06rem';
+      document.body.style.overflow = 'hidden';
       return () => {
           document.removeEventListener("keydown", escFunction, false);
-          document.body.style.overflow = 'auto'
+          document.body.style.overflow = 'auto';
+          document.body.style.paddingRight = '0';
       };
     }
   }, [visible]);

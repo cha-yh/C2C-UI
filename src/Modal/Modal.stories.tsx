@@ -28,7 +28,7 @@ export const modal = () => {
   return (
     <div>
       <button onClick={()=>{setVisible(true)}}>open modal</button>
-      <div style={{width: '500px', height: '2000px', background:'green'}}></div>
+      <div style={{width: '100%', height: '2000px', background:'green'}}></div>
       <Modal
         title={title}
         description={description}
