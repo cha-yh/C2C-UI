@@ -29,18 +29,19 @@ const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
     return (
         <InfoGroupBlock>
             <WidthFixer ref={label1Ref}>
-                {infos.map(item => 
-                    <InfoLabel>{item.label}</InfoLabel>
+                {infos.map((item, index) => 
+                    <InfoLabel key = {index}>{item.label}</InfoLabel>
                 )}
             </WidthFixer>
             {infos2 && <WidthFixer ref={label2Ref}>
-                {infos2.map(item => 
-                    <InfoLabel>{item.label}</InfoLabel>
+                {infos2.map((item, index) => 
+                    <InfoLabel key = {index}>{item.label}</InfoLabel>
                 )}
             </WidthFixer>}
             <InfoGroupBox >
-                {infos.map(item => 
+                {infos.map((item, index) => 
                      <InfoItem
+                        key = {index}
                         row
                         value = {item.value}
                         label = {item.label}
@@ -51,8 +52,9 @@ const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
 
             {infos2 &&
                 <InfoGroupBox >
-                    {infos2.map(item => 
+                    {infos2.map((item, index) => 
                         <InfoItem
+                            key = {index}
                             row
                             value = {item.value}
                             label = {item.label}
