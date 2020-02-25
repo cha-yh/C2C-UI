@@ -1,6 +1,6 @@
 {
   "name": "react-c2c-ui",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "module": "dist/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -46,7 +46,7 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-sb": "build-storybook",
     "build": "rollup -c",
     "build:types": "tsc --emitDeclarationOnly"
   },
