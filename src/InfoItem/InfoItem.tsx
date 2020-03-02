@@ -41,7 +41,6 @@ const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
         css`
             ${flex.row};
             ${flex.ai.center};
-            /* ${flex.wrap}; */
             >:first-child {
                 ${flex.flex('none')};
                 margin-right:${rem(20)};
@@ -60,6 +59,7 @@ const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
     >.value {
         font-size: ${rem(16)};
         font-weight: 700;
+        word-break: break-word;
     }
 
     >.no_data {

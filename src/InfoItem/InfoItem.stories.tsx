@@ -40,6 +40,15 @@ export const infoItem = () => {
                 row
                 labelWidth={labelWidth}
             />
+
+            <div style={{width: '300px', background: 'green'}}>
+                <InfoItem
+                    label={"width test"}
+                    value={"Lorem ipsum dolor sit amet consectetur adipisicing elit."}
+                    row
+                    labelWidth={labelWidth}
+                />
+            </div>
         </React.Fragment>
     );
 };
