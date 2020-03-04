@@ -13,10 +13,21 @@ type Props = OwnProps;
 const InfoItem = ({
     value, label, labelWidth = 0, row = false
 }: Props) => {
+    let existValue = false;
+    if(value) {
+        existValue = true;
+    } else {
+        if(value === 0) {
+            existValue = true;
+        } else {
+            existValue = false;
+        }
+    }
+    
     return (
         <InfoItemBlock row={row} labelWidth={labelWidth}>
             <InfoLabel>{label}</InfoLabel>
-            {value
+            {existValue
                 ?
                 <h5 className="value">{value}</h5>
 
