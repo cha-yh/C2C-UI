@@ -6,12 +6,12 @@ import {rem, flex, media} from '../utils';
 type InfoGroupProps = {
     infos: {
         label: string;
-        value: string;
+        value: any;
     }[],
 
     infos2?: {
         label: string;
-        value: string;
+        value: any;
     }[];
 }
 const InfoGroup = ({infos, infos2}:InfoGroupProps) => {

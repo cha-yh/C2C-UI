@@ -21,27 +21,23 @@ export const infoGroup = () => {
             <InfoGroup
                 infos={[
                     {
-                        label: "Origin",
-                        value: "lorem ipsum do"
+                        label: "zero",
+                        value: 0
                     },
                     {
-                        label: "Region",
-                        value: "lorem ipsum do"
+                        label: "empty",
+                        value: ""
                     },
                     {
-                        label: "Altitude",
-                        value: "lorem ipsum do"
+                        label: "undefined",
+                        value: undefined
                     },
                     {
-                        label: "Temperature",
-                        value: "lorem ipsum do"
+                        label: "null",
+                        value: null
                     },
                     {
-                        label: "Soil",
-                        value: "lorem ipsum do"
-                    },
-                    {
-                        label: "Annual rainfall",
+                        label: "text",
                         value: "lorem ipsum do"
                     }
                 ]}
