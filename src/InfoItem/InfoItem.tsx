@@ -59,7 +59,7 @@ const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
     >.value {
         font-size: ${rem(16)};
         font-weight: 700;
-        word-break: break-word;
+        white-space:normal;
     }
 
     >.no_data {
