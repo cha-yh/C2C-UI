@@ -1,10 +1,10 @@
-#C2C-UI
+# C2C-UI
 React UI kits with [styled-components](https://styled-components.com/) & [typescript](https://www.typescriptlang.org/)
 
-##Description
+## Description
 This is a beta version library. It might have no problem to use. But It might be hard to read the [Docs](https://c2c-ui.netlify.com/) in current version.
 
-##Installation
+## Installation
 ```sh
 // npm
 npm install react-c2c-ui
@@ -13,7 +13,7 @@ npm install react-c2c-ui
 yarn add react-c2c-ui
 ```
 
-##Usage
+## Usage
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -30,9 +30,9 @@ return (
 ReactDOM.render(<App />, document.querySelector('#app'));
 ```
 
-##Docs
+## Docs
 Check the [Docs](https://c2c-ui.netlify.com/) made of storybook
 
-##License
+## License
 This project is licensed under the terms of the
 [MIT license](/LICENSE).
