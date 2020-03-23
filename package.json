@@ -16,6 +16,7 @@
     "@types/react-loader-spinner": "^3.1.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
+    "react-c2c-ui": "^0.4.42",
     "react-custom-scrollbars": "^4.2.1",
     "react-icons": "^3.8.0",
     "react-loader-spinner": "^3.1.5",
