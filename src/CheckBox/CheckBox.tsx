@@ -60,7 +60,6 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
     ${flex.row};
     ${flex.ai.center};
     cursor: pointer;
-    width: fit-content;
     &:hover {
         .check-box {
             background-color: ${palette.blue500};
@@ -69,6 +68,7 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
         .label >h5 {
             font-size: 13px;
             color: ${palette.blue500};
+            
         }
     }
     &:active {
@@ -109,6 +109,7 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
     .label {
         >h5 {
             font-size: 13px;
+            margin: 0;
         }
     }
 
