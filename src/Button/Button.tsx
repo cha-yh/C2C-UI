@@ -15,7 +15,7 @@ type ButtonProps = {
   /** Disable Button */
   disabled?: boolean;
   /** Width of Button */
-  width?: string | number;
+  width?: string;
   /** Set width full size */
   full?: boolean;
   /** Basic property: style */
@@ -169,7 +169,7 @@ const sizes = {
   `
 };
 
-const ButtonBlock = styled.button<{ fontColor: string|null, full: boolean, colorTheme: 'primary' | 'secondary' | 'tertiary', size: 'small' | 'medium' | 'big', width: string | number | undefined}>`
+const ButtonBlock = styled.button<{ fontColor: string|null, full: boolean, colorTheme: 'primary' | 'secondary' | 'tertiary', size: 'small' | 'medium' | 'big', width: string | undefined}>`
   box-sizing: border-box;
   outline: none;
   border: none;
