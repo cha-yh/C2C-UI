@@ -25,6 +25,7 @@ interface OwnProps {
     require?: boolean;
     search?: boolean;
     disabled?: boolean;
+    /**When the focus of Dropdown component is out, it will be shown*/
     errorMessages?: string[];
     width?: number;
 }
@@ -87,7 +88,7 @@ const Dropdown = ({
         if (disabled) {
             return 'disabled';
         }
-        if (errorMessages&&showError) {
+        if (errorMessages?.length&&showError) {
             return 'error';
         } else {
             return null;
