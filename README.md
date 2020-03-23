@@ -35,4 +35,4 @@ Check the [Docs](https://c2c-ui.netlify.com/) made of storybook
 
 ## License
 This project is licensed under the terms of the
-[MIT license](/LICENSE).
+[MIT license](https://github.com/cha-yh/C2C-UI/blob/master/LICENSE.md).
