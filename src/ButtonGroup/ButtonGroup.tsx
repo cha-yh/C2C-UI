@@ -2,7 +2,7 @@ import React from 'react';
 import styled, {css} from 'styled-components';
 import {utils, flex, rem} from '../utils';
 
-const ButtonGroupBlock = styled.div<{ direction: 'row'|'column'|undefined, gap: number, rightAlign: boolean|undefined}>`
+const ButtonGroupBlock = styled.div<{ direction: 'row'|'column'|undefined, gap: number, rightAlign: boolean|undefined, width: string | undefined }>`
   ${props => props.direction === 'row'
     ? css`
         ${flex.row};
@@ -12,6 +12,7 @@ const ButtonGroupBlock = styled.div<{ direction: 'row'|'column'|undefined, gap: 
       `
     : css`
         ${flex.col};
+        width: ${props => props.width};
         button + button {
           margin-top: ${rem(props.gap)}
         }
@@ -28,6 +29,8 @@ export type ButtonGroupProps = {
   rightAlign?: boolean;
   /** gap of between children */
   gap?: number;
+  /** When `Direction` is `column`, working */
+  width?: string;
   
   children: React.ReactNode;
   className?: string;
@@ -43,7 +46,8 @@ const ButtonGroup = ({
   children,
   gap=10,
   className,
-  style
+  style,
+  width="100%"
 }: ButtonGroupProps) => {
   return (
     <ButtonGroupBlock
@@ -52,6 +56,7 @@ const ButtonGroup = ({
       gap={gap}
       style={style}
       className={className}
+      width={width}
     >
       {children}
     </ButtonGroupBlock>
