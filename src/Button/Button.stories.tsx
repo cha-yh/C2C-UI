@@ -43,19 +43,6 @@ export const button = () => {
 button.story = {
   name: 'Default'
 };
-
-export const primaryButton = () => {
-  return <Button>PRIMARY</Button>;
-};
-
-export const secondaryButton = () => {
-  return <Button theme="secondary">SECONDARY</Button>;
-};
-
-export const tertiaryButton = () => {
-  return <Button theme="tertiary">TERTIARY</Button>;
-};
-
 const ButtonWrapper = styled.div`
   .description {
     margin-bottom: 0.5rem;
@@ -65,20 +52,40 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+export const themes = () => {
+  return (
+    <ButtonWrapper>
+      <div>
+        <div className="description">Small</div>
+        <Button>theme="primary"</Button>
+      </div>
+      <div>
+        <div className="description">Medium</div>
+        <Button theme="secondary">theme="secondary"</Button>
+      </div>
+      <div>
+        <div className="description">Big</div>
+        <Button theme="tertiary">theme="tertiary"</Button>
+      </div>
+    </ButtonWrapper>
+  )
+}
+
+
 export const sizes = () => {
   return (
     <ButtonWrapper>
       <div>
         <div className="description">Small</div>
-        <Button size="small">BUTTON</Button>
+        <Button size="small">size="small"</Button>
       </div>
       <div>
         <div className="description">Medium</div>
-        <Button size="medium">BUTTON</Button>
+        <Button size="medium">size="medium"</Button>
       </div>
       <div>
         <div className="description">Big</div>
-        <Button size="big">BUTTON</Button>
+        <Button size="big">size="big"</Button>
       </div>
     </ButtonWrapper>
   );
@@ -92,12 +99,12 @@ export const disabled = () => {
         </div>
         <div>
           <Button disabled theme="secondary">
-            SECONDARY
+            theme="secondary" disabled
           </Button>
         </div>
         <div>
           <Button disabled theme="tertiary">
-            TERTIARY
+            theme="tertiary" disabled
           </Button>
         </div>
       </ButtonWrapper>
@@ -108,10 +115,13 @@ export const disabled = () => {
     return (
       <ButtonWrapper>
         <div>
+          <Button width="100px">width="100px"</Button>
+        </div>
+        <div>
           <Button width="20rem">width="20rem"</Button>
         </div>
         <div>
-          <Button width="100%">width="100%"</Button>
+          <Button width="70%">width="70%"</Button>
         </div>
         <div>
           <Button full>'full' option</Button>
