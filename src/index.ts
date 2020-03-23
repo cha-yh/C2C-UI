@@ -11,4 +11,5 @@ export { default as InputRange } from './InputRange/InputRange';
 export { default as Notification } from './Notification/Notification';
 export { default as Popup } from './Popup/Popup';
 export { default as Textarea } from './Textarea/Textarea';
+export { default as Loader } from './Loader/Loader';
 export {media, palette, rem, utils, flex} from './utils';
