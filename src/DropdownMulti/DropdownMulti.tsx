@@ -1,17 +1,18 @@
-import React, { useState, useCallback, SyntheticEvent, useRef } from 'react';
+import React, { useState, useCallback, SyntheticEvent, useRef, ReactText } from 'react';
 import _ from 'lodash';
 import styled, {css} from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 
+import { useOnClickOutside } from '../hooks';
 import UnD from '../UnD/UnD';
 import { MdSearch, MdClose } from 'react-icons/md';
-// import OutsideClickHandler from 'react-outside-click-handler';
+
 import { Scrollbars } from 'react-custom-scrollbars';
-import CheckBox from '../CheckBox/CheckBox';
 import Input from '../Input/Input';
 import InputWrapper from '../InputWrapper/InputWrapper';
-import { dropdownStyles } from '../Dropdown/Dropdown';
-import { useOnClickOutside } from '../hooks';
+
+import { DropdownBlock, DropdownProps } from '../Dropdown/Dropdown';
+import CheckBox from '../CheckBox/CheckBox';
 
 const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
     width: fit-content;
@@ -47,128 +48,39 @@ const ListItemBlock = styled.div`
 
     }
 `;
-const DropdownMultiBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
-    ${utils.initiateCss};
-    position: relative;
-    width: 100%;
-    min-width: ${rem(200)};
-
-    .box {
-        min-height: ${rem(45)};
-        border: 1px solid ${palette.gray400};
-        padding: 0 ${rem(13)};
-        ${flex.row};
-        ${flex.jc.spaceB};
-        ${flex.ai.center};
-        background: white;
-
-        >.placeholder {
-            color: ${palette.gray500};
-            font-size: ${rem(12)};
-            letter-spacing: -1px;
-        }
-
-        >.selected-box {
-            ${flex.row};
-            ${flex.jc.start};
-            ${flex.wrap};
-            width: 100%;
-        }
-    }
-
-    .list {
-        z-index: 1;
-        width: 100%;
-        border: 1px solid ${palette.gray400};
-        min-height: ${rem(200)};
-        padding: ${rem(10)};
-        padding-top: 0;
-        background: white;
-        ${utils.shadow};
-        position: absolute;
-
-        .input-wrapper {
-            ${flex.row};
-            ${flex.jc.spaceB};
-            ${flex.ai.center};
-            border: 1px solid ${palette.gray300};
-            padding-right: ${rem(10)};
-            >input {
-                width: 100%;
-                border-radius: 2px;
-                margin-right: ${rem(10)};
-                border: none;
-                outline: none;
-                padding: ${rem(10)};
-            }
-            >p {
-
-            }
-        }
-
-        .list-wrapper {
-            padding-top: ${rem(10)};
-
-            /** Scrollbar */
-            >div {
-                >div:first-child {
-                    max-height: 12.5rem !important;
-                    min-height: 7rem !important;
-                    position: unset !important;
-                    /* overflow-x: auto !important; */
-                    /* height: 100% !important; */
-                }
-            }
-
-            .item {
-                padding: ${rem(5)} 0;
-                font-weight: 700;
-                cursor: pointer;
-                margin-right: ${rem(10)};
-                &:hover {
-                    background: ${palette.gray300};
-                }
-            }
-        }
-    }
-
-    ${props => props.inputStatus && dropdownStyles[props.inputStatus]};
-`;
-
-interface OwnProps {
-    onChange: (name: string, value: string[] | number[] | any) => void;
-    value: string[];
+interface OwnProps<T> {
+    onChange: (name: string, value: T) => void;
+    value: T;
     name: string;
     placeholder?: string;
-    options: Array<{ key: number, value: string | number, text: string }>;
-    checkError?: (name: string, value: string[] | number[] | any) => void;
+    options: Array<{ key: number, value: ReactText, text: string }>;
+    checkError?: (name: string, value: T) => void;
     message?: string[];
     label?: string;
     require?: boolean;
     search?: boolean;
     disabled?: boolean;
+    /**When the focus of Dropdown component is out, it will be shown*/
     errorMessages?: string[];
     width?: number;
 }
-type Props = OwnProps;
+type Props = OwnProps<ReactText[]>;
 
 const DropdownMulti = ({
-    onChange, value, name,
-    placeholder = "Select Values",
-    options, checkError, message,
+    onChange, value, name, placeholder, options, checkError, message,
     label, require, search, disabled = false, errorMessages, width
 }: Props) => {
     const [showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
 
-    const handleListChange = (itemValue: any) => {
+    const handleListChange = (itemValue: ReactText) => {
 
         const copy = [...value];
-        const exist = copy.some(item => {
+        const exist = copy.some((item:ReactText) => {
             return item === itemValue;
         });
         if (exist) { // exist already
-            _.remove(copy, (item: any) => {
+            _.remove<ReactText>(copy, (item: any) => {
                 return item === itemValue
             })
 
@@ -199,7 +111,7 @@ const DropdownMulti = ({
         setInputValue(e.target.value);
     };
 
-    const closeList = useCallback((value: string[] | number[], focus: boolean) => {
+    const closeList = useCallback((value: ReactText[], focus: boolean) => {
         if (focus) {
             setFocus(false);
             checkError && checkError(name, value);
@@ -219,6 +131,7 @@ const DropdownMulti = ({
             setFocus(true);
         }
     };
+
     const inputStatus = () => {
         if (focus) {
             return 'focus';
@@ -232,8 +145,10 @@ const DropdownMulti = ({
             return null;
         }
     }
+
     const ref = useRef(null);
     useOnClickOutside(ref, ()=>closeList(value, focus));
+
     return (
         <InputWrapper
             label={label}
@@ -243,7 +158,7 @@ const DropdownMulti = ({
             errorMessages={errorMessages}
             width={width}
         >
-            <DropdownMultiBlock inputStatus={inputStatus()} ref={ref}>
+            <DropdownBlock inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
                         {value.length === 0
                             ?
@@ -251,7 +166,7 @@ const DropdownMulti = ({
 
                             :
                             <div className="selected-box">
-                                {value.map((item: string, index: number) => {
+                                {value.map((item: ReactText, index: number) => {
                                     const itemIndex = _.findIndex(options, (o:any)=> {
                                         return o.value === item;
                                     })
@@ -273,7 +188,7 @@ const DropdownMulti = ({
                         <UnD value={focus} />
                     </div>
 
-                    {focus && <div className="list">
+                    <div className="list">
                         {search &&
                             <Input
                                 onChange={handleInputChange}
@@ -298,9 +213,9 @@ const DropdownMulti = ({
                                 })}
                             </Scrollbars>
                         </div>
-                    </div>}
+                    </div>
                 {/* {(message && showError) && <span className="msg">{message}</span>} */}
-            </DropdownMultiBlock>
+            </DropdownBlock>
         </InputWrapper>
     );
 };
