@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, ReactText } from 'react';
 import _ from 'lodash';
-import cx from 'classnames';
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
+import {useOnClickOutside} from '../hooks';
 
 import UnD from '../UnD/UnD';
 import { MdSearch } from 'react-icons/md';
@@ -11,15 +11,15 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import Input from '../Input/Input';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
-import {useOnClickOutside} from '../hooks';
+import cx from 'classnames';
 
-interface OwnProps {
-    onChange: (name: string, value: string | number) => void;
-    value: string | number;
+export interface DropdownProps<T> {
+    onChange: (name: string, value: T) => void;
+    value: T;
     name: string;
     placeholder?: string;
-    options: Array<{ key: number, value: string | number, text: string }>;
-    checkError?: (name: string, value: string | number) => void;
+    options: Array<{ key: number, value: ReactText, text: string }>;
+    checkError?: (name: string, value: T) => void;
     message?: string[];
     label?: string;
     require?: boolean;
@@ -29,7 +29,7 @@ interface OwnProps {
     errorMessages?: string[];
     width?: number;
 }
-type Props = OwnProps;
+type Props = DropdownProps<string|number>;
 
 const Dropdown = ({
     onChange, value, name, placeholder, options, checkError, message,
@@ -41,6 +41,18 @@ const Dropdown = ({
     const clickListItem = (value: any) => {
         onChange && onChange(name, value);
         closeList(value, focus);
+    }
+
+    let index = -1;
+    if (value) {
+        index = _.findIndex(options, (o: any) => {
+            return o.value === value;
+        });
+    }
+
+    let valueText = '';
+    if (index !== -1) {
+        valueText = options[index].text;
     }
 
     const [inputValue, setInputValue] = useState('');
@@ -60,7 +72,6 @@ const Dropdown = ({
         if (disabled) {
             return;
         }
-        
         if (focus) {
             setFocus(false);
             checkError && checkError(name, value);
@@ -70,17 +81,6 @@ const Dropdown = ({
         }
     };
 
-    let index = -1;
-    if (value) {
-        index = _.findIndex(options, (o: any) => {
-            return o.value === value;
-        });
-    }
-
-    let valueText = '';
-    if (index !== -1) {
-        valueText = options[index].text;
-    }
     const inputStatus = () => {
         if (focus) {
             return 'focus';
@@ -97,6 +97,7 @@ const Dropdown = ({
 
     const ref = useRef(null);
     useOnClickOutside(ref, () => closeList(value, focus));
+
     return (
         <InputWrapper
             label={label}
@@ -106,9 +107,10 @@ const Dropdown = ({
             errorMessages={errorMessages}
             width={width}
         >
-            <Block inputStatus={inputStatus()} ref={ref}>
+            <DropdownBlock inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
-                        <p className={cx("placeholder", { 'selected': (valueText || value) })}>{valueText || value || placeholder || 'select item'}</p>
+                        <input type="text" name={name} value={value} required={require} placeholder={placeholder}/>
+                        {/* <p className={cx("placeholder", { 'selected': (valueText || value) })}>{valueText || value || placeholder || 'select item'}</p> */}
                         <UnD value={focus} />
                     </div>
 
@@ -137,7 +139,7 @@ const Dropdown = ({
                             </Scrollbars>
                         </div>
                     </div>
-            </Block>
+            </DropdownBlock>
         </InputWrapper>
     );
 };
@@ -176,20 +178,71 @@ export const dropdownStyles = {
         }
     `
 }
+export const listWrapper = css`
+    padding-top: ${rem(10)};
 
-const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
+    /** Scrollbar */
+    >div {
+        >div:first-child {
+            max-height: 12.5rem !important;
+            min-height: 7rem !important;
+            position: unset !important;
+            /* overflow-x: auto !important; */
+            /* height: 100% !important; */
+        }
+    }
+
+
+    .item {
+        padding: ${rem(5)} 0;
+        font-weight: 700;
+        margin: 0;
+        cursor: pointer;
+        margin-right: ${rem(10)};
+        &:hover {
+            background: ${palette.gray300};
+        }
+    }
+`;
+
+export const inputWrapper = css`
+    ${flex.row};
+    ${flex.jc.spaceB};
+    ${flex.ai.center};
+    border: 1px solid ${palette.gray300};
+    padding-right: ${rem(10)};
+    >input {
+        width: 100%;
+        border-radius: 2px;
+        margin-right: ${rem(10)};
+        border: none;
+        outline: none;
+        padding: ${rem(10)};
+    }
+    >p {
+
+    }
+`;
+export const DropdownBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
     ${utils.initiateCss};
     position: relative;
     width: 100%;    
     .box {
-        height: ${rem(45)};
+        min-height: ${rem(45)};
         border: 1px solid ${palette.gray400};
         padding: 0 ${rem(13)};
         ${flex.row};
         ${flex.jc.spaceB};
         ${flex.ai.center};
         background: white;
-        
+        cursor: pointer;
+        >input {
+            border: none;
+            cursor: pointer;
+            &:focus {
+                outline: none;
+            }
+        }
         >.placeholder {
             color: ${palette.gray500};
             font-size: ${rem(14)};
@@ -198,6 +251,13 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
 
         >.placeholder.selected {
             color: black;
+        }
+
+        >.selected-box {
+            ${flex.row};
+            ${flex.jc.start};
+            ${flex.wrap};
+            width: 100%;
         }
     }
 
@@ -213,49 +273,11 @@ const Block = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>
         display: none;
 
         .input-wrapper {
-            ${flex.row};
-            ${flex.jc.spaceB};
-            ${flex.ai.center};
-            border: 1px solid ${palette.gray300};
-            padding-right: ${rem(10)};
-            >input {
-                width: 100%;
-                border-radius: 2px;
-                margin-right: ${rem(10)};
-                border: none;
-                outline: none;
-                padding: ${rem(10)};
-            }
-            >p {
-
-            }
+            ${inputWrapper};
         }
 
         .list-wrapper {
-            padding-top: ${rem(10)};
-
-            /** Scrollbar */
-            >div {
-                >div:first-child {
-                    max-height: 12.5rem !important;
-                    min-height: 7rem !important;
-                    position: unset !important;
-                    /* overflow-x: auto !important; */
-                    /* height: 100% !important; */
-                }
-            }
-
-
-            .item {
-                padding: ${rem(5)} 0;
-                font-weight: 700;
-                margin: 0;
-                cursor: pointer;
-                margin-right: ${rem(10)};
-                &:hover {
-                    background: ${palette.gray300};
-                }
-            }
+            ${listWrapper};
         }
     }
     ${props => props.inputStatus && dropdownStyles[props.inputStatus]};
