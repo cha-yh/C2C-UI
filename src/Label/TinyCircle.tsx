@@ -17,14 +17,16 @@ const TinyCircleBlock = styled.div<{white:boolean|undefined, color:string|undefi
 interface OwnProps {
     white?:boolean;
     color?:string;
+    title?: string;
 }
 type Props = OwnProps;
 
-const TinyCircle: React.SFC<Props> = ({white, color}) => {
+const TinyCircle: React.SFC<Props> = ({white, color, title}) => {
     return (
         <TinyCircleBlock
             white={white}
             color={color}
+            title={title}
         />
     )
 }
