@@ -87,7 +87,7 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
         border: 1px solid ${palette.gray400};
         border-radius: 2px;
         cursor: pointer;
-        margin-right: ${rem(10)};
+        
         ${flex.flex('none')};
     }
 
@@ -110,6 +110,7 @@ const CheckBoxBlock = styled.div<{disabled:boolean}>`
         >h5 {
             font-size: 13px;
             margin: 0;
+            margin-left: ${rem(10)};
         }
     }
 
