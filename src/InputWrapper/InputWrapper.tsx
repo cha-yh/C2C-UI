@@ -71,6 +71,8 @@ const Trigger = styled.div`
     >svg {
         font-size: ${rem(13)};
         color: ${palette.red500};
+        margin-top: ${rem(3)};
+        margin-left: ${rem(4)};
     }
 `;
 
