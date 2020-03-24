@@ -14,6 +14,10 @@ const LabelBlock = styled.h5`
 
     ${flex.row};
     ${flex.ai.center};
+
+    >div {
+        cursor: help;
+    }
 `;
 
 
@@ -21,7 +25,7 @@ const LabelBlock = styled.h5`
 const Label = ({ text, require }:LabelProps) => {
     return (
         <LabelBlock>
-            {text} {require && <TinyCircle />}
+            {text} {require && <TinyCircle title={"required"}/>}
         </LabelBlock>
     )
 }
