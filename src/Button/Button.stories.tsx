@@ -56,15 +56,12 @@ export const themes = () => {
   return (
     <ButtonWrapper>
       <div>
-        <div className="description">Small</div>
         <Button>theme="primary"</Button>
       </div>
       <div>
-        <div className="description">Medium</div>
         <Button theme="secondary">theme="secondary"</Button>
       </div>
       <div>
-        <div className="description">Big</div>
         <Button theme="tertiary">theme="tertiary"</Button>
       </div>
     </ButtonWrapper>
@@ -76,15 +73,12 @@ export const sizes = () => {
   return (
     <ButtonWrapper>
       <div>
-        <div className="description">Small</div>
         <Button size="small">size="small"</Button>
       </div>
       <div>
-        <div className="description">Medium</div>
         <Button size="medium">size="medium"</Button>
       </div>
       <div>
-        <div className="description">Big</div>
         <Button size="big">size="big"</Button>
       </div>
     </ButtonWrapper>
