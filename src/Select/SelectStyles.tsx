@@ -43,7 +43,7 @@ const selectStyles = {
 const selectBody = css`
     min-height: ${rem(45)};
     border: 1px solid ${palette.gray400};
-    padding: 0 ${rem(13)};
+    padding: ${rem(5)} ${rem(13)};
     ${flex.row};
     ${flex.jc.spaceB};
     ${flex.ai.center};
@@ -138,7 +138,7 @@ export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
 
 export const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
     height: ${rem(23)};
-    margin: ${rem(2)};
+    margin: ${rem(2)} ${rem(5)} ${rem(2)} 0;
     padding: ${rem(5)} ${rem(10)};
     background: ${palette.blue500};
     ${flex.row};
@@ -148,6 +148,7 @@ export const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' 
 
     >h5 {
         color: white;
+        margin-bottom: ${rem(2)};
     }
 
     >svg {

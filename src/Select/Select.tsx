@@ -10,11 +10,11 @@ import CheckBox from '../CheckBox/CheckBox';
 import {SelectedItemBlock, ListItemBlock, SelectBlock} from './SelectStyles';
 import cx from 'classnames';
 
-// export type Value = string | number | string[] | undefined;
-interface SelectProps {
-    onChange: (name: string, value: any) => void;
+type Value = string | number | string[] | undefined;
+interface OwnProps {
+    onChange: (name: string, value: string | number | string[]) => void;
     name: string;
-    value: any;
+    value: string | number | string[];
     options: Array<{ key: ReactText, value: ReactText, text: string }>;
     required?: boolean;
     disabled?: boolean;
@@ -25,13 +25,13 @@ interface SelectProps {
     multiple?: boolean;
 }
 
-type Props = SelectProps;
+type Props = OwnProps;
 
-const Select: React.SFC<Props> = ({
-    options, name, value, required,
+const Select = ({
+    onChange, name, value, options, required,
     disabled, label, width, searchable,
-    placeholder, multiple, onChange
-}) => {
+    placeholder, multiple, 
+}:Props) => {
     const [focus, setFocus] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
@@ -153,7 +153,9 @@ const removeSearchValue = () => {
                             }
                         </>
                         :
-                        <p className={cx("placeholder", { 'selected': value})}>{value || placeholder}</p>
+                        <p className={cx("placeholder", { 'selected': value})}>
+                            {_.find(options, function(o) { return o.value === value; })?.text || placeholder} 
+                        </p>
 
                     }
                     <UnD value={focus} />
