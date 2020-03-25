@@ -109,8 +109,7 @@ const Dropdown = ({
         >
             <DropdownBlock inputStatus={inputStatus()} ref={ref}>
                     <div className="box" onClick={handleDivClick}>
-                        <input type="text" name={name} value={value} required={require} placeholder={placeholder}/>
-                        {/* <p className={cx("placeholder", { 'selected': (valueText || value) })}>{valueText || value || placeholder || 'select item'}</p> */}
+                        <p className={cx("placeholder", { 'selected': (valueText || value) })}>{valueText || value || placeholder || 'select item'}</p>
                         <UnD value={focus} />
                     </div>
 
