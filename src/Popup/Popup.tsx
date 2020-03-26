@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent, useEffect, useRef } from 'react'
+import React, { useState, SyntheticEvent, useEffect, useRef, ReactNode } from 'react'
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import { useOnClickOutside } from '../hooks';
@@ -7,21 +7,22 @@ interface OwnProps {
     name: string;
     onClickTrigger: (name: string) => void;
     onClose: (name: string) => void;
-    trigger: any;
-    contents: any;
+    trigger: ReactNode;
+    contents: ReactNode;
+    target: string;
     sameWidth?: boolean;
     contentsPosition?: 'right' | 'left';
-    target: string;
     className?: string;
+    style?: React.CSSProperties;
 }
 type Props = OwnProps;
 
 const Popup = ({
     name, trigger, contents, sameWidth = false, contentsPosition = 'left',
-    className, target, onClickTrigger, onClose
+    className, target, onClickTrigger, onClose, style
 }: Props) => {
     const handleClickTrigger = () => {
-        console.log(`${name}'s target: `, target);
+        // console.log(`${name}'s target: `, target);
         if (target === name) {
             onClose(name);
         } else {
@@ -38,7 +39,7 @@ const Popup = ({
     const ref = useRef(null);
     useOnClickOutside(ref, () => handleClickOutside());
     return (
-        <PopupBlock className={className} ref={ref}>
+        <PopupBlock className={className} ref={ref} style={style}>
                 <Trigger onClick={handleClickTrigger}>
                     {trigger}
                 </Trigger>
