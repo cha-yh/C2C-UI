@@ -23,8 +23,8 @@ export const notification = () => {
         },
         'normal'
     );
-    const duration = number('duration', 5000);
-    const title = text('title', 'title');
+    const duration = number('duration', 7000);
+    const title = text('title', 'Title');
     const [visible, setVisible] = useState(true);
     const handleOpen = () => {
         setVisible(true);
@@ -45,8 +45,7 @@ export const notification = () => {
                 success={theme==='success'}
                 contents={
                     <div style={{color: 'white'}}>
-                        <h3>hello</h3>
-                        <p>world</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, expedita.</p>
                     </div>
                 }
             />

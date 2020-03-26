@@ -28,22 +28,22 @@ const Notification = ({
     
     const slideUpTransition = useTransition(visible, null, {
         from: {
-        //   transform: `translateY(20px) scale(0.9)`,
+          transform: `translateY(20px) scale(0.9)`,
           opacity: 0,
-        //   bottom: rem(-20),
-        //   right: rem(20)
+          bottom: rem(-20),
+          right: rem(20)
         },
         enter: {
-        //   transform: `translateY(0px) scale(1)`,
+          transform: `translateY(0px) scale(1)`,
           opacity: 1,
-        //   bottom: rem(20),
-        //   right: rem(20)
+          bottom: rem(20),
+          right: rem(20)
         },
         leave: {
-        //   transform: `translateY(20px) scale(0.9)`,
+          transform: `translateY(20px) scale(0.9)`,
           opacity: 0,
-        //   bottom: rem(-20),
-        //   right: rem(20)
+          bottom: rem(-20),
+          right: rem(20)
         },
         config: {
           tension: 200,
