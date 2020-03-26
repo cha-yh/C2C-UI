@@ -85,17 +85,19 @@ type InputWrapperProps = {
     errorMessages?: string[],
     width?: number;
 }
-const InputWrapper = forwardRef(
-    ({
-        children,
-        label,
-        required,
-        messages,
-        showError,
-        errorMessages=[],
-        width
-    }:InputWrapperProps,
-    ref?: React.Ref<HTMLInputElement>) => {
+export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
+    (
+        {
+            children,
+            label,
+            required,
+            messages,
+            showError,
+            errorMessages=[],
+            width
+        },
+        ref
+    ) => {
         const [inputWidth, setInputWidth] = useState(0);
         const blockRef = useRef<HTMLDivElement>(null);
         useEffect(() => {
@@ -105,7 +107,7 @@ const InputWrapper = forwardRef(
         return (
             <InputWrapperBlock width={width}>
                 <div className="header">
-                {label?<Label text={label} require={required}/>:<p> </p>}
+                {label?<Label text={label} required={required}/>:<p> </p>}
                 {(errorMessages.length&& showError)?
                     <Helper
                         trigger={
