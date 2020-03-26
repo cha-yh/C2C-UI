@@ -31,8 +31,8 @@ export const dropdown = () => {
             name="unknown"
             placeholder={placeholder}
             options={[
-                { key: 0, value: 'ab', text: 'first option' },
-                { key: 1, value: 'cd', text: 'second option' }
+                { key: 0, value: 'first', text: 'first option' },
+                { key: 1, value: 'second', text: 'second option' }
             ]}
             message={message}
             label={label}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DropdownMulti from './DropdownMulti';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, number, array } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
 
 export default {
@@ -17,45 +17,32 @@ export default {
 export const dropdownMulti = () => {
     const label = text('label', 'test-label');
     const search = boolean('search', true);
-    const error = boolean('error', false);
-    const require = boolean('require', true);
+    const required = boolean('required', true);
     const disabled = boolean('disabled', false);
-    const placeholder = text('placeholder', "placeholder");
+    const placeholder = text('placeholder', "");
+    const width = number('width', 500);
+    const errorMessages = array('errorMessages', []);
+    const messages = array('messages', []);
     const [testValue, setTestValue] = useState([]); 
     return (
         <div>
             <DropdownMulti
-                onChange={(name, value) => { setTestValue(value) }}
+                onChange={(name:any, value:any) => { setTestValue(value) }}
                 value={testValue}
                 name="unknown1"
                 placeholder={placeholder}
                 options={[
-                    { key: 0, value: 'ab', text: 'ab text' },
-                    { key: 1, value: 'cd', text: 'cd cd' },
-                    { key: 2, value: 'df', text: 'df text' }
+                    { key: 0, value: 'value1', text: 'text1' },
+                    { key: 1, value: 'value2', text: 'text2' },
+                    { key: 2, value: 'value3', text: 'text3' }
                 ]}
                 label={label}
-                require={require}
+                required={required}
                 search={search}
                 disabled={disabled}
-            />
-            <DropdownMulti
-                onChange={(name, value) => { setTestValue(value) }}
-                value={testValue}
-                name="unknown2"
-                placeholder={placeholder}
-                options={[
-                    { key: 0, value: 'ab', text: 'ab text' },
-                    { key: 1, value: 'cd', text: 'cd cd' },
-                    { key: 2, value: 'df', text: 'df text' }
-                ]}
-                message={["error1", "errpr2"]}
-                label={label}
-                require={require}
-                search={search}
-                disabled={disabled}
-                errorMessages={['something wrong!']}
-                width={300}
+                width={width}
+                errorMessages={errorMessages}
+                messages={messages}
             />
         </div>
     );
