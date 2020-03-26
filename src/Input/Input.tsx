@@ -20,7 +20,7 @@ export interface InputProps {
     icon?: any,
     symbol?: string,
     messages?: string[],
-    width?: number,
+    width?: string,
     ref?: React.MutableRefObject<HTMLInputElement>,
 
     placeholder?: string,

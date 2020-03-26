@@ -19,7 +19,7 @@ interface OwnProps {
     required?: boolean;
     disabled?: boolean;
     label?: string;
-    width?: number;
+    width?: string;
     searchable?: boolean;
     placeholder?: string;
     multiple?: boolean;

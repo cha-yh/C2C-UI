@@ -20,7 +20,7 @@ export const dropdownMulti = () => {
     const required = boolean('required', true);
     const disabled = boolean('disabled', false);
     const placeholder = text('placeholder', "");
-    const width = number('width', 500);
+    const width = text('width', '500px');
     const errorMessages = array('errorMessages', []);
     const messages = array('messages', []);
     const [testValue, setTestValue] = useState([]); 

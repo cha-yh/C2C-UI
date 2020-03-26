@@ -27,7 +27,7 @@ export const inputWrapper = () => {
     const placeholder = text('placeholder', "");
     const label = text('label', "");
 
-    const width = number('width', 700);
+    const width = text('width', '700px');
 
     return (
         <div>
@@ -101,20 +101,20 @@ export const options = () => {
             <InputRange
                 name="test"
                 value=""
-                label="width={500}"
-                width={500}
+                label="width='500px'"
+                width='500px'
             />
             <InputRange
                 name="test"
                 value=""
-                label="width={600}"
-                width={600}
+                label="width='600px'"
+                width='600px'
             />
             <InputRange
                 name="test"
                 value=""
-                label="width={700}"
-                width={700}
+                label="width='700px'"
+                width='700px'
             />
 
             <h5>placeholder & disabled</h5>
@@ -122,21 +122,21 @@ export const options = () => {
                 name="test"
                 value=""
                 label="with placeholder"
-                width={700}
+                width='700px'
                 placeholder="placeholder"
             />
             <InputRange
                 name="test"
                 value=""
                 label="with disabled"
-                width={700}
+                width='700px'
                 disabled
             />
             <InputRange
                 name="test"
                 value=""
                 label="with placeholder & disabled"
-                width={700}
+                width='700px'
                 placeholder="placeholder"
                 disabled
             />

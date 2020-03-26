@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from './Input';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
 import Button from '../Button/Button';
 import { Box } from '../storyStyle';
@@ -16,56 +16,42 @@ export default {
 };
 
 export const input = () => {
-  const label = text('label', 'test-label');
-  const symbol = text('symbol', 'kg');
-  const require = boolean('require', true);
+  const label = text('label', 'Label');
+  const symbol = text('symbol', '');
+  const required = boolean('required', true);
   const disabled = boolean('disabled', false);
   const placeholder = text('placeholder', "placeholder");
   const type = text('type', 'text');
-  const [first, setFirst] = useState("");
-  const onChangeFirst = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirst(e.target.value)
+  const messages = array('messages', []);
+  const errorMessages = array('errorMessages', []);
+  const width = text('width', '700px');
+
+  const [value, setValue] = useState("");
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+  }
+
+  const submit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    alert(value);
   }
   return (
-      <form onSubmit={(e:React.FormEvent<HTMLFormElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
-      }}>
-      <Input
-          label={label}
-          symbol={symbol}
-          placeholder={placeholder}
-          disabled={disabled}
-          type={'number'}
-          step={0.001}
-          min={0}
-          max={1}
-          value={first}
-          name="first"
-          onChange={onChangeFirst}
-          required
-          size={10}
-        />
-
+      <form onSubmit={submit}>
         <Input
+          name=""
+          value={value}
+          onChange={onChange}
           label={label}
-          required
+          type={type}
+          required={required}
           symbol={symbol}
           placeholder={placeholder}
           disabled={disabled}
-          errorMessages={[]}
+          messages={messages}
+          errorMessages={errorMessages}
+          width={width}
         />
-
-        <Input
-          message={["first messages. It's test dummy text.", 'second']}
-          label={label}
-          required
-          symbol={symbol}
-          placeholder={placeholder}
-          disabled={disabled}
-          errorMessages={['first error', 'second error', 'third']}
-        />
-
         <Button type="submit" >btn</Button>
       </form>
   );
@@ -91,16 +77,16 @@ export const options = () => {
       <h5>with Icon & Symbol</h5>
       <Input
         icon={<FaCalendarAlt/>}
-        width={300}
+        width='300px'
       />
       <Input
         symbol="km/h"
-        width={300}
+        width='300px'
       />
       <Input
         symbol="km/h"
         icon={<FaCalendarAlt/>}
-        width={300}
+        width='300px'
       />
 
       <h5>with messages & error messages</h5>
@@ -115,16 +101,16 @@ export const options = () => {
 
       <h5>width</h5>
       <Input
-        label="width={500}"
-        width={500}
+        label="width='500px'"
+        width='500px'
       />
       <Input
-        label="width={600}"
-        width={600}
+        label="width='600px'"
+        width='600px'
       />
       <Input
-        label="width={700}"
-        width={700}
+        label="width='700px'"
+        width='700px'
       />
 
       <h5>placeholder & disabled</h5>

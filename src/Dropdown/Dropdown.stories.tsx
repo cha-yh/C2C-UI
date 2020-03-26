@@ -23,7 +23,7 @@ export const dropdown = () => {
     const [testValue, setTestValue] = useState("");
     const message = array('message', []);
     const errorMessages = array('errorMessages', []);
-    const width = number('width', 500);
+    const width = text('width', '500px');
     return (
         <Dropdown
             onChange={(name, value) => { setTestValue(String(value)) }}
@@ -131,7 +131,7 @@ export const disabled = () => {
 export const width = () => {
     return (
         <>
-            <p>{`width={80}`}</p>
+            <p>{`width='80px'`}</p>
             <Dropdown
                 onChange={() => {}}
                 value={""}
@@ -140,10 +140,10 @@ export const width = () => {
                     { key: 0, value: 'ab', text: 'first option' },
                     { key: 1, value: 'cd', text: 'second option' }
                 ]}
-                width={80}
+                width='80px'
             />
 
-            <p>{`width={120}`}</p>
+            <p>{`width='120px'`}</p>
             <Dropdown
                 onChange={() => {}}
                 value={""}
@@ -152,10 +152,10 @@ export const width = () => {
                     { key: 0, value: 'ab', text: 'first option' },
                     { key: 1, value: 'cd', text: 'second option' }
                 ]}
-                width={120}
+                width='120px'
             />
 
-            <p>{`width={160}`}</p>
+            <p>{`width='160'`}</p>
             <Dropdown
                 onChange={() => {}}
                 value={""}
@@ -164,7 +164,7 @@ export const width = () => {
                     { key: 0, value: 'ab', text: 'first option' },
                     { key: 1, value: 'cd', text: 'second option' }
                 ]}
-                width={160}
+                width='160'
             />
         </>
     )

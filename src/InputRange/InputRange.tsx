@@ -35,7 +35,7 @@ interface OwnProps {
     errorMessages?: string[];
     checkError?: (name: string, value: string)=>void;
 
-    width?: number;
+    width?: string;
     placeholder?: string;
     type?: string;
     disabled?: boolean;

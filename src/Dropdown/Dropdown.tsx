@@ -27,7 +27,7 @@ export interface DropdownProps<T> {
     disabled?: boolean;
     /**When the focus of Dropdown component is out, it will be shown*/
     errorMessages?: string[];
-    width?: number;
+    width?: string;
 }
 type Props = DropdownProps<string|number>;
 

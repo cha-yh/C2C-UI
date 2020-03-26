@@ -38,8 +38,8 @@ export const select = () => {
     )
 }
 export const singleAndMultipleInAForm = () => {
-    const [testValue, setTestValue] = useState<any>([]); 
-    const [singleValue, setSingleValue] = useState<any>("value4"); 
+    const [testValue, setTestValue] = useState<any>([]);
+    const [singleValue, setSingleValue] = useState<any>(""); 
     
     const submit = (e:any)=>{
         e.preventDefault();
@@ -53,19 +53,18 @@ export const singleAndMultipleInAForm = () => {
             <div style={{display:'flex'}}>
                 <Select
                     name="multipletest"
-                    multiple
                     onChange={(name, value) => { setTestValue(value) }}
                     value={testValue}
                     options={options}
                     label="multiple"
                     required
                     placeholder="hello world"
+                    multiple
                 />
                 <Select
                     name="singletest"
                     onChange={(name, value) => { setSingleValue(value) }}
                     value={singleValue}
-                    searchable
                     options={[
                         { key: 'none', value: '', text: 'None' },
                         ...options,
@@ -93,7 +92,7 @@ export const labelAndRequired = () => {
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={300}
+                width='300px'
                 label="label"
                 placeholder="placeholder"
             />
@@ -102,7 +101,7 @@ export const labelAndRequired = () => {
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={300}
+                width='300px'
                 required
                 label="label + required"
                 placeholder="placeholder"
@@ -122,7 +121,7 @@ export const disabledAndSearchable = () => {
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={300}
+                width='300px'
                 disabled
                 label="disabled"
                 placeholder="placeholder"
@@ -132,7 +131,7 @@ export const disabledAndSearchable = () => {
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={300}
+                width='300px'
                 searchable
                 label="searchable"
                 placeholder="placeholder"
@@ -152,24 +151,24 @@ export const width = () => {
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={100}
-                label="with={100}"
+                width='100px'
+                label="with='100px'"
             />
             <Select
                 name=""
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={200}
-                label="with={200}"
+                width='200px'
+                label="with='200px'"
             />
             <Select
                 name=""
                 value={value}
                 onChange={handleChnage}
                 options={options}
-                width={300}
-                label="with={300}"
+                width='300px'
+                label="with='300px'"
                 placeholder="placeholder"
             />
         </>

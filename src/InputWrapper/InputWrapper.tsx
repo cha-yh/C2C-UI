@@ -15,9 +15,9 @@ const Helper = ({trigger, messages}:HelperProps) => {
             <Popup>
                 <p>Check below validation messages</p>
                 <ul>
-                    {messages.map(item => {
+                    {messages.map((item, index) => {
                         console.log('item', item);
-                        return <li>{item}</li>
+                        return <li key={item+index}>{item}</li>
                     })}
                 </ul>
             </Popup>
@@ -83,7 +83,7 @@ type InputWrapperProps = {
     messages?: string[],
     showError?: boolean,
     errorMessages?: string[],
-    width?: number;
+    width?: string;
 }
 export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
     (
@@ -137,9 +137,9 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
         )
     }
 );
-const InputWrapperBlock = styled.div<{width: number|undefined}>`
+const InputWrapperBlock = styled.div<{width: string|undefined}>`
     ${utils.initiateCss};
-    width: ${props => props.width ? rem(props.width) : '100%' };
+    width: ${props => props.width ? props.width : '100%' };
 
     >:first-child {
         margin-bottom: ${rem(5)};
@@ -150,7 +150,7 @@ const InputWrapperBlock = styled.div<{width: number|undefined}>`
 const MessagesWrapper = styled.div<{inputWidth:number}>`
     ${props => props.inputWidth && utils.singleEllipsis(props.inputWidth)};
     >p {
-        color: ${palette.gray800};
+        color: ${palette.gray700};
         margin-right: ${rem(10)};
     }
 `
