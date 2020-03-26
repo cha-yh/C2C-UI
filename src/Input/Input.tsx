@@ -1,11 +1,11 @@
-import React, { useCallback, useState, forwardRef, useRef, useEffect, InputHTMLAttributes } from 'react'
+import React, { useCallback, useState, forwardRef, useRef, useEffect } from 'react'
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
 export interface InputProps {
     name?: string,
-    value?: string|number|string[],
+    value?: string|number,
     onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void,
     checkError?: (e:React.ChangeEvent<HTMLInputElement>) => void,
     min?: string | number,
@@ -19,7 +19,7 @@ export interface InputProps {
     label?: string,
     icon?: any,
     symbol?: string,
-    message?: string[],
+    messages?: string[],
     width?: number,
     ref?: React.MutableRefObject<HTMLInputElement>,
 
@@ -29,16 +29,16 @@ export interface InputProps {
     errorMessages?: string[]
 }
 
-const Input = forwardRef(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
     (
         {
             name, value, onChange,
             required, label, icon,
-            symbol, message,
+            symbol, messages,
             checkError, width, placeholder, type, disabled=false, errorMessages=[],
             min, max, onKeyUp, step, pattern, size
-        }:InputProps,
-        ref?: React.Ref<HTMLInputElement>
+        },
+        ref
     ) => {
     const [focus, setFocus] = useState(false);
     const [inputWidth, setInputWidth] = useState(0);
@@ -85,7 +85,7 @@ const Input = forwardRef(
         <InputWrapper
             label={label}
             required={required}
-            messages={message}
+            messages={messages}
             showError={showError}
             errorMessages={errorMessages}
             width={width}
