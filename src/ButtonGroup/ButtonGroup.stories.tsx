@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonGroup from './ButtonGroup';
 import Button from '../Button/Button';
-import { withKnobs, number, radios, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, radios, boolean, text } from '@storybook/addon-knobs';
 
 export default {
   title: 'components|ButtonGroup',
@@ -17,9 +17,14 @@ export const buttonGroup = () => {
   );
   const rightAlign = boolean('rightAlign', false);
   const gap = number('gap', 10);
-
+  const width = text('width', '100%')
   return (
-    <ButtonGroup direction={direction} rightAlign={rightAlign} gap={gap}>
+    <ButtonGroup
+      direction={direction}
+      rightAlign={rightAlign}
+      gap={gap}
+      width={width}
+    >
       <Button theme="tertiary">취소</Button>
       <Button>확인</Button>
     </ButtonGroup>
