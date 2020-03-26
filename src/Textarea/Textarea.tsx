@@ -3,17 +3,30 @@ import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
-const TextareaBlock = styled.div`
+const TextareaBlock = styled.div<{height: string}>`
     width: 100%;
     >textarea {
         width: 100%;
-        height: ${rem(100)};
+        height: ${props => props.height};
         margin: 0;
         padding-right: ${rem(13)};
         border: 1px solid ${palette.gray400};
         border-radius: 2px;
         background: ${palette.gray100};
         color: ${palette.gray800};
+    }
+
+    >textarea::placeholder {
+        color: ${palette.gray500};
+        font-size: ${rem(14)};
+        letter-spacing: 0;
+    }
+
+    >textarea:disabled {
+        background: ${palette.gray300};
+    }
+    >textarea:disabled::placeholder {
+        color: ${palette.gray400};
     }
 `;
 
@@ -24,12 +37,19 @@ interface OwnProps {
     onChange?: React.ChangeEventHandler;
     checkError?: React.ChangeEventHandler;
     required?: boolean;
-    message?: string[];
+    messages?: string[];
     errorMessages?: string[];
+    height?: string;
+    placeholder?:string;
+    disabled?:boolean;
 }
 type Props = OwnProps;
 
-const Textarea: React.SFC<Props> = ({label, required, name, value, onChange, checkError, message, errorMessages}) => {
+const Textarea = ({
+    label, required, name, value,
+    onChange, checkError, messages, errorMessages,
+    placeholder, disabled, height='6.25rem'
+}:Props) => {
     const [focus, setFocus] = useState(false);
     const [inputWidth, setInputWidth] = useState(0);
     const [showError, setShowError] = useState(false);
@@ -53,15 +73,17 @@ const Textarea: React.SFC<Props> = ({label, required, name, value, onChange, che
             label= {label}
             required= {required}
             errorMessages= {errorMessages}
-            messages= {message}
+            messages= {messages}
             showError= {showError}
         >
-            <TextareaBlock>
+            <TextareaBlock height={height}>
                 <textarea name={name} value={value}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     onFocus={onFocus}
                     required={required}
+                    placeholder={placeholder}
+                    disabled={disabled}
                 />
             </TextareaBlock>
         </InputWrapper>
