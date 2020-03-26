@@ -3,6 +3,7 @@ import InfoItem from './InfoItem';
 import { withKnobs, text, boolean, radios, number } from '@storybook/addon-knobs';
 import styled from 'styled-components';
 import { rem, palette } from '../utils';
+import { Box } from '../storyStyle';
 
 export default {
     title: 'components|InfoItem',
@@ -19,7 +20,7 @@ export const infoItem = () => {
     const row = boolean('row', false);
     const label = text('label', 'country');
     const value = text('value', 'Republic of Korea');
-    const labelWidth = number('labelWidth', null);
+    const labelWidth = number('labelWidth', 100);
     return (
         <React.Fragment>
             <InfoItem
@@ -97,15 +98,6 @@ export const labelWidth = () => {
         </Box>
     )
 }
-
-const Box = styled.div`
-    >h5 {
-        margin: 0;
-        margin-top: ${rem(20)}; 
-        color: ${palette.blue700};
-        font-size: ${rem(24)};
-    }
-`;
 
 infoItem.story = {
     name: 'Default'
