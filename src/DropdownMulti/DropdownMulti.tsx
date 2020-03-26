@@ -55,9 +55,9 @@ interface OwnProps<T> {
     placeholder?: string;
     options: Array<{ key: number, value: ReactText, text: string }>;
     checkError?: (name: string, value: T) => void;
-    message?: string[];
+    messages?: string[];
     label?: string;
-    require?: boolean;
+    required?: boolean;
     search?: boolean;
     disabled?: boolean;
     /**When the focus of Dropdown component is out, it will be shown*/
@@ -67,8 +67,8 @@ interface OwnProps<T> {
 type Props = OwnProps<ReactText[]>;
 
 const DropdownMulti = ({
-    onChange, value, name, placeholder, options, checkError, message,
-    label, require, search, disabled = false, errorMessages, width
+    onChange, value, name, placeholder, options, checkError, messages,
+    label, required, search, disabled = false, errorMessages, width
 }: Props) => {
     const [showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -139,7 +139,7 @@ const DropdownMulti = ({
         if (disabled) {
             return 'disabled';
         }
-        if (errorMessages&&showError) {
+        if (errorMessages?.length&&showError) {
             return 'error';
         } else {
             return null;
@@ -152,8 +152,8 @@ const DropdownMulti = ({
     return (
         <InputWrapper
             label={label}
-            required={require}
-            messages={message}
+            required={required}
+            messages={messages}
             showError={showError}
             errorMessages={errorMessages}
             width={width}
@@ -214,7 +214,7 @@ const DropdownMulti = ({
                             </Scrollbars>
                         </div>
                     </div>
-                {/* {(message && showError) && <span className="msg">{message}</span>} */}
+                {/* {(messages && showError) && <span className="msg">{messages}</span>} */}
             </DropdownBlock>
         </InputWrapper>
     );
