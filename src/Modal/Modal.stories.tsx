@@ -19,7 +19,7 @@ export const modal = () => {
   // const visible = boolean('visible', true);
   const confirmText = text('confirmText', 'ConfirmText');
   const cancelText = text('cancelText', 'CancelText');
-  const cancellable = boolean('cancellable', true);
+  const cancellable = boolean('cancellable', false);
 
   const [visible, setVisible] = useState(false);
   const handleCancel = () => {
@@ -28,7 +28,6 @@ export const modal = () => {
   return (
     <div>
       <button onClick={()=>{setVisible(true)}}>open modal</button>
-      <div style={{width: '100%', height: '2000px', background:'green'}}></div>
       <Modal
         title={title}
         description={description}
