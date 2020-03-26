@@ -3,6 +3,7 @@ import Input from './Input';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
 import Button from '../Button/Button';
+import { Box } from '../storyStyle';
 export default {
   title: 'components|Input',
   component: Input,
@@ -21,9 +22,9 @@ export const input = () => {
   const disabled = boolean('disabled', false);
   const placeholder = text('placeholder', "placeholder");
   const type = text('type', 'text');
-  const [first, setFirst] = useState(null);
+  const [first, setFirst] = useState("");
   const onChangeFirst = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirst(Number(e.target.value))
+    setFirst(e.target.value)
   }
   return (
       <form onSubmit={(e:React.FormEvent<HTMLFormElement>) => {
@@ -75,47 +76,71 @@ input.story = {
 };
 
 
-export const styles = () => {
+export const options = () => {
   return (
-    <React.Fragment>
-      <h4>error</h4>
-      <Input
-        label="label"
-        required
-        errorMessages={["error1", "error2", "error2", "error2", "error2", "error2", "error2", "error2", "error2"]}
-      />
-
-      <h4>disabled</h4>
-      <Input
-        disabled
-      />
-
-      <h4>with Symbol</h4>
-      <Input
-        symbol="km/h"
-      />
-
-      <h4>with Icon</h4>
-      <Input
-        icon={<FaCalendarAlt/>}
-      />
-      <h4>with placeholder</h4>
-      <Input
-        placeholder="hello input"
-      />
-
-      <h4>with Label</h4>
+    <Box>
+      <h5>with Label & required</h5>
       <Input
         label="label1"
       />
       <Input
-        label="label2"
+        label="label+required"
         required
+      />
+      
+      <h5>with Icon & Symbol</h5>
+      <Input
+        icon={<FaCalendarAlt/>}
+        width={300}
+      />
+      <Input
+        symbol="km/h"
+        width={300}
+      />
+      <Input
+        symbol="km/h"
+        icon={<FaCalendarAlt/>}
+        width={300}
+      />
+
+      <h5>with messages & error messages</h5>
+      <Input
+        label="with messages"
+        messages={["message1", "message2"]}
+      />
+      <Input
+        label="with error message(when focus out, shown)"
+        errorMessages={["error1", "error2"]}
+      />
+
+      <h5>width</h5>
+      <Input
+        label="width={500}"
+        width={500}
+      />
+      <Input
+        label="width={600}"
+        width={600}
+      />
+      <Input
+        label="width={700}"
+        width={700}
+      />
+
+      <h5>placeholder & disabled</h5>
+      <Input
+        placeholder="hello input"
+      />
+      <Input
+        disabled
+      />
+      <Input
+        disabled
+        placeholder="hello input"
       />
 
       
 
-
-    </React.Fragment>
+    </Box>
   )
 }
