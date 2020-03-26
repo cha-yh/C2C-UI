@@ -4,7 +4,7 @@ import { rem, utils, flex, palette } from '../utils';
 import TinyCircle from './TinyCircle';
 export type LabelProps = {
     text: string;
-    require?: boolean;
+    required?: boolean;
 };
 const LabelBlock = styled.h5`
     color: ${palette.gray800};
@@ -22,10 +22,10 @@ const LabelBlock = styled.h5`
 
 
 
-const Label = ({ text, require }:LabelProps) => {
+const Label = ({ text, required }:LabelProps) => {
     return (
         <LabelBlock>
-            {text} {require && <TinyCircle title={"required"}/>}
+            {text} {required && <TinyCircle title={"required"}/>}
         </LabelBlock>
     )
 }

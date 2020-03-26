@@ -16,10 +16,16 @@ export default {
 export const label = () => {
 
     return (
-        <Label
-            text="label"
-            require
-        />
+        <>
+            <Label
+                text="label"
+            />
+            <Label
+                text="label+required"
+                required
+            />
+           
+        </>
     );
 };
 
