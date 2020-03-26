@@ -24,31 +24,34 @@ interface OwnProps {
     name: string;
     value: string;
     onChange?: (name: string, value: string)=>void;
-    checkError?: (name: string, value: string)=>void;
-    require?: boolean;
-
+    
     label?: string;
+    required?: boolean;
+
     icon?: any;
     symbol?: string;
-    message?: string[];
+
+    messages?: string[];
+    errorMessages?: string[];
+    checkError?: (name: string, value: string)=>void;
+
     width?: number;
-    ref?: React.MutableRefObject<HTMLInputElement>;
     placeholder?: string;
     type?: string;
     disabled?: boolean;
-    errorMessages?: string[];
+    ref?: React.MutableRefObject<HTMLInputElement>;
 }
 type Props = OwnProps;
 
-const InputRange = forwardRef(
+const InputRange = forwardRef<HTMLInputElement, Props>(
     (
         { 
             name, value, onChange,
-            require, label, icon,
-            symbol, message,
-            checkError, width, placeholder, type, disabled=false, errorMessages
-        }:Props,
-        ref?: React.Ref<HTMLInputElement>
+            required, label, icon,
+            symbol, messages,
+            checkError, width, placeholder, type="number", disabled=false, errorMessages
+        },
+        ref
     ) => {
     const [focus, setFocus] = useState(false);
     const [inputWidth, setInputWidth] = useState(0);
@@ -124,8 +127,8 @@ const InputRange = forwardRef(
     return (
         <InputWrapper
             label={label}
-            required={require}
-            messages={message}
+            required={required}
+            messages={messages}
             showError={showError}
             errorMessages={errorMessages}
             width={width}
