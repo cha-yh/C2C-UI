@@ -127,7 +127,7 @@ export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
     width: 100%;
     >.select-body {
         ${selectBody};
-        height: ${props => props.height ?props.height :rem(35)};
+        min-height: ${props => props.height ?props.height :rem(40)};
     }
 
     >.select-list {
@@ -168,7 +168,7 @@ export const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' 
 export const ListItemBlock = styled.div<{multiple:boolean}>`
     cursor: pointer;
     ${flex.row};
-    padding: ${rem(5)} ${rem(10)};
+    padding: ${rem(5)} 0;
     width: calc(100% - 1rem);
     &:hover {
         background: ${palette.gray200}; 
