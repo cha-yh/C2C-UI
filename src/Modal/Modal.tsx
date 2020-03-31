@@ -164,6 +164,8 @@ const WhiteBox = styled.div<{width: string|undefined}>`
   background: white;
   box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
   padding: ${rem(20)};
+  max-height: 90vh;
+  overflow-y: auto;
 
   >.title {
     font-size: 1.5rem;
