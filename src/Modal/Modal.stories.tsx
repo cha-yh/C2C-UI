@@ -65,3 +65,16 @@ export const customContent = () => {
     </Modal>
   );
 };
+
+export const longHeightContents = () => {
+  return (
+    <Modal
+      visible={true}
+      confirmText={'confirm'}
+      cancelText={'cancelText'}
+      cancellable={true}
+    >
+      <h3 style={{width: '50px'}}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, molestias. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, molestias.</h3>
+    </Modal>
+  )
+}
