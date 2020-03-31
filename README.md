@@ -2,7 +2,7 @@
 React UI kits with [styled-components](https://styled-components.com/) & [typescript](https://www.typescriptlang.org/)
 
 ## Description
-This is a beta version library. It might have no problem to use. But It might be hard to read the [Docs](https://c2c-ui.netlify.com/) in current version.
+This is a beta version library. It might have no problem to use. But It might have cross-browsing issues and some bugs. It will be fixed.
 
 ## Installation
 ```sh
@@ -31,7 +31,7 @@ ReactDOM.render(<App />, document.querySelector('#app'));
 ```
 
 ## Docs
-Check the [Docs](https://c2c-ui.netlify.com/) made of storybook
+Check the [Examples and Docs](https://c2c-ui.netlify.com/) made of storybook
 
 ## License
 This project is licensed under the terms of the
