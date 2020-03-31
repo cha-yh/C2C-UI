@@ -140,6 +140,20 @@ export const options = () => {
                 placeholder="placeholder"
                 disabled
             />
+
+            <h5>height</h5>
+            <InputRange
+                name="test"
+                value=""
+                label="height='3rem'"
+                height='3rem'
+            />
+            <InputRange
+                name="test"
+                value=""
+                label="height='5rem'"
+                height='5rem'
+            />
         </Box>
     )
 }

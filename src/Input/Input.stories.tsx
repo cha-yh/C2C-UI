@@ -125,7 +125,16 @@ export const options = () => {
         placeholder="hello input"
       />
 
-      
+      <h5>height</h5>
+      <Input 
+        label="height='2.5rem'"
+        height='2.5rem'
+      />
+
+      <Input 
+        label="height='3rem'"
+        height='3rem'
+      />
 
     </Box>
   )

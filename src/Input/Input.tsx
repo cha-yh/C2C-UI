@@ -26,7 +26,8 @@ export interface InputProps {
     placeholder?: string,
     type?: string,
     disabled?: boolean,
-    errorMessages?: string[]
+    errorMessages?: string[],
+    height?: string
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -36,7 +37,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             required, label, icon,
             symbol, messages,
             checkError, width, placeholder, type, disabled=false, errorMessages=[],
-            min, max, onKeyUp, step, pattern, size
+            min, max, onKeyUp, step, pattern, size,
+            height
         },
         ref
     ) => {
@@ -90,7 +92,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             errorMessages={errorMessages}
             width={width}
         >
-            <Wrapper inputStatus={inputStatus()}>
+            <Wrapper inputStatus={inputStatus()} height={height}>
                 <input
                     ref={ref}
                     type={type}
@@ -129,10 +131,10 @@ const styles = {
         border-color: ${palette.red500};
     `
 }
-export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null}>`
+export const Wrapper = styled.div<{inputStatus:'focus'|'disabled'|'error'|null, height:string|undefined}>`
     ${utils.initiateCss};
     width: 100%;
-    height: ${rem(35)};
+    height: ${props => props.height ?props.height :rem(35)};
     margin: 0;
     padding-right: ${rem(13)};
     border: 1px solid ${palette.gray400};

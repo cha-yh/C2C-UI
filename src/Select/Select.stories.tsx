@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Select from './Select';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
+import Input from '../Input/Input';
 
 export default {
     title: 'components|Select',
@@ -175,6 +176,68 @@ export const width = () => {
     )
 }
 
+export const heightCompareWithInput = () => {
+    const [value, setvalue] = useState("value1")
+    const handleChnage = (name: string, value: any) => {
+        setvalue(value);
+    }
+    return (
+        <div>
+        <div style={{display: 'flex'}}>
+            <Select
+                name=""
+                value={value}
+                onChange={handleChnage}
+                options={options}
+                width='300px'
+                placeholder="placeholder"
+                label="Select height='30px'"
+                height="30px"
+            />
+            <Input
+                label="Input height='30px'"
+                height="30px"
+                width='300px'
+            />
+        </div>
+        <div style={{display: 'flex'}}>
+            <Select
+                name=""
+                value={value}
+                onChange={handleChnage}
+                options={options}
+                width='300px'
+                placeholder="placeholder"
+                label="Select height='40px'"
+                height="40px"
+            />
+            <Input
+                label="Input height='40px'"
+                height="40px"
+                width='300px'
+            />
+        </div>
+
+        <div style={{display: 'flex'}}>
+            <Select
+                name=""
+                value={value}
+                onChange={handleChnage}
+                options={options}
+                width='300px'
+                placeholder="placeholder"
+                label="Select height='50px'"
+                height="50px"
+            />
+            <Input
+                label="Input height='50px'"
+                height="50px"
+                width='300px'
+            />
+        </div>
+        </div>
+    )
+}
 select.story = {
     name: 'Default'
 };

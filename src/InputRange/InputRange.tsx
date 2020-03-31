@@ -40,6 +40,8 @@ interface OwnProps {
     type?: string;
     disabled?: boolean;
     ref?: React.MutableRefObject<HTMLInputElement>;
+
+    height?: string;
 }
 type Props = OwnProps;
 
@@ -49,7 +51,8 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
             name, value, onChange,
             required, label, icon,
             symbol, messages,
-            checkError, width, placeholder, type="number", disabled=false, errorMessages
+            checkError, width, placeholder, type="number", disabled=false, errorMessages,
+            height
         },
         ref
     ) => {
@@ -135,7 +138,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
         >
             <InputRangeBlock inputWidth={inputWidth}>
                 <div className="range">
-                    <Wrapper inputStatus={inputStatus()} ref={blockRef}>
+                    <Wrapper inputStatus={inputStatus()} ref={blockRef} height={height}>
                         <input
                             ref={ref}
                             type={type||"text"}
@@ -151,7 +154,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
                         {symbol && <span>{symbol}</span>}
                     </Wrapper>
                     <p>~</p>
-                    <Wrapper inputStatus={inputStatus()} ref={blockRef}>
+                    <Wrapper inputStatus={inputStatus()} ref={blockRef} height={height}>
                         <input
                             ref={ref}
                             type={type||"text"}

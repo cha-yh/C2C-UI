@@ -41,7 +41,6 @@ const selectStyles = {
 }
 
 const selectBody = css`
-    min-height: ${rem(45)};
     border: 1px solid ${palette.gray400};
     padding: ${rem(5)} ${rem(13)};
     ${flex.row};
@@ -122,12 +121,13 @@ const selectList = css`
     }
     
 `;
-export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
+export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null, height: string|undefined }>`
     ${utils.initiateCss};
     position: relative;
     width: 100%;
     >.select-body {
         ${selectBody};
+        height: ${props => props.height ?props.height :rem(35)};
     }
 
     >.select-list {

@@ -23,6 +23,7 @@ interface OwnProps {
     searchable?: boolean;
     placeholder?: string;
     multiple?: boolean;
+    height?: string;
 }
 
 type Props = OwnProps;
@@ -30,7 +31,7 @@ type Props = OwnProps;
 const Select = ({
     onChange, name, value, options, required,
     disabled, label, width, searchable,
-    placeholder, multiple, 
+    placeholder, multiple, height
 }:Props) => {
     const [focus, setFocus] = useState(false);
 
@@ -112,7 +113,7 @@ const removeSearchValue = () => {
             required={required}
             width={width}
         >
-            <SelectBlock inputStatus={inputStatus()} ref={ref}>
+            <SelectBlock inputStatus={inputStatus()} ref={ref} height={height}>
                 <div className="select-body" onClick={handleDivClick}>
                     {/* for checking required throgh form field */}
                     <input
