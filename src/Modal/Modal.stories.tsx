@@ -15,6 +15,7 @@ export default {
 
 export const modal = () => {
   const title = text('title', 'Title of Modal');
+  const width = text('width', undefined);
   const description = text('description', 'Description of Modal');
   // const visible = boolean('visible', true);
   const confirmText = text('confirmText', 'ConfirmText');
@@ -36,6 +37,7 @@ export const modal = () => {
         cancelText={cancelText}
         cancellable={cancellable}
         onCancel={handleCancel}
+        width={width}
       />
     </div>
   );

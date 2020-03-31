@@ -17,6 +17,7 @@ export type ModalProps = {
   confirmText?: string;
   onCancel?: () => void;
   onConfirm?: () => void;
+  width?: string;
 };
 
 
@@ -31,7 +32,8 @@ const Modal = ({
   confirmText = 'Confirm',
   children,
   onCancel,
-  onConfirm
+  onConfirm,
+  width
 }: ModalProps) => {
 
   const fadeTransition = useTransition(visible, null, {
@@ -106,9 +108,9 @@ const Modal = ({
       {slideUpTransition.map(({ item, key, props }) =>
         item ? (
           <BoxWrapperBlock key={key} style={props}>
-            <WhiteBox ref={ref}>
-              {title && <h3>{title}</h3>}
-              {description && <p>{description}</p>}
+            <WhiteBox ref={ref} width={width}>
+              {title && <h3 className="title">{title}</h3>}
+              {description && <p className="description">{description}</p>}
               {children}
               {!hideButtons && (
                 <ButtonGroup
@@ -155,22 +157,22 @@ const BoxWrapperBlock = styled(animated.div)`
   ${fullscreen};
 `;
 
-const WhiteBox = styled.div`
+const WhiteBox = styled.div<{width: string|undefined}>`
   box-sizing: border-box;
   border-radius: 4px;
-  width: 25rem;
+  width: ${props => props.width ? props.width :'25rem'};
   background: white;
   box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
   padding: ${rem(20)};
 
-  h3 {
+  >.title {
     font-size: 1.5rem;
     color: #343a40;
     margin-top: 0;
     margin-bottom: 1rem;
   }
 
-  p {
+  >.description {
     font-size: 1.125rem;
     margin: 0;
     color: #868e96;
