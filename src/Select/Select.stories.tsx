@@ -240,7 +240,20 @@ export const heightCompareWithInput = () => {
 }
 
 export const withErrorMessages = () => {
-    const [singleValue, setSingleValue] = useState<any>("value1"); 
+    const [singleValue, setSingleValue] = useState<any>([]); 
+    const [errors, setErrors] = useState([]);
+    const checkError = (name: string, value: string | number | string[]) => {
+        const tempError = [...errors];
+        if(typeof value !== 'object') {
+            return;
+        }
+        if(value.length === 0) {
+            tempError.push([`empty`])
+            setErrors(tempError);
+        } else {
+            setErrors([]);
+        }
+    }
     return (
         <Select
             name="singletest"
@@ -250,7 +263,9 @@ export const withErrorMessages = () => {
                 { key: 'none', value: '', text: 'None' },
                 ...options,
             ]}
-            errorMessages={["error1", "error2"]}
+            errorMessages={errors}
+            checkError={checkError}
+            multiple
         />
     )
 }

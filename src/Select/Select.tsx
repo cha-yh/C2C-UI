@@ -46,11 +46,11 @@ const Select = ({
         setInputValue(e.target.value);
     };
 
-    const closeList = useCallback((focus: boolean) => {
+    const closeList = useCallback((focus: boolean, value: any) => {
         if (focus) {
-            setFocus(false);
-            checkError && checkError(name, value);
+            setFocus(false);            
             setShowError(true);
+            checkError && checkError(name, value);
         }
     }, []);
 
@@ -59,9 +59,7 @@ const Select = ({
             return;
         }
         if (focus) {
-            setFocus(false);
-            checkError && checkError(name, value);
-            setShowError(true);
+            closeList(focus, value);
         } else {
             setFocus(true);
         }
@@ -83,7 +81,7 @@ const Select = ({
     }
 
     const ref = useRef(null);
-    useOnClickOutside(ref, () => closeList(focus));
+    useOnClickOutside(ref, () => closeList(focus, value));
 
     const handleClickItem = (itemValue: any) => {
         if (multiple && typeof value === 'object') {
@@ -97,14 +95,14 @@ const Select = ({
                 })
 
                 onChange(name, copy);
-
             } else {
                 copy.push(itemValue);
                 onChange(name, copy);
             }
+            checkError && checkError(name, copy);
         } else {
             onChange && onChange(name, itemValue);
-            closeList(focus);
+            closeList(focus, itemValue);
         }
     }
 
@@ -118,6 +116,7 @@ const Select = ({
                 return item === itemValue;
             })
             onChange(name, copy);
+            checkError && checkError(name, copy);
         }
     }
 
