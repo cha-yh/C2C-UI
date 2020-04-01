@@ -149,6 +149,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
                             onFocus={onFocus}
                             placeholder={placeholder}
                             disabled={disabled}
+                            required={required}
                         />
                         {icon && icon}
                         {symbol && <span>{symbol}</span>}
@@ -165,6 +166,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
                             onFocus={onFocus}
                             placeholder={placeholder}
                             disabled={disabled}
+                            min={value1}
                         />
                         {icon && icon}
                         {symbol && <span>{symbol}</span>}
