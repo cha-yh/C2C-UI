@@ -24,6 +24,10 @@ interface OwnProps {
     placeholder?: string;
     multiple?: boolean;
     height?: string;
+
+    checkError?: (name: string, value: string | number | string[]) => void;
+    messages?: string[];
+    errorMessages?: string[];
 }
 
 type Props = OwnProps;
@@ -31,8 +35,10 @@ type Props = OwnProps;
 const Select = ({
     onChange, name, value, options, required,
     disabled, label, width, searchable,
-    placeholder, multiple, height
+    placeholder, multiple, height,
+    checkError, messages, errorMessages
 }:Props) => {
+    const [ showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
@@ -43,6 +49,8 @@ const Select = ({
     const closeList = useCallback((focus: boolean) => {
         if (focus) {
             setFocus(false);
+            checkError && checkError(name, value);
+            setShowError(true);
         }
     }, []);
 
@@ -50,7 +58,13 @@ const Select = ({
         if (disabled) {
             return;
         }
-        setFocus(!focus);
+        if (focus) {
+            setFocus(false);
+            checkError && checkError(name, value);
+            setShowError(true);
+        } else {
+            setFocus(true);
+        }
     };
 
     const inputStatus = () => {
@@ -60,8 +74,11 @@ const Select = ({
         if (disabled) {
             return 'disabled';
         }
-
-        return null;
+        if (errorMessages?.length&&showError&&errorMessages[0]) {
+            return 'error';
+        } else {
+            return null;
+        }
 
     }
 
@@ -112,6 +129,9 @@ const removeSearchValue = () => {
             label={label}
             required={required}
             width={width}
+            messages= {messages}
+            errorMessages= {errorMessages}
+            showError= {showError}
         >
             <SelectBlock inputStatus={inputStatus()} ref={ref} height={height}>
                 <div className="select-body" onClick={handleDivClick}>

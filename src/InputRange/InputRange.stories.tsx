@@ -30,7 +30,7 @@ export const inputWrapper = () => {
     const width = text('width', '700px');
 
     return (
-        <div>
+        <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => {event.preventDefault()}}>
             <InputRange
                 value={value}
                 name="test"
@@ -42,7 +42,9 @@ export const inputWrapper = () => {
                 required={required}
                 width={width}
             />
-        </div>
+            <p>{value}</p>
+            <button type="submit">button</button>
+        </form>
     );
 };
 

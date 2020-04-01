@@ -15,10 +15,9 @@ const Helper = ({trigger, messages}:HelperProps) => {
             <Popup>
                 <p>Check below validation messages</p>
                 <ul>
-                    {messages.map((item, index) => {
-                        console.log('item', item);
-                        return <li key={item+index}>{item}</li>
-                    })}
+                    {messages.map((item, index) => 
+                        item && <li key={item+index}>{item}</li>
+                    )}
                 </ul>
             </Popup>
         </HelperBlock>
@@ -108,7 +107,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
             <InputWrapperBlock width={width}>
                 <div className="header">
                 {label?<Label text={label} required={required}/>:<p> </p>}
-                {(errorMessages.length&& showError)?
+                {(errorMessages.length && showError && errorMessages[0])?
                     <Helper
                         trigger={
                             <Trigger>

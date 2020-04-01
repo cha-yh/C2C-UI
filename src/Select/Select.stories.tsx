@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from './Select';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, array } from '@storybook/addon-knobs';
 import { FaCalendarAlt } from 'react-icons/fa';
 import Input from '../Input/Input';
 
@@ -236,6 +236,22 @@ export const heightCompareWithInput = () => {
             />
         </div>
         </div>
+    )
+}
+
+export const withErrorMessages = () => {
+    const [singleValue, setSingleValue] = useState<any>("value1"); 
+    return (
+        <Select
+            name="singletest"
+            onChange={(name, value) => { setSingleValue(value) }}
+            value={singleValue}
+            options={[
+                { key: 'none', value: '', text: 'None' },
+                ...options,
+            ]}
+            errorMessages={["error1", "error2"]}
+        />
     )
 }
 select.story = {
