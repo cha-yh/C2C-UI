@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import Label from '../Label/Label';
 import { Wrapper } from '../Input/Input';
-import InputWrapper from '../InputWrapper/InputWrapper';
+import InputWrapper, { getInputStatus } from '../InputWrapper/InputWrapper';
 
 const InputRangeBlock = styled.div<{ inputWidth: number }>`
     >.range {
@@ -117,19 +117,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
 
         const blockRef = useRef<HTMLDivElement>(null);
 
-        const inputStatus = () => {
-            if (focus) {
-                return 'focus';
-            }
-            if (disabled) {
-                return 'disabled';
-            }
-            if (errorMessages && showError) {
-                return 'error';
-            } else {
-                return null;
-            }
-        }
+        const inputStatus = getInputStatus(focus, showError, disabled, errorMessages);
 
         return (
             <InputWrapper
@@ -144,7 +132,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
             >
                 <InputRangeBlock inputWidth={inputWidth}>
                     <div className="range">
-                        <Wrapper inputStatus={inputStatus()} ref={blockRef} height={height}>
+                        <Wrapper inputStatus={inputStatus} ref={blockRef} height={height}>
                             <input
                                 ref={ref}
                                 type={type || "text"}
@@ -161,7 +149,7 @@ const InputRange = forwardRef<HTMLInputElement, Props>(
                             {symbol && <span>{symbol}</span>}
                         </Wrapper>
                         <p>~</p>
-                        <Wrapper inputStatus={inputStatus()} ref={blockRef} height={height}>
+                        <Wrapper inputStatus={inputStatus} ref={blockRef} height={height}>
                             <input
                                 ref={ref}
                                 type={type || "text"}

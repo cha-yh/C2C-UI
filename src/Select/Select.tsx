@@ -1,6 +1,6 @@
 import React, { ReactText, useRef, useState, useCallback } from 'react';
 import _ from 'lodash';
-import InputWrapper from '../InputWrapper/InputWrapper';
+import InputWrapper, { getInputStatus } from '../InputWrapper/InputWrapper';
 import { useOnClickOutside } from '../hooks';
 import UnD from '../UnD/UnD';
 import Input from '../Input/Input';
@@ -72,20 +72,7 @@ const Select = ({
         }
     };
 
-    const inputStatus = () => {
-        if (focus) {
-            return 'focus';
-        }
-        if (disabled) {
-            return 'disabled';
-        }
-        if (errorMessages?.length && showError && errorMessages[0]) {
-            return 'error';
-        } else {
-            return null;
-        }
-
-    }
+    const inputStatus = getInputStatus(focus, showError, disabled, errorMessages);
 
     const ref = useRef(null);
     useOnClickOutside(ref, () => closeList(focus, value));
@@ -142,7 +129,7 @@ const Select = ({
             style={style}
         >
             <SelectBlock
-                inputStatus={inputStatus()}
+                inputStatus={inputStatus}
                 ref={ref}
                 height={height}
             >
@@ -172,7 +159,7 @@ const Select = ({
                                             return (
                                                 <SelectedItemBlock
                                                     key={`${item}-${index}`}
-                                                    inputStatus={inputStatus()}
+                                                    inputStatus={inputStatus}
                                                 >
                                                     <h5>{itemText}</h5>
                                                     <MdClose onClick={(e) => removeBlock(e, item)} />

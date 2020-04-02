@@ -4,6 +4,19 @@ import { rem, utils, flex, palette } from '../utils';
 import Label from '../Label/Label';
 import { MdHelp } from 'react-icons/md';
 
+export const getInputStatus = (focus: boolean, showError: boolean, disabled?: boolean, errorMessages?: any[], ) => {
+    if (focus) {
+        return 'focus';
+    }
+    if (disabled) {
+        return 'disabled';
+    }
+    if (errorMessages?.length && showError && errorMessages[0]) {
+        return 'error';
+    } else {
+        return null;
+    }
+}
 type HelperProps = {
     trigger: ReactNode,
     messages: string[]

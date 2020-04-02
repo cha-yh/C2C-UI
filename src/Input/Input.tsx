@@ -1,7 +1,7 @@
 import React, { useCallback, useState, forwardRef, useRef, useEffect } from 'react'
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
-import InputWrapper from '../InputWrapper/InputWrapper';
+import InputWrapper, { getInputStatus } from '../InputWrapper/InputWrapper';
 
 export interface InputProps {
     name?: string;
@@ -75,19 +75,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         }, [])
 
         const blockRef = useRef<HTMLDivElement>(null);
-        const inputStatus = () => {
-            if (focus) {
-                return 'focus';
-            }
-            if (disabled) {
-                return 'disabled';
-            }
-            if (errorMessages.length && showError) {
-                return 'error';
-            } else {
-                return null;
-            }
-        }
+        const inputStatus = getInputStatus(focus, showError, disabled, errorMessages);
         return (
             <InputWrapper
                 label={label}
@@ -99,7 +87,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 className={className}
                 style={style}
             >
-                <Wrapper inputStatus={inputStatus()} height={height}>
+                <Wrapper inputStatus={inputStatus} height={height}>
                     <input
                         ref={ref}
                         type={type}
