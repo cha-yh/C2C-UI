@@ -74,7 +74,7 @@ const Contents = styled.div<{ sameWidth: boolean, contentsPosition: string }>`
 
 const PopupBlock = styled.div`
     ${utils.initiateCss};
-    width: fit-content;
+    display: table;
     position: relative;
 
     /* OutsideClickHandler */

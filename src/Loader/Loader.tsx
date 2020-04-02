@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import Spinner from 'react-loader-spinner';
 const LoaderBlock = styled.div<{ size: number, noMargin:boolean|undefined }>`
-    width: fit-content;
+    display: table;
     height:${props => props.size && rem(props.size)};    
     margin: ${props => props.noMargin ?'0' :'0 auto'};
 
     >div {
         height:${props => props.size && rem(props.size)};
-        width: fit-content;
+        display: table;
     }
 `;
 type Types =

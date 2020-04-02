@@ -73,7 +73,6 @@ const InfoGroup = ({ infos, infos2, style, className }: InfoGroupProps) => {
     )
 }
 const WidthFixer = styled.div`
-    width: fit-content;
     height: 0;
     visibility: hidden;
     position: absolute;

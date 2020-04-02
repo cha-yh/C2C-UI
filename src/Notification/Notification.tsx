@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import { MdClose } from 'react-icons/md';
-import Loader from '../Loader/Loader';
 import { animated, useTransition } from 'react-spring';
 
 type NotificationProp = {

@@ -108,7 +108,6 @@ export const utils = {
     sticky: css`
         position: sticky;
         top: ${rem(100)};
-        height: fit-content;
         margin-left: ${rem(20)};
     `,
     ellipsis: (lineCount: number) => css`
