@@ -1,54 +1,59 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import { MdClose } from 'react-icons/md';
 import Loader from '../Loader/Loader';
 import { animated, useTransition } from 'react-spring';
 
-type NotificationProp =  {
+type NotificationProp = {
     visible: boolean;
     /** Must contain code that makes 'visible' be 'true' */
-    onOpen: ()=>void;
+    onOpen: () => void;
     /** Must contain code that makes 'visible' be 'false' */
-    onClose: ()=>void;
+    onClose: () => void;
     duration?: number;
     title?: string;
     contents: ReactNode;
     success?: boolean;
     failure?: boolean;
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
 }
 const Notification = ({
     visible,
     onOpen,
     onClose,
-    duration=5000,
-    title="Notification", contents,
-    success, failure
-}:NotificationProp) => {
-    
+    duration = 5000,
+    title = "Notification", contents,
+    success, failure,
+    style, className
+}: NotificationProp) => {
+
     const slideUpTransition = useTransition(visible, null, {
         from: {
-          transform: `translateY(20px) scale(0.9)`,
-          opacity: 0,
-          bottom: rem(-20),
-          right: rem(20)
+            transform: `translateY(20px) scale(0.9)`,
+            opacity: 0,
+            bottom: rem(-20),
+            right: rem(20)
         },
         enter: {
-          transform: `translateY(0px) scale(1)`,
-          opacity: 1,
-          bottom: rem(20),
-          right: rem(20)
+            transform: `translateY(0px) scale(1)`,
+            opacity: 1,
+            bottom: rem(20),
+            right: rem(20)
         },
         leave: {
-          transform: `translateY(20px) scale(0.9)`,
-          opacity: 0,
-          bottom: rem(-20),
-          right: rem(20)
+            transform: `translateY(20px) scale(0.9)`,
+            opacity: 0,
+            bottom: rem(-20),
+            right: rem(20)
         },
         config: {
-          tension: 200,
-          friction: 15,
-          duration: 100
+            tension: 200,
+            friction: 15,
+            duration: 100
         }
     });
 
@@ -64,8 +69,8 @@ const Notification = ({
     }
 
     useEffect(() => {
-        if(visible) {
-            if(status === 'hover') {
+        if (visible) {
+            if (status === 'hover') {
                 clearTimeout(timerToClearSomewhere.current);
                 timerToClearSomewhere.current = delayClose(99999000);
             } else {
@@ -90,9 +95,9 @@ const Notification = ({
     }
 
     const getTheme = () => {
-        if(success) {
+        if (success) {
             return 'success';
-        } else if(failure) {
+        } else if (failure) {
             return 'failure';
         } else {
             return 'normal';
@@ -105,9 +110,10 @@ const Notification = ({
                     <NotificationBlock
                         theme={getTheme()}
                         key={key}
-                        style={props}
+                        style={{ ...props, ...style }}
                         onMouseEnter={onHover}
                         onMouseLeave={onLeave}
+                        className={className}
                     >
                         <div className="head">
                             <h5>{title}</h5>
@@ -181,13 +187,13 @@ const colorTheme = {
 };
 
 
-const NotificationBlock = styled(animated.div)<{theme: 'normal'|'success'|'failure'}>`
+const NotificationBlock = styled(animated.div) <{ theme: 'normal' | 'success' | 'failure' }>`
     ${utils.initiateCss};
     z-index: 9;
     position: fixed;
     bottom: ${rem(20)};
     right: ${rem(20)};
-    ${(props: {theme: 'normal'|'success'|'failure'}) => props.theme ? colorTheme[props.theme] : colorTheme.normal};
+    ${(props: { theme: 'normal' | 'success' | 'failure' }) => props.theme ? colorTheme[props.theme] : colorTheme.normal};
     >.head {
         ${flex.row};
         ${flex.ai.center};

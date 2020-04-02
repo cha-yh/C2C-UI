@@ -1,9 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react';
 import InfoItem, { InfoLabel } from '../InfoItem/InfoItem';
 import styled from 'styled-components';
-import {rem, flex, media} from '../utils';
+import { rem, flex, media } from '../utils';
 
 type InfoGroupProps = {
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
+
     infos: {
         label: string;
         value: any;
@@ -14,7 +19,7 @@ type InfoGroupProps = {
         value: any;
     }[];
 }
-const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
+const InfoGroup = ({ infos, infos2, style, className }: InfoGroupProps) => {
     const label1Ref = useRef<HTMLDivElement>(null);
     const label2Ref = useRef<HTMLDivElement>(null);
     const [labelWidth, setLabelWidth] = useState(0);
@@ -27,44 +32,44 @@ const InfoGroup = ({infos, infos2}:InfoGroupProps) => {
             setLabel2Width(label2Ref.current.clientWidth);
     }, [])
     return (
-        <InfoGroupBlock>
+        <InfoGroupBlock style={style} className={className}>
             <WidthFixer ref={label1Ref}>
-                {infos.map((item, index) => 
-                    <InfoLabel key = {index}>{item.label}</InfoLabel>
+                {infos.map((item, index) =>
+                    <InfoLabel key={index}>{item.label}</InfoLabel>
                 )}
             </WidthFixer>
             {infos2 && <WidthFixer ref={label2Ref}>
-                {infos2.map((item, index) => 
-                    <InfoLabel key = {index}>{item.label}</InfoLabel>
+                {infos2.map((item, index) =>
+                    <InfoLabel key={index}>{item.label}</InfoLabel>
                 )}
             </WidthFixer>}
             <InfoGroupBox >
-                {infos.map((item, index) => 
-                     <InfoItem
-                        key = {index}
+                {infos.map((item, index) =>
+                    <InfoItem
+                        key={index}
                         row
-                        value = {item.value}
-                        label = {item.label}
-                        labelWidth = {labelWidth>label2Width?labelWidth:label2Width}
+                        value={item.value}
+                        label={item.label}
+                        labelWidth={labelWidth > label2Width ? labelWidth : label2Width}
                     />
                 )}
             </InfoGroupBox>
 
             {infos2 &&
                 <InfoGroupBox >
-                    {infos2.map((item, index) => 
+                    {infos2.map((item, index) =>
                         <InfoItem
-                            key = {index}
+                            key={index}
                             row
-                            value = {item.value}
-                            label = {item.label}
-                            labelWidth = {labelWidth>label2Width?labelWidth:label2Width}
+                            value={item.value}
+                            label={item.label}
+                            labelWidth={labelWidth > label2Width ? labelWidth : label2Width}
                         />
                     )}
                 </InfoGroupBox>
             }
         </InfoGroupBlock>
-        
+
     )
 }
 const WidthFixer = styled.div`

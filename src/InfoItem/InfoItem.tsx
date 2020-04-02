@@ -3,29 +3,34 @@ import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 
 interface OwnProps {
-    value: any,
-    label: string,
-    labelWidth?: number,
-    row?: boolean
+    value: any;
+    label: string;
+    labelWidth?: number;
+    row?: boolean;
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
 }
 type Props = OwnProps;
 
 const InfoItem = ({
-    value, label, labelWidth = 0, row = false
+    value, label, labelWidth = 0, row = false,
+    className, style
 }: Props) => {
     let existValue = false;
-    if(value) {
+    if (value) {
         existValue = true;
     } else {
-        if(value === 0) {
+        if (value === 0) {
             existValue = true;
         } else {
             existValue = false;
         }
     }
-    
+
     return (
-        <InfoItemBlock row={row} labelWidth={labelWidth}>
+        <InfoItemBlock row={row} labelWidth={labelWidth} className={className} style={style}>
             <InfoLabel>{label}</InfoLabel>
             {existValue
                 ?
@@ -56,14 +61,14 @@ const InfoItemBlock = styled.div<{ row: boolean, labelWidth: number }>`
                 ${flex.flex('none')};
                 margin-right:${rem(20)};
                 ${ props.labelWidth
-                    ? css`
+                ? css`
                         width:${rem(props.labelWidth)};
                     `
 
-                    : css`
+                : css`
                         width: initial;
                     `
-                }
+            }
             }
         `
     };

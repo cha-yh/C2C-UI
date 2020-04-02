@@ -18,6 +18,10 @@ export type ModalProps = {
   onCancel?: () => void;
   onConfirm?: () => void;
   width?: string;
+  /** Basic property: style */
+  style?: React.CSSProperties;
+  /** Basic property: className */
+  className?: string;
 };
 
 
@@ -33,7 +37,9 @@ const Modal = ({
   children,
   onCancel,
   onConfirm,
-  width
+  width,
+  style,
+  className
 }: ModalProps) => {
 
   const fadeTransition = useTransition(visible, null, {
@@ -69,27 +75,27 @@ const Modal = ({
   }
   const ref = useRef(null);
   useOnClickOutside(ref, () => onClickDimmer());
-  const closeModal= (e: SyntheticEvent) => {
+  const closeModal = (e: SyntheticEvent) => {
     e.preventDefault();
     e.stopPropagation();
     onCancel && onCancel();
-}
+  }
 
   const escFunction = (event: any) => {
-    if(event.keyCode === 27) {
-        closeModal(event);
+    if (event.keyCode === 27) {
+      closeModal(event);
     }
   }
 
   useEffect(() => {
-    if(visible) {
+    if (visible) {
       document.addEventListener("keydown", escFunction, false);
       document.body.style.paddingRight = '1.06rem';
       document.body.style.overflow = 'hidden';
       return () => {
-          document.removeEventListener("keydown", escFunction, false);
-          document.body.style.overflow = 'auto';
-          document.body.style.paddingRight = '0';
+        document.removeEventListener("keydown", escFunction, false);
+        document.body.style.overflow = 'auto';
+        document.body.style.paddingRight = '0';
       };
     }
   }, [visible]);
@@ -107,7 +113,7 @@ const Modal = ({
 
       {slideUpTransition.map(({ item, key, props }) =>
         item ? (
-          <BoxWrapperBlock key={key} style={props}>
+          <BoxWrapperBlock key={key} style={{ ...props, ...style }} className={className}>
             <WhiteBox ref={ref} width={width}>
               {title && <h3 className="title">{title}</h3>}
               {description && <p className="description">{description}</p>}
@@ -157,10 +163,10 @@ const BoxWrapperBlock = styled(animated.div)`
   ${fullscreen};
 `;
 
-const WhiteBox = styled.div<{width: string|undefined}>`
+const WhiteBox = styled.div<{ width: string | undefined }>`
   box-sizing: border-box;
   border-radius: 4px;
-  width: ${props => props.width ? props.width :'25rem'};
+  width: ${props => props.width ? props.width : '25rem'};
   background: white;
   box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
   padding: ${rem(20)};

@@ -5,6 +5,10 @@ import TinyCircle from './TinyCircle';
 export type LabelProps = {
     text: string;
     required?: boolean;
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
 };
 const LabelBlock = styled.h5`
     color: ${palette.gray800};
@@ -22,10 +26,10 @@ const LabelBlock = styled.h5`
 
 
 
-const Label = ({ text, required }:LabelProps) => {
+const Label = ({ text, required, style, className }: LabelProps) => {
     return (
-        <LabelBlock>
-            {text} {required && <TinyCircle title={"required"}/>}
+        <LabelBlock style={style} className={className}>
+            {text} {required && <TinyCircle title={"required"} />}
         </LabelBlock>
     )
 }

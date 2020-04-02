@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { rem, utils, flex, palette } from '../utils';
 import InputWrapper from '../InputWrapper/InputWrapper';
 
-const TextareaBlock = styled.div<{height: string}>`
+const TextareaBlock = styled.div<{ height: string }>`
     width: 100%;
     >textarea {
         width: 100%;
@@ -40,16 +40,21 @@ interface OwnProps {
     messages?: string[];
     errorMessages?: string[];
     height?: string;
-    placeholder?:string;
-    disabled?:boolean;
+    placeholder?: string;
+    disabled?: boolean;
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
 }
 type Props = OwnProps;
 
 const Textarea = ({
     label, required, name, value,
     onChange, checkError, messages, errorMessages,
-    placeholder, disabled, height='6.25rem'
-}:Props) => {
+    placeholder, disabled, height = '6.25rem',
+    style, className
+}: Props) => {
     const [focus, setFocus] = useState(false);
     const [inputWidth, setInputWidth] = useState(0);
     const [showError, setShowError] = useState(false);
@@ -65,16 +70,18 @@ const Textarea = ({
     const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (onChange) onChange(e);
         if (checkError) checkError(e);
-        
+
     }, []);
 
     return (
         <InputWrapper
-            label= {label}
-            required= {required}
-            errorMessages= {errorMessages}
-            messages= {messages}
-            showError= {showError}
+            label={label}
+            required={required}
+            errorMessages={errorMessages}
+            messages={messages}
+            showError={showError}
+            className={className}
+            style={style}
         >
             <TextareaBlock height={height}>
                 <textarea name={name} value={value}

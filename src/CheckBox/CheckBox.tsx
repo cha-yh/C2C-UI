@@ -8,7 +8,10 @@ interface CheckBoxProps {
     checked: boolean;
     onClick?: any;
     label?: string;
-    style?: any;
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
     disabled?: boolean;
     circle?: boolean;
 }
@@ -16,17 +19,18 @@ const CheckBox = ({
     checked,
     onClick,
     label,
+    className,
     style,
-    disabled=false,
+    disabled = false,
     circle
-}:CheckBoxProps) => {
+}: CheckBoxProps) => {
     return (
-        <CheckBoxBlock disabled={disabled} onClick={onClick} style={{...style}}>
-            <div className={cx("check-box", {"check-box-checked":checked}, {circle})}>
-                {checked&&<MdDone/>}
+        <CheckBoxBlock disabled={disabled} onClick={onClick} style={{ ...style }} className={className}>
+            <div className={cx("check-box", { "check-box-checked": checked }, { circle })}>
+                {checked && <MdDone />}
             </div>
-            <div className={cx("label", {"label-checked":checked})} >
-                {label&&<h5>{label}</h5>}
+            <div className={cx("label", { "label-checked": checked })} >
+                {label && <h5>{label}</h5>}
             </div>
         </CheckBoxBlock>
     )
@@ -56,7 +60,7 @@ const disabled = css`
     }
 `;
 
-const CheckBoxBlock = styled.div<{disabled:boolean}>`
+const CheckBoxBlock = styled.div<{ disabled: boolean }>`
     ${flex.row};
     ${flex.ai.center};
     cursor: pointer;

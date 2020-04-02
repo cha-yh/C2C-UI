@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
-import {rem, palette, flex} from '../utils';
+import { rem, palette, flex } from '../utils';
 import Loader from '../Loader/Loader';
 
 type ButtonProps = {
@@ -35,10 +35,10 @@ type ButtonProps = {
 /** Button */
 const Button = ({
   children,
-  theme='primary',
-  size='medium',
-  disabled=false,
-  width, full=false,
+  theme = 'primary',
+  size = 'medium',
+  disabled = false,
+  width, full = false,
   onClick,
   style,
   className,
@@ -46,40 +46,40 @@ const Button = ({
   fontColor,
   type
 }: ButtonProps) => {
-  const loaderSize = (size:string) => {
-    if(size === 'small') {
+  const loaderSize = (size: string) => {
+    if (size === 'small') {
       return 16;
-    } else if(size === 'big') {
+    } else if (size === 'big') {
       return 26;
     }
     return 22;
   }
-  const loaderColor = (theme:string, disabled:boolean) => {
-    if(theme==='primary') {
+  const loaderColor = (theme: string, disabled: boolean) => {
+    if (theme === 'primary') {
       return 'white';
     }
-    if(disabled) {
+    if (disabled) {
       return palette.gray400;
     }
-    if(theme === 'secondary') {
+    if (theme === 'secondary') {
       return palette.blue500;
-    } else if(theme === 'tertiary') {
+    } else if (theme === 'tertiary') {
       return palette.blue500;
     }
     return 'white';
   }
-  const buttonFontColor = (disabled:boolean, fontColor?:string) => {
-    if(disabled) {
+  const buttonFontColor = (disabled: boolean, fontColor?: string) => {
+    if (disabled) {
       return null;
     } else {
-      if(fontColor) {
+      if (fontColor) {
         return fontColor;
       } else {
         return null;
       }
     }
   }
-  
+
   return (
     <ButtonBlock
       colorTheme={theme}
@@ -94,15 +94,15 @@ const Button = ({
       type={type}
     >
       {loading
-        ? 
+        ?
         <WithIcon>
-          <Loader 
+          <Loader
             size={loaderSize(size)}
             color={loaderColor(theme, disabled)}
           />
           {children}
         </WithIcon>
-        
+
         :
         children
       }
@@ -169,7 +169,7 @@ const sizes = {
   `
 };
 
-const ButtonBlock = styled.button<{ fontColor: string|null, full: boolean, colorTheme: 'primary' | 'secondary' | 'tertiary', size: 'small' | 'medium' | 'big', width: string | undefined}>`
+const ButtonBlock = styled.button<{ fontColor: string | null, full: boolean, colorTheme: 'primary' | 'secondary' | 'tertiary', size: 'small' | 'medium' | 'big', width: string | undefined }>`
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -188,8 +188,8 @@ const ButtonBlock = styled.button<{ fontColor: string|null, full: boolean, color
     cursor: not-allowed;
   }
   ${props => props.size
-    ?sizes[props.size]
-    :sizes.medium 
+    ? sizes[props.size]
+    : sizes.medium
   };
   ${props => themes[props.colorTheme]};
   width: ${props => props.width};

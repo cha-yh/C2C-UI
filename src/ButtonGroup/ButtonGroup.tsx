@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
-import {utils, flex, rem} from '../utils';
+import styled, { css } from 'styled-components';
+import { utils, flex, rem } from '../utils';
 
-const ButtonGroupBlock = styled.div<{ direction: 'row'|'column'|undefined, gap: number, rightAlign: boolean|undefined, width: string }>`
+const ButtonGroupBlock = styled.div<{ direction: 'row' | 'column' | undefined, gap: number, rightAlign: boolean | undefined, width: string }>`
   ${props => props.direction === 'row'
     ? css`
         ${flex.row};
@@ -31,23 +31,25 @@ export type ButtonGroupProps = {
   gap?: number;
   /** When `Direction` is `column`, working */
   width?: string;
-  
+
   children: React.ReactNode;
+  /** Basic property: style */
+  style?: React.CSSProperties;
+  /** Basic property: className */
   className?: string;
-  style?: any;
 };
 
 /**
  * For grouping Buttons
  */
 const ButtonGroup = ({
-  direction="row",
-  rightAlign=false,
+  direction = "row",
+  rightAlign = false,
   children,
-  gap=10,
+  gap = 10,
   className,
   style,
-  width="100%"
+  width = "100%"
 }: ButtonGroupProps) => {
   return (
     <ButtonGroupBlock

@@ -12,8 +12,10 @@ interface OwnProps {
     target: string;
     sameWidth?: boolean;
     contentsPosition?: 'right' | 'left';
-    className?: string;
+    /** Basic property: style */
     style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
 }
 type Props = OwnProps;
 
@@ -30,7 +32,7 @@ const Popup = ({
         }
     }
     const handleClickOutside = () => {
-        if(target === name) {
+        if (target === name) {
             console.log(`${name} outside`);
             onClose(name)
         }
@@ -40,17 +42,17 @@ const Popup = ({
     useOnClickOutside(ref, () => handleClickOutside());
     return (
         <PopupBlock className={className} ref={ref} style={style}>
-                <Trigger onClick={handleClickTrigger}>
-                    {trigger}
-                </Trigger>
-                {(target === name) &&
-                    <Contents
-                        sameWidth={sameWidth}
-                        contentsPosition={contentsPosition}
-                    >
-                        {contents}
-                    </Contents>
-                }
+            <Trigger onClick={handleClickTrigger}>
+                {trigger}
+            </Trigger>
+            {(target === name) &&
+                <Contents
+                    sameWidth={sameWidth}
+                    contentsPosition={contentsPosition}
+                >
+                    {contents}
+                </Contents>
+            }
         </PopupBlock>
     )
 }

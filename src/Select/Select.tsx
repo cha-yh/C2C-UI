@@ -7,7 +7,7 @@ import Input from '../Input/Input';
 import { MdSearch, MdClose } from 'react-icons/md';
 import Scrollbars from 'react-custom-scrollbars';
 import CheckBox from '../CheckBox/CheckBox';
-import {SelectedItemBlock, ListItemBlock, SelectBlock} from './SelectStyles';
+import { SelectedItemBlock, ListItemBlock, SelectBlock } from './SelectStyles';
 import cx from 'classnames';
 
 type Value = string | number | string[] | undefined;
@@ -16,18 +16,24 @@ interface OwnProps {
     name: string;
     value: string | number | string[];
     options: Array<{ key: ReactText, value: ReactText, text: string }>;
-    required?: boolean;
-    disabled?: boolean;
     label?: string;
     width?: string;
     searchable?: boolean;
-    placeholder?: string;
-    multiple?: boolean;
     height?: string;
+    multiple?: boolean;
 
     checkError?: (name: string, value: string | number | string[]) => void;
     messages?: string[];
+    /**When the focus of Dropdown component is out, it will be shown*/
     errorMessages?: string[];
+
+    required?: boolean;
+    placeholder?: string;
+    disabled?: boolean;
+    /** Basic property: style */
+    style?: React.CSSProperties;
+    /** Basic property: className */
+    className?: string;
 }
 
 type Props = OwnProps;
@@ -36,9 +42,10 @@ const Select = ({
     onChange, name, value, options, required,
     disabled, label, width, searchable,
     placeholder, multiple, height,
-    checkError, messages, errorMessages
-}:Props) => {
-    const [ showError, setShowError] = useState(false);
+    checkError, messages, errorMessages,
+    style, className
+}: Props) => {
+    const [showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
@@ -48,7 +55,7 @@ const Select = ({
 
     const closeList = useCallback((focus: boolean, value: any) => {
         if (focus) {
-            setFocus(false);            
+            setFocus(false);
             setShowError(true);
             checkError && checkError(name, value);
         }
@@ -72,7 +79,7 @@ const Select = ({
         if (disabled) {
             return 'disabled';
         }
-        if (errorMessages?.length&&showError&&errorMessages[0]) {
+        if (errorMessages?.length && showError && errorMessages[0]) {
             return 'error';
         } else {
             return null;
@@ -120,23 +127,29 @@ const Select = ({
         }
     }
 
-const removeSearchValue = () => {
-    setInputValue('');
-}
+    const removeSearchValue = () => {
+        setInputValue('');
+    }
     return (
         <InputWrapper
             label={label}
             required={required}
             width={width}
-            messages= {messages}
-            errorMessages= {errorMessages}
-            showError= {showError}
+            messages={messages}
+            errorMessages={errorMessages}
+            showError={showError}
+            className={className}
+            style={style}
         >
-            <SelectBlock inputStatus={inputStatus()} ref={ref} height={height}>
+            <SelectBlock
+                inputStatus={inputStatus()}
+                ref={ref}
+                height={height}
+            >
                 <div className="select-body" onClick={handleDivClick}>
                     {/* for checking required throgh form field */}
                     <input
-                        onChange={(e:React.ChangeEvent<HTMLInputElement>) => {}}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { }}
                         name={name} value={value}
                         required={required} placeholder={placeholder}
                     />
@@ -149,7 +162,7 @@ const removeSearchValue = () => {
 
                                 :
                                 <>
-                                    
+
                                     <div className="selected-box">
                                         {value.map((item: ReactText, index: number) => {
                                             const itemIndex = _.findIndex(options, (o: any) => {
@@ -173,8 +186,8 @@ const removeSearchValue = () => {
                             }
                         </>
                         :
-                        <p className={cx("placeholder", { 'selected': value})}>
-                            {_.find(options, function(o) { return o.value === value; })?.text || placeholder} 
+                        <p className={cx("placeholder", { 'selected': value })}>
+                            {_.find(options, function (o) { return o.value === value; })?.text || placeholder}
                         </p>
 
                     }
@@ -186,9 +199,9 @@ const removeSearchValue = () => {
                         <Input
                             onChange={handleInputChange}
                             value={inputValue}
-                            icon={inputValue 
-                                ?<MdClose onClick={removeSearchValue} style={{cursor:'pointer'}}/> 
-                                :<MdSearch />
+                            icon={inputValue
+                                ? <MdClose onClick={removeSearchValue} style={{ cursor: 'pointer' }} />
+                                : <MdSearch />
                             }
                             placeholder="Enter the search word"
                         />
@@ -199,11 +212,11 @@ const removeSearchValue = () => {
                                 if (_.includes(item.text.toLowerCase(), inputValue.toLowerCase())) {
                                     return (
                                         <ListItemBlock
-                                            multiple={multiple?multiple:false}
+                                            multiple={multiple ? multiple : false}
                                             onClick={() => { handleClickItem(item.value); }}
                                             key={item.value}
                                         >
-                                            {multiple && typeof value === 'object' && <CheckBox checked={value.some((innerItem:any) => { return innerItem === item.value })} />}
+                                            {multiple && typeof value === 'object' && <CheckBox checked={value.some((innerItem: any) => { return innerItem === item.value })} />}
                                             <p className="item">{item.text}</p>
                                         </ListItemBlock>
                                     )
