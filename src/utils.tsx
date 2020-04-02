@@ -17,8 +17,8 @@ export const media = {
  * PALETTE
  */
 export const palette = {
-    grayGreen:          '#93ad93' as const, //gray-green, sampleTradeItemHead
-    grayGreenDarken10:  '#6b826b' as const, //hover
+    grayGreen:          '#93ad93' as const,
+    grayGreenDarken10:  '#6b826b' as const,
 
     /** GRAY 100: lighten 40%, PRIMARY_WHITE */
     gray100:  '#FAFAFA' as const, 
@@ -115,7 +115,7 @@ export const utils = {
         word-wrap:break-word;
         overflow: hidden;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: ${lineCount}; /* 라인수 */
+        -webkit-line-clamp: ${lineCount};
     `,
     singleEllipsis: (width: number) => css`
         width: ${rem(width)};
