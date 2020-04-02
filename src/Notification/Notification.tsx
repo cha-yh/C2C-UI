@@ -85,12 +85,10 @@ const Notification = ({
 
 
     const onHover = () => {
-        console.log('hover');
         setStatus('hover');
     }
 
     const onLeave = () => {
-        console.log('leave');
         setStatus('leave');
     }
 

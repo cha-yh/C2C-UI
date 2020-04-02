@@ -24,7 +24,6 @@ const Popup = ({
     className, target, onClickTrigger, onClose, style
 }: Props) => {
     const handleClickTrigger = () => {
-        // console.log(`${name}'s target: `, target);
         if (target === name) {
             onClose(name);
         } else {
@@ -33,7 +32,6 @@ const Popup = ({
     }
     const handleClickOutside = () => {
         if (target === name) {
-            console.log(`${name} outside`);
             onClose(name)
         }
     }
