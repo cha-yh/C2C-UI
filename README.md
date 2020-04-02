@@ -20,14 +20,31 @@ import ReactDOM from 'react-dom';
 import {Button} from 'react-c2c-ui';
 
 function App() {
-return (
-    <Button theme="secondary">
-        Hello World
-    </Button>
-);
+    return (
+        <Button theme="secondary">
+            Hello World
+        </Button>
+    );
 }
 
 ReactDOM.render(<App />, document.querySelector('#app'));
+```
+
+## Deleted Dropdown, DropdownMulti
+The `Dropdown` and `DropdownMulti` are not able to use from **0.7.0** version.
+Please use the `Select` component instead of the `Dropdown` and `DropdownMulti`.
+```tsx
+    /** Same as Dropdown */ 
+    <Select 
+        ... // required props and other props you want
+        multiple={false} // or skip this prop
+    />
+    
+    /** Same as DropdownMulti */ 
+    <Select 
+        ... // required props and other props you want
+        multiple // or multiple={true}
+    />
 ```
 
 ## Docs
