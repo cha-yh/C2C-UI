@@ -30,6 +30,36 @@ function App() {
 ReactDOM.render(<App />, document.querySelector('#app'));
 ```
 
+## Changed props of Popup component
+Props of `Popup` are changed from **0.7.3** version.
+Removed `onClickTrigger`, `onClose` props and added `setTarget`.
+```tsx
+    ...
+    const [popupTarget, setPopupTarget] = useState("");
+    return (
+        <div>
+            <Popup 
+                ... // required props and other props you want
+                name={"popup1"}
+                setTarget={(target:string)=>{
+                    // Add code lines that can change `target` value
+                    setPopupTarget(target);
+                }}
+                target={popupTarget}
+            />
+            <Popup 
+                ... // required props and other props you want
+                name={"popup2"}
+                setTarget={(target:string)=>{
+                    // Add code lines that can change `target` value
+                    setPopupTarget(target);
+                }}
+                target={popupTarget}
+            />
+        </div>
+    )
+```
+
 ## Deleted Dropdown, DropdownMulti
 The `Dropdown` and `DropdownMulti` are not able to use from **0.7.0** version.
 Please use the `Select` component instead of the `Dropdown` and `DropdownMulti`.

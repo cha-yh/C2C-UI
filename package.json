@@ -50,7 +50,7 @@
     "build-sb": "build-storybook",
     "build": "rollup -c",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:publish": "build-storybook && rollup -c && tsc --emitDeclarationOnly && yarn publish"
+    "build:publish": "build-storybook && rollup -c && tsc --emitDeclarationOnly && yarn publish && git push"
   },
   "peerDependencies": {
     "@types/react-loader-spinner": "^3.1.0",

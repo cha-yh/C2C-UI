@@ -4,12 +4,14 @@ import { rem, utils, flex, palette } from '../utils';
 import { useOnClickOutside } from '../hooks';
 
 interface OwnProps {
+    /** Name of popup: If it's same with `target`, `contents` will be shown.*/
     name: string;
-    onClickTrigger: (name: string) => void;
-    onClose: (name: string) => void;
+    /** This function has to be able to control the target value */
+    setTarget: (target: string) => void;
+    /** It's changed by `setTarget`. If it's same with `name`, `contents` will be shown.*/
+    target: string;
     trigger: ReactNode;
     contents: ReactNode;
-    target: string;
     sameWidth?: boolean;
     contentsPosition?: 'right' | 'left';
     /** Basic property: style */
@@ -21,18 +23,19 @@ type Props = OwnProps;
 
 const Popup = ({
     name, trigger, contents, sameWidth = false, contentsPosition = 'left',
-    className, target, onClickTrigger, onClose, style
+    className, style, target, setTarget
+    // onClickTrigger, onClose,
 }: Props) => {
     const handleClickTrigger = () => {
         if (target === name) {
-            onClose(name);
+            setTarget("");
         } else {
-            onClickTrigger(name);
+            setTarget(name);
         }
     }
     const handleClickOutside = () => {
         if (target === name) {
-            onClose(name)
+            setTarget("")
         }
     }
 

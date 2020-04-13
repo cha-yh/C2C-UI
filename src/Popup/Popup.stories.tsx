@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Popup from './Popup';
 import { withKnobs, text, boolean, radios } from '@storybook/addon-knobs';
 import Button from '../Button/Button';
-import {Box} from '../storyStyle';
+import { Box } from '../storyStyle';
 export default {
     title: 'components|Popup',
     component: Popup,
@@ -15,22 +15,14 @@ export default {
 };
 
 export const popup = () => {
-    const [target, setTarget] = useState("q");
-    const handleClick = (name: string) => {
-        setTarget(name);
-    }
-    const handleClose = (name: string) => {
-        if(target === name) {
-            setTarget("");
-        }
-    }
+    const [target, setTarget] = useState("");
 
     const sameWidth = boolean('sameWidth', false);
     const contentsPosition = radios(
         'contentsPosition',
         { Right: 'right', Left: 'left' },
         'left'
-      );
+    );
     return (
         <React.Fragment>
             <Popup
@@ -44,8 +36,9 @@ export const popup = () => {
                 sameWidth={sameWidth}
                 contentsPosition={contentsPosition}
                 target={target}
-                onClickTrigger={handleClick}
-                onClose={handleClose}
+                setTarget={(target: string) => {
+                    setTarget(target);
+                }}
             />
         </React.Fragment>
     );
@@ -53,31 +46,24 @@ export const popup = () => {
 
 export const options = () => {
     const [target, setTarget] = useState("");
-    const handleClick = (name: string) => {
-        setTarget(name);
-    }
-    const handleClose = (name: string) => {
-        if(target === name) {
-            setTarget("");
-        }
-    }
     return (
         <Box>
             <h5>contents position</h5>
-            <div style={{display:'flex'}}>
+            <div style={{ display: 'flex' }}>
                 <Popup
                     name="test2"
                     trigger={
                         <Button theme="secondary">{`contentsPosition={'left'}`}</Button>
                     }
                     contents={
-                        <p style={{ whiteSpace: 'nowrap',padding: '10px', background: 'blue', color: 'white' }}>lorem inpsum dolor sh ls lorem ipsum</p>
+                        <p style={{ whiteSpace: 'nowrap', padding: '10px', background: 'blue', color: 'white' }}>lorem inpsum dolor sh ls lorem ipsum</p>
                     }
                     contentsPosition='left'
                     target={target}
-                    onClickTrigger={() => {handleClick('test2')}}
-                    onClose={() => {handleClose('test2')}}
-                    style={{marginRight:'20px'}}
+                    setTarget={(target: string) => {
+                        setTarget(target);
+                    }}
+                    style={{ marginRight: '20px' }}
                 />
                 <Popup
                     name="test1"
@@ -89,10 +75,11 @@ export const options = () => {
                     }
                     contentsPosition='right'
                     target={target}
-                    onClickTrigger={() => {handleClick('test1')}}
-                    onClose={() => {handleClose('test1')}}
+                    setTarget={(target: string) => {
+                        setTarget(target);
+                    }}
                 />
-                
+
             </div>
 
             <h5>same width</h5>
@@ -106,8 +93,9 @@ export const options = () => {
                 }
                 target={target}
                 sameWidth={true}
-                onClickTrigger={() => {handleClick('test3')}}
-                onClose={() => {handleClose('test3')}}
+                setTarget={(target: string) => {
+                    setTarget(target);
+                }}
             />
         </Box>
     )
