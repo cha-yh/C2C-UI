@@ -59,19 +59,19 @@ const Textarea = ({
     const [inputWidth, setInputWidth] = useState(0);
     const [showError, setShowError] = useState(false);
 
-    const onFocus = useCallback(() => {
+    const onFocus = () => {
         setFocus(true);
-    }, []);
-    const handleBlur = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    }
+    const handleBlur = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFocus(false);
         setShowError(true);
-    }, []);
+    }
 
-    const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (onChange) onChange(e);
         if (checkError) checkError(e);
 
-    }, []);
+    }
 
     return (
         <InputWrapper
