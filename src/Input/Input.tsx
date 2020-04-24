@@ -51,19 +51,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         const [inputWidth, setInputWidth] = useState(0);
         const [showError, setShowError] = useState(false);
 
-        const onFocus = useCallback(() => {
+        const onFocus = () => {
             setFocus(true);
-        }, []);
-        const handleBlur = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        }
+        const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
             setFocus(false);
             setShowError(true);
-        }, []);
+        }
 
-        const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             if (onChange) onChange(e);
             if (checkError) checkError(e);
 
-        }, []);
+        }
 
         useEffect(() => {
             blockRef.current &&
