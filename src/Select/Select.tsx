@@ -12,9 +12,9 @@ import cx from 'classnames';
 
 type Value = string | number | string[] | undefined;
 interface OwnProps {
-    onChange: (name: string, value: string | number | string[]) => void;
+    onChange: (name: string, value: any) => void;
     name: string;
-    value: string | number | string[];
+    value: string | number | string[] | undefined | null;
     options: Array<{ key: ReactText, value: ReactText, text: string }>;
     label?: string;
     width?: string;
@@ -79,7 +79,7 @@ const Select = ({
 
     const handleClickItem = (itemValue: any) => {
         if (multiple && typeof value === 'object') {
-            const copy = [...value];
+            const copy = value?[...value]:[];
             const exist = copy.some((item: ReactText) => {
                 return item === itemValue;
             });
@@ -103,9 +103,9 @@ const Select = ({
     const removeBlock = (e: React.MouseEvent<SVGElement, MouseEvent>, itemValue: any) => {
         if (disabled) {
             return;
-        } else if (typeof value === 'object') {
+        } else if (multiple && typeof value === 'object') {
             e.stopPropagation();
-            const copy = [...value];
+            const copy = value?[...value]:[];
             _.remove(copy, (item: any) => {
                 return item === itemValue;
             })
@@ -134,43 +134,53 @@ const Select = ({
                 height={height}
             >
                 <div className="select-body" onClick={handleDivClick}>
-                    {/* for checking required throgh form field */}
+                    {/* input tag for checking required throgh form field */}
                     <input
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { }}
-                        name={name} value={value}
+                        name={name} value={value?value:""}
                         required={required} placeholder={placeholder}
                     />
-                    {(multiple && typeof value === 'object')
+                    {(multiple)
                         ?
                         <>
-                            {value.length === 0
+                            {(typeof value === 'object' && value)
                                 ?
-                                <p className="placeholder">{placeholder}</p>
+                                <>
+                                    {value.length === 0
+                                        ?
+                                        <p className="placeholder">{placeholder}</p>
+
+                                        :
+                                        <>
+
+                                            <div className="selected-box">
+                                                {value.map((item: ReactText, index: number) => {
+                                                    const itemIndex = _.findIndex(options, (o: any) => {
+                                                        return o.value === item;
+                                                    })
+                                                    const itemText = options[itemIndex].text;
+                                                    return (
+                                                        <SelectedItemBlock
+                                                            key={`${item}-${index}`}
+                                                            inputStatus={inputStatus}
+                                                        >
+                                                            <h5>{itemText}</h5>
+                                                            <MdClose onClick={(e) => removeBlock(e, item)} />
+                                                        </SelectedItemBlock>
+                                                    )
+                                                }
+
+                                                )}
+                                            </div>
+                                        </>
+                                    }
+                                </>
 
                                 :
-                                <>
-
-                                    <div className="selected-box">
-                                        {value.map((item: ReactText, index: number) => {
-                                            const itemIndex = _.findIndex(options, (o: any) => {
-                                                return o.value === item;
-                                            })
-                                            const itemText = options[itemIndex].text;
-                                            return (
-                                                <SelectedItemBlock
-                                                    key={`${item}-${index}`}
-                                                    inputStatus={inputStatus}
-                                                >
-                                                    <h5>{itemText}</h5>
-                                                    <MdClose onClick={(e) => removeBlock(e, item)} />
-                                                </SelectedItemBlock>
-                                            )
-                                        }
-
-                                        )}
-                                    </div>
-                                </>
+                                <p className="placeholder">{placeholder||"Data is null"}</p>
                             }
+
+                            
                         </>
                         :
                         <p className={cx("placeholder", { 'selected': value })}>
@@ -203,7 +213,17 @@ const Select = ({
                                             onClick={() => { handleClickItem(item.value); }}
                                             key={item.value}
                                         >
-                                            {multiple && typeof value === 'object' && <CheckBox checked={value.some((innerItem: any) => { return innerItem === item.value })} />}
+                                            {multiple && 
+                                                <>
+                                                    {(value&&typeof value === 'object')
+                                                        ?
+                                                        <CheckBox checked={value.some((innerItem: any) => { return innerItem === item.value })} />
+
+                                                        :
+                                                        <CheckBox checked={false} />
+                                                    }
+                                                </>
+                                            }
                                             <p className="item">{item.text}</p>
                                         </ListItemBlock>
                                     )

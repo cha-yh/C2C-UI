@@ -38,6 +38,7 @@ export const select = () => {
         />
     )
 }
+
 export const singleAndMultipleInAForm = () => {
     const [testValue, setTestValue] = useState<any>([]);
     const [singleValue, setSingleValue] = useState<any>(""); 
@@ -269,6 +270,37 @@ export const withErrorMessages = () => {
         />
     )
 }
+
+export const nullValue = () => {
+    const [testValue, setTestValue] = useState<any[]>(null);
+    const [singleValue, setSingleValue] = useState<any>(null); 
+    return (
+        <div style={{display:'flex'}}>
+            <Select
+                name="multipletest"
+                onChange={(name, value) => { setTestValue(value) }}
+                value={testValue}
+                options={options}
+                label="multiple"
+                required
+                multiple
+            />
+            <Select
+                name="singletest"
+                onChange={(name, value) => { setSingleValue(value) }}
+                value={singleValue}
+                options={[
+                    { key: 'none', value: '', text: 'None' },
+                    ...options,
+                ]}
+                label="single"
+                required
+                placeholder="single select"
+            />
+        </div>
+    )
+}
+
 select.story = {
     name: 'Default'
 };
