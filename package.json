@@ -1,6 +1,6 @@
 {
   "name": "react-c2c-ui",
-  "version": "0.7.43",
+  "version": "0.7.44",
   "module": "dist/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -43,6 +43,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-url": "^3.0.1",
+    "standard-version": "^8.0.0",
     "typescript": "^3.7.3"
   },
   "scripts": {
@@ -50,7 +51,8 @@
     "build-sb": "build-storybook",
     "build": "rollup -c",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:publish": "build-storybook && rollup -c && tsc --emitDeclarationOnly && yarn publish && git push"
+    "build:publish": "build-storybook && rollup -c && tsc --emitDeclarationOnly && yarn publish && git push",
+    "release": "standard-version"
   },
   "peerDependencies": {
     "@types/react-loader-spinner": "^3.1.0",
