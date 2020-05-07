@@ -123,7 +123,7 @@ export const InputWrapper = forwardRef<HTMLInputElement, InputWrapperProps>(
         return (
             <InputWrapperBlock width={width} style={style} className={className}>
                 <div className="header">
-                    {label ? <Label text={label} required={required} /> : <p> </p>}
+                    {label ? <Label text={label} required={required} /> : null}
                     {(errorMessages.length && showError && errorMessages[0]) ?
                         <Helper
                             trigger={
@@ -157,8 +157,10 @@ const InputWrapperBlock = styled.div<{ width: string | undefined }>`
     ${utils.initiateCss};
     width: ${props => props.width ? props.width : '100%'};
 
-    >:first-child {
-        margin-bottom: ${rem(5)};
+    >.header {
+        >* {
+            margin-bottom: ${rem(5)};
+        }
         ${flex.row};
         ${flex.jc.spaceB};
     }
