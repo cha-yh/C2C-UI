@@ -10,7 +10,7 @@ export type LabelProps = {
     /** Basic property: className */
     className?: string;
 };
-const LabelBlock = styled.h5`
+const LabelBlock = styled.label`
     color: ${palette.gray800};
     font-size: ${rem(14)};
     font-weight: 600;
