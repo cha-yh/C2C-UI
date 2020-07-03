@@ -11,4 +11,5 @@ export { default as Popup } from './Popup/Popup';
 export { default as Textarea } from './Textarea/Textarea';
 export { default as Loader } from './Loader/Loader';
 export { default as Select } from './Select/Select';
+export { default as Label } from './Label/Label';
 export {media, palette, rem, utils, flex} from './utils';
