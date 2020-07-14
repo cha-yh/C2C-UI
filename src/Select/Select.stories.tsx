@@ -301,6 +301,26 @@ export const nullValue = () => {
     )
 }
 
+export const otherValue = () => {
+    const [testValue, setTestValue] = useState(['value8', 'otherValue']);
+    return (
+        <>
+            <p>otherValue isn't in options</p>
+            <div style={{display:'flex'}}>
+                <Select
+                    name="multipletest"
+                    onChange={(name, value) => { setTestValue(value) }}
+                    value={testValue}
+                    options={options}
+                    label="multiple"
+                    required
+                    multiple
+                />
+            </div>
+        </>
+    )
+}
+
 select.story = {
     name: 'Default'
 };

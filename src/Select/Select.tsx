@@ -158,7 +158,12 @@ const Select = ({
                                                     const itemIndex = _.findIndex(options, (o: any) => {
                                                         return o.value === item;
                                                     })
-                                                    const itemText = options[itemIndex].text;
+                                                    console.log('itemIndex', itemIndex);
+                                                    let itemText = item;
+                                                    if(itemIndex !== -1) {
+                                                        itemText = options[itemIndex].text;
+
+                                                    }
                                                     return (
                                                         <SelectedItemBlock
                                                             key={`${item}-${index}`}
