@@ -1,4 +1,4 @@
-import React, { ReactText, useRef, useState, useCallback } from 'react';
+import React, { ReactText, useRef, useState, useCallback, memo } from 'react';
 import _ from 'lodash';
 import InputWrapper, { getInputStatus } from '../InputWrapper/InputWrapper';
 import { useOnClickOutside } from '../hooks';
@@ -9,6 +9,7 @@ import Scrollbars from 'react-custom-scrollbars';
 import CheckBox from '../CheckBox/CheckBox';
 import { SelectedItemBlock, ListItemBlock, SelectBlock } from './SelectStyles';
 import cx from 'classnames';
+import OptionList from './OptionList';
 
 type Value = string | number | string[] | undefined;
 interface OwnProps {
@@ -38,7 +39,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const Select = ({
+const Select = memo(({
     onChange, name, value, options, required,
     disabled, label, width, searchable,
     placeholder, multiple, height,
@@ -117,6 +118,7 @@ const Select = ({
     const removeSearchValue = () => {
         setInputValue('');
     }
+    console.log('Select rendered', name)
     return (
         <InputWrapper
             label={label}
@@ -208,38 +210,19 @@ const Select = ({
                             placeholder="Enter the search word"
                         />
                     }
-                    <div className="list-wrapper">
-                        <Scrollbars>
-                            {options.map(item => {
-                                if (_.includes(item.text.toLowerCase(), inputValue.toLowerCase())) {
-                                    return (
-                                        <ListItemBlock
-                                            multiple={multiple ? multiple : false}
-                                            onClick={() => { handleClickItem(item.value); }}
-                                            key={item.value}
-                                        >
-                                            {multiple && 
-                                                <>
-                                                    {(value&&typeof value === 'object')
-                                                        ?
-                                                        <CheckBox checked={value.some((innerItem: any) => { return innerItem === item.value })} />
-
-                                                        :
-                                                        <CheckBox checked={false} />
-                                                    }
-                                                </>
-                                            }
-                                            <p className="item">{item.text}</p>
-                                        </ListItemBlock>
-                                    )
-                                }
-                            })}
-                        </Scrollbars>
-                    </div>
+                    <OptionList
+                        options={options}
+                        multiple={multiple}
+                        value={value}
+                        handleClickItem={handleClickItem}
+                        inputValue={inputValue}
+                    />
                 </div>
             </SelectBlock>
         </InputWrapper>
     )
-}
+}, ((prevProps: Readonly<React.PropsWithChildren<OwnProps>>, nextProps: Readonly<React.PropsWithChildren<OwnProps>>) => {    
+    return _.isEqual(prevProps,nextProps);
+}))
 
 export default Select;
