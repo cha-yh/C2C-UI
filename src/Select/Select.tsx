@@ -1,4 +1,4 @@
-import React, { ReactText, useRef, useState, useCallback, memo } from 'react';
+import React, { ReactText, useRef, useState, useCallback, memo, useEffect } from 'react';
 import _ from 'lodash';
 import InputWrapper, { getInputStatus } from '../InputWrapper/InputWrapper';
 import { useOnClickOutside } from '../hooks';
@@ -35,6 +35,9 @@ interface OwnProps {
     style?: React.CSSProperties;
     /** Basic property: className */
     className?: string;
+    /** The option you can input directly instead of selection */
+    typeable?: boolean;
+    typeablePlaceholder?: string;
 }
 
 type Props = OwnProps;
@@ -44,8 +47,10 @@ const Select = memo(({
     disabled, label, width, searchable,
     placeholder, multiple, height,
     checkError, messages, errorMessages,
-    style, className
+    style, className, typeable, typeablePlaceholder
 }: Props) => {
+    const ref = useRef<HTMLDivElement>(null);
+
     const [showError, setShowError] = useState(false);
     const [focus, setFocus] = useState(false);
 
@@ -62,6 +67,13 @@ const Select = memo(({
         }
     }, []);
 
+    
+    const isUpper = React.useMemo(() => {
+        const top = ref.current?.getBoundingClientRect().top ? ref.current?.getBoundingClientRect().top : 0;
+        const _isUpper = window.innerHeight/2 > top;
+        return _isUpper;
+    }, [ref.current?.getBoundingClientRect()]);
+
     const handleDivClick = () => {
         if (disabled) {
             return;
@@ -75,8 +87,9 @@ const Select = memo(({
 
     const inputStatus = getInputStatus(focus, showError, disabled, errorMessages);
 
-    const ref = useRef(null);
+    
     useOnClickOutside(ref, () => closeList(focus, value));
+
 
     const handleClickItem = (itemValue: any) => {
         if (multiple && typeof value === 'object') {
@@ -118,7 +131,8 @@ const Select = memo(({
     const removeSearchValue = () => {
         setInputValue('');
     }
-    console.log('Select rendered', name)
+
+    
     return (
         <InputWrapper
             label={label}
@@ -134,6 +148,7 @@ const Select = memo(({
                 inputStatus={inputStatus}
                 ref={ref}
                 height={height}
+                isUpper={isUpper}
             >
                 <div className="select-body" onClick={handleDivClick}>
                     {/* input tag for checking required throgh form field */}
@@ -160,11 +175,9 @@ const Select = memo(({
                                                     const itemIndex = _.findIndex(options, (o: any) => {
                                                         return o.value === item;
                                                     })
-                                                    console.log('itemIndex', itemIndex);
                                                     let itemText = item;
                                                     if(itemIndex !== -1) {
                                                         itemText = options[itemIndex].text;
-
                                                     }
                                                     return (
                                                         <SelectedItemBlock
@@ -175,9 +188,7 @@ const Select = memo(({
                                                             <MdClose onClick={(e) => removeBlock(e, item)} />
                                                         </SelectedItemBlock>
                                                     )
-                                                }
-
-                                                )}
+                                                })}
                                             </div>
                                         </>
                                     }
@@ -191,7 +202,7 @@ const Select = memo(({
                         </>
                         :
                         <p className={cx("placeholder", { 'selected': value })}>
-                            {_.find(options, function (o) { return o.value === value; })?.text || placeholder}
+                            {_.find(options, function (o) { return o.value === value; })?.text || value || placeholder}
                         </p>
 
                     }
@@ -199,24 +210,30 @@ const Select = memo(({
                 </div>
 
                 <div className="select-list">
-                    {searchable &&
-                        <Input
-                            onChange={handleInputChange}
-                            value={inputValue}
-                            icon={inputValue
-                                ? <MdClose onClick={removeSearchValue} style={{ cursor: 'pointer' }} />
-                                : <MdSearch />
+                    {focus &&
+                        <>
+                            {searchable &&
+                                <Input
+                                    onChange={handleInputChange}
+                                    value={inputValue}
+                                    icon={inputValue
+                                        ? <MdClose onClick={removeSearchValue} style={{ cursor: 'pointer' }} />
+                                        : <MdSearch />
+                                    }
+                                    placeholder="Enter the search word"
+                                />
                             }
-                            placeholder="Enter the search word"
-                        />
+                            <OptionList
+                                options={options}
+                                multiple={multiple}
+                                value={value}
+                                handleClickItem={handleClickItem}
+                                inputValue={inputValue}
+                                typeable={typeable}
+                                typeablePlaceholder={typeablePlaceholder}
+                            />
+                        </>
                     }
-                    <OptionList
-                        options={options}
-                        multiple={multiple}
-                        value={value}
-                        handleClickItem={handleClickItem}
-                        inputValue={inputValue}
-                    />
                 </div>
             </SelectBlock>
         </InputWrapper>

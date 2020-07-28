@@ -30,6 +30,11 @@ function App() {
 ReactDOM.render(<App />, document.querySelector('#app'));
 ```
 
+## Updated the Select component(0.7.7)
+- add typeable options (`typeable`, `typeablePlaceholder`)
+- add up position of listbox render: depends on `Select`'s position of screen
+You can check this in [Docs page](https://c2c-ui.netlify.com/)
+
 ## Changed props of Popup component
 Props of `Popup` are changed from **0.7.3** version.
 Removed `onClickTrigger`, `onClose` props and added `setTarget`.

@@ -303,10 +303,20 @@ export const nullValue = () => {
 
 export const otherValue = () => {
     const [testValue, setTestValue] = useState(['value8', 'otherValue']);
+    const [singValue, setSingValue] = useState('otherValue')
     return (
         <>
             <p>otherValue isn't in options</p>
             <div style={{display:'flex'}}>
+                <Select
+                    name="single"
+                    onChange={(name, value) => { setSingValue(value) }}
+                    value={singValue}
+                    options={options}
+                    label="multiple"
+                    required
+                />
+
                 <Select
                     name="multipletest"
                     onChange={(name, value) => { setTestValue(value) }}
@@ -317,6 +327,74 @@ export const otherValue = () => {
                     multiple
                 />
             </div>
+        </>
+    )
+}
+
+export const Typeable = () => {
+    const [testValue, setTestValue] = useState(['value8', 'otherValue', 'other2']);
+    const [singValue, setSingValue] = useState('otherValue')
+    return (
+        <>
+            <p>typeable</p>
+            <div style={{display:'flex'}}>
+                <Select
+                    name="single"
+                    onChange={(name, value) => { setSingValue(value) }}
+                    value={singValue}
+                    options={options}
+                    label="single"
+                    required
+                    typeable
+                />
+
+                <Select
+                    name="multipletest"
+                    onChange={(name, value) => { setTestValue(value) }}
+                    value={testValue}
+                    options={options}
+                    label="multiple"
+                    required
+                    multiple
+                    typeable
+                />
+            </div>
+        </>
+    )
+}
+
+export const ListPosition = () => {
+    const [testValue, setTestValue] = useState(['value8', 'otherValue', 'other2']);
+    const [singValue, setSingValue] = useState('otherValue')
+    return (
+        <>
+            <p style={{height: '600px', background: 'white'}}>List Position</p>
+            <div style={{display:'flex'}}>
+                <Select
+                    name="single"
+                    onChange={(name, value) => { setSingValue(value) }}
+                    value={singValue}
+                    options={options}
+                    label="single select, height = 80px"
+                    required
+                    height={'80px'}
+                    typeable
+                    typeablePlaceholder="select direct input"
+                />
+
+                <Select
+                    name="multipletest"
+                    onChange={(name, value) => { setTestValue(value) }}
+                    value={testValue}
+                    options={options}
+                    label="multiple"
+                    required
+                    multiple
+                    typeable
+                    typeablePlaceholder="add direct input"
+                />
+            </div>
+            <p style={{height: '12000px', background: 'white'}}></p>
         </>
     )
 }

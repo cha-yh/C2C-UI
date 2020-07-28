@@ -5,11 +5,10 @@ const selectStyles = {
     focus: css`
         .select-body {
             border-color: ${palette.blue500};
-            border-bottom: none;
+            
         }
         .select-list {
             border-color: ${palette.blue500};
-            border-top: none;
             display: block;
         }
         
@@ -121,7 +120,7 @@ const selectList = css`
     }
     
 `;
-export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null, height: string|undefined }>`
+export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null, height: string|undefined, isUpper: boolean }>`
     ${utils.initiateCss};
     position: relative;
     width: 100%;
@@ -132,8 +131,29 @@ export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
 
     >.select-list {
         ${selectList};
+        ${props => !props.isUpper && css`
+            bottom: ${props.height ?props.height :rem(40)};
+        `}
     }
     ${props => props.inputStatus && selectStyles[props.inputStatus]};
+
+    ${props => (props.inputStatus === 'focus' && props.isUpper) && css`
+        .select-body {
+            border-bottom: none;
+        }
+        .select-list {
+            border-top: none;
+        }
+    `};
+    ${props => (props.inputStatus === 'focus' && !props.isUpper) && css`
+        .select-body {
+            border-top: none;
+        }
+        .select-list {
+            border-bottom: none;
+            box-shadow: 2px -2px 3px rgba(0,0,0,0.12);
+        }
+    `};
 `;
 
 export const SelectedItemBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null }>`
@@ -179,5 +199,9 @@ export const ListItemBlock = styled.div<{multiple:boolean}>`
         margin: 0;
         cursor: pointer;
         margin-left: ${props => props.multiple && rem(10)};
+    }
+
+    >.item.select {
+        color: ${palette.blue500};
     }
 `;
