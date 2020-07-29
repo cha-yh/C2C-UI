@@ -336,8 +336,46 @@ export const Typeable = () => {
     const [singValue, setSingValue] = useState('otherValue')
     return (
         <>
-            <p>typeable</p>
+            <p>Typeable with typeablePlaceholder</p>
+            <div>
+                <Select
+                    name="single"
+                    onChange={(name, value) => { setSingValue(value) }}
+                    value={''}
+                    options={options}
+                    label="single"
+                    required
+                    typeable
+                    typeablePlaceholder="It's typeablePlaceholder"
+                />
+            </div>
+
+            <p>Typeable in wide box</p>
             <div style={{display:'flex'}}>
+                <Select
+                    name="single"
+                    onChange={(name, value) => { setSingValue(value) }}
+                    value={singValue}
+                    options={options}
+                    label="single"
+                    required
+                    typeable
+                />
+
+                <Select
+                    name="multipletest"
+                    onChange={(name, value) => { setTestValue(value) }}
+                    value={testValue}
+                    options={options}
+                    label="multiple"
+                    required
+                    multiple
+                    typeable
+                />
+            </div>
+
+            <p>Typeable in narrow box</p>
+            <div style={{display:'flex', width:'300px'}}>
                 <Select
                     name="single"
                     onChange={(name, value) => { setSingValue(value) }}

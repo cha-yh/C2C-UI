@@ -1,4 +1,4 @@
-import React, { ReactText, memo, useState, useEffect } from 'react'
+import React, { ReactText, memo, useState, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components';
 import { ListItemBlock } from './SelectStyles';
 import Scrollbars from 'react-custom-scrollbars';
@@ -65,7 +65,17 @@ const OptionList: React.SFC<Props> = memo(({
         }
     }
 
+    
+
+    /** Ref */
+    const typeableInputRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
+        const typeableInputRefCurrent = typeableInputRef.current;
+        const clientWidth = typeableInputRefCurrent?.clientWidth ? typeableInputRefCurrent?.clientWidth : 0;
+        if(clientWidth < 150) {
+            if(typeableInputRefCurrent) typeableInputRefCurrent.style.width = '100%';
+        }
         return () => {
             setMultiTypeableValue([]);
             setSingleTypeableValue(undefined);
@@ -120,14 +130,13 @@ const OptionList: React.SFC<Props> = memo(({
                                     <>
                                         {multiTypeableValue.map((item, index) => {
                                             return (
-                                                <>
                                                     <ListItemBlock
                                                         key={index}
                                                         multiple={multiple}
                                                         onClick={() => { handleClickItem(item); }}
                                                     >
                                                         {(value && typeof value === 'object')
-                                                            ?
+                                                            &&
                                                             <>
                                                                 <CheckBox
                                                                     checked={value.some((innerItem: any) => { return innerItem === item })}
@@ -135,14 +144,13 @@ const OptionList: React.SFC<Props> = memo(({
                                                                 <p className={cx('item', { 'select': value.some((innerItem: any) => { return innerItem === item }) })}>{item}</p>
                                                             </>
 
-                                                            :
-                                                            <>
-                                                                <CheckBox checked={false} />
-                                                                <p className={cx('item')}>{item}</p>
-                                                            </>
+                                                            // :
+                                                            // <>
+                                                            //     <CheckBox checked={false} />
+                                                            //     <p className={cx('item')}>{item}</p>
+                                                            // </>
                                                         }
                                                     </ListItemBlock>
-                                                </>
                                             )
                                         })}
                                     </>
@@ -156,6 +164,7 @@ const OptionList: React.SFC<Props> = memo(({
                                         value={multiTypeableTextValue}
                                         onChange={(e) => { handleChangeMultiTypeableTextValue(e) }}
                                         placeholder={typeablePlaceholder && typeablePlaceholder}
+                                        ref={typeableInputRef}
                                     />
                                     <button
                                         disabled={multiTypeableTextValue === ""}
@@ -174,6 +183,7 @@ const OptionList: React.SFC<Props> = memo(({
                                         onChange={handleChangeSingleTypeableValue}
                                         placeholder={typeablePlaceholder && typeablePlaceholder}
                                         className={cx({"selected": singleTypeableValue === value})}
+                                        ref={typeableInputRef}
                                     />
                                     <button onClick={() => { handleClickItem(singleTypeableValue); }}><MdCheck /></button>
                                 </TypeableBox>
@@ -204,8 +214,8 @@ const OptionListBlock = styled.div`
     }
 `;
 const TypeableSection = styled.section`
-    margin-top: 1rem;
-    margin-right: 1rem;
+    margin: 1rem;
+    margin-left: 0;
     padding-top: 1rem;
     border-top: 1px solid ${palette.blue500};
 
@@ -224,7 +234,7 @@ const TypeableBox = styled.div`
         font-weight: 700;
     }
     >button {
-        width: 60px;
+        flex: 1 0 60px;
         display: flex;
         align-items: center;
         justify-content: center;
