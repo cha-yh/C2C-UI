@@ -1,15 +1,12 @@
-import React, { ReactText, useRef, useState, useCallback, memo, useEffect } from 'react';
+import React, { ReactText, useRef, useState, useCallback, memo, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import InputWrapper, { getInputStatus } from '../InputWrapper/InputWrapper';
 import { useOnClickOutside } from '../hooks';
 import UnD from '../UnD/UnD';
-import Input from '../Input/Input';
-import { MdSearch, MdClose } from 'react-icons/md';
-import Scrollbars from 'react-custom-scrollbars';
-import CheckBox from '../CheckBox/CheckBox';
-import { SelectedItemBlock, ListItemBlock, SelectBlock } from './SelectStyles';
+import { MdClose } from 'react-icons/md';
+import { SelectedItemBlock, SelectBlock } from './SelectStyles';
 import cx from 'classnames';
-import OptionList from './OptionList';
+import SelectList from './SelectList';
 
 type Value = string | number | string[] | undefined;
 interface OwnProps {
@@ -71,6 +68,7 @@ const Select = memo(({
     const isUpper = React.useMemo(() => {
         const top = ref.current?.getBoundingClientRect().top ? ref.current?.getBoundingClientRect().top : 0;
         const _isUpper = window.innerHeight/2 > top;
+        console.log('_isUpper', _isUpper);
         return _isUpper;
     }, [ref.current?.getBoundingClientRect()]);
 
@@ -209,32 +207,22 @@ const Select = memo(({
                     <UnD value={focus} />
                 </div>
 
-                <div className="select-list">
-                    {focus &&
-                        <>
-                            {searchable &&
-                                <Input
-                                    onChange={handleInputChange}
-                                    value={inputValue}
-                                    icon={inputValue
-                                        ? <MdClose onClick={removeSearchValue} style={{ cursor: 'pointer' }} />
-                                        : <MdSearch />
-                                    }
-                                    placeholder="Enter the search word"
-                                />
-                            }
-                            <OptionList
-                                options={options}
-                                multiple={multiple}
-                                value={value}
-                                handleClickItem={handleClickItem}
-                                inputValue={inputValue}
-                                typeable={typeable}
-                                typeablePlaceholder={typeablePlaceholder}
-                            />
-                        </>
-                    }
-                </div>
+                {focus &&
+                    <SelectList
+                        focus={focus}
+                        searchable={searchable}
+                        handleInputChange={handleInputChange}
+                        inputValue={inputValue}
+                        removeSearchValue={removeSearchValue}
+                        options={options}
+                        multiple={multiple}
+                        value={value}
+                        handleClickItem={handleClickItem}
+                        typeable={typeable}
+                        typeablePlaceholder={typeablePlaceholder}
+                        isUpper={isUpper}
+                    />
+                }
             </SelectBlock>
         </InputWrapper>
     )

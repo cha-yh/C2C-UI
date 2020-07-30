@@ -430,6 +430,7 @@ export const ListPosition = () => {
                     multiple
                     typeable
                     typeablePlaceholder="add direct input"
+                    searchable
                 />
             </div>
             <p style={{height: '12000px', background: 'white'}}></p>

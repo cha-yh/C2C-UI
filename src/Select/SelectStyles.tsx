@@ -7,10 +7,6 @@ const selectStyles = {
             border-color: ${palette.blue500};
             
         }
-        .select-list {
-            border-color: ${palette.blue500};
-            display: block;
-        }
         
     `,
     disabled: css`
@@ -71,55 +67,6 @@ const selectBody = css`
     }
 
 `;
-
-const selectList = css`
-    z-index: 1;
-    width: 100%;
-    border: 1px solid ${palette.gray400};
-    padding: ${rem(10)};
-    padding-top: 0;
-    background: white;
-    ${utils.shadow};
-    position: absolute;
-    display: none;
-
-    .input-wrapper {
-        ${flex.row};
-        ${flex.jc.spaceB};
-        ${flex.ai.center};
-        border: 1px solid ${palette.gray300};
-        padding-right: ${rem(10)};
-        >input {
-            width: 100%;
-            border-radius: 2px;
-            margin-right: ${rem(10)};
-            border: none;
-            outline: none;
-            padding: ${rem(10)};
-        }
-        >p {
-
-        }
-    }
-
-    .list-wrapper {
-        padding-top: ${rem(10)};
-
-        /** Scrollbar */
-        >div {
-            >div:first-child {
-                max-height: 12.5rem !important;
-                /* min-height: 7rem !important; */
-                min-height: 100% !important;
-                position: unset !important;
-                /* overflow-x: auto !important; */
-                /* height: 100% !important; */
-            }
-        }
-
-    }
-    
-`;
 export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'error' | null, height: string|undefined, isUpper: boolean }>`
     ${utils.initiateCss};
     position: relative;
@@ -128,30 +75,16 @@ export const SelectBlock = styled.div<{ inputStatus: 'focus' | 'disabled' | 'err
         ${selectBody};
         min-height: ${props => props.height ?props.height :rem(40)};
     }
-
-    >.select-list {
-        ${selectList};
-        ${props => !props.isUpper && css`
-            bottom: ${props.height ?props.height :rem(40)};
-        `}
-    }
     ${props => props.inputStatus && selectStyles[props.inputStatus]};
 
     ${props => (props.inputStatus === 'focus' && props.isUpper) && css`
         .select-body {
             border-bottom: none;
         }
-        .select-list {
-            border-top: none;
-        }
     `};
     ${props => (props.inputStatus === 'focus' && !props.isUpper) && css`
         .select-body {
             border-top: none;
-        }
-        .select-list {
-            border-bottom: none;
-            box-shadow: 2px -2px 3px rgba(0,0,0,0.12);
         }
     `};
 `;
