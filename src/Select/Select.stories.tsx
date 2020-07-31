@@ -341,7 +341,7 @@ export const Typeable = () => {
                 <Select
                     name="single"
                     onChange={(name, value) => { setSingValue(value) }}
-                    value={''}
+                    value={singValue}
                     options={options}
                     label="single"
                     required
