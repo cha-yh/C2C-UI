@@ -136,6 +136,12 @@ export const options = () => {
         height='3rem'
       />
 
+      <h5>With datalist</h5>
+      <Input
+        list="ice-cream-flavors"
+        dataList={["Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"]}
+      />
+
     </Box>
   )
 }

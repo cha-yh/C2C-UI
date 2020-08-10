@@ -15,6 +15,8 @@ export interface InputProps {
     required?: boolean;
     pattern?: string;
     size?: number;
+    list?: string;
+    dataList?: string[];
 
     label?: string;
     icon?: any;
@@ -43,7 +45,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             symbol, messages,
             checkError, width, placeholder, type, disabled = false, errorMessages = [],
             min, max, onKeyUp, step, pattern, size,
-            height, style, className
+            height, style, className, list, dataList
         },
         ref
     ) => {
@@ -105,9 +107,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                         required={required}
                         pattern={pattern}
                         size={size}
+                        list={list}
                     />
                     {icon && icon}
                     {symbol && <span>{symbol}</span>}
+                    {(list && dataList) &&
+                        <datalist id={list}>
+                            {dataList.map(item => (
+                                <option value={item}/>
+                            ))}
+                        </datalist>
+                    }
                 </Wrapper>
             </InputWrapper>
         )
