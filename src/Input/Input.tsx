@@ -113,8 +113,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                     {symbol && <span>{symbol}</span>}
                     {(list && dataList) &&
                         <datalist id={list}>
-                            {dataList.map(item => (
-                                <option value={item}/>
+                            {dataList.map((item: string, index: number) => (
+                                <option value={item} key={index}/>
                             ))}
                         </datalist>
                     }
