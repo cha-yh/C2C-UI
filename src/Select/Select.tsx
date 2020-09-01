@@ -68,7 +68,6 @@ const Select = memo(({
     const isUpper = React.useMemo(() => {
         const top = ref.current?.getBoundingClientRect().top ? ref.current?.getBoundingClientRect().top : 0;
         const _isUpper = window.innerHeight/2 > top;
-        console.log('_isUpper', _isUpper);
         return _isUpper;
     }, [ref.current?.getBoundingClientRect()]);
 
